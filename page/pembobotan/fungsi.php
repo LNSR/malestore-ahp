@@ -396,7 +396,7 @@ function showTabelPerbandingan($jenis, $kriteria)
 				<div class="row">
 					<div class="col-lg-2">
 						<div class="form-group">
-						<input name="pilih<?php echo $urut?>" value="1" class="hidden" type="radio" checked <?php if ($selected_value == "1") echo "checked"; ?>>
+						<input name="pilih<?php echo $urut?>" value="1" class="hidden" type="radio" checked>
 							<label><?php echo $pilihan[$x]; ?></label>
 						</div>
 					</div>
@@ -425,7 +425,7 @@ function showTabelPerbandingan($jenis, $kriteria)
 					</div>
 					<div class="col-lg-3">
 						<div class="form-group">
-							<input name="pilih<?php echo $urut?>" value="2" class="hidden" type="radio" <?php if ($selected_value == "2") echo "checked"; ?>>
+							<input name="pilih<?php echo $urut?>" value="2" class="hidden" type="radio">
 							<label><?php echo $pilihan[$y]; ?></label>
 						</div>
 					</div>
@@ -477,7 +477,7 @@ function showTabelPerbandingan2($jenis, $alternatif)
 				<div class="row">
 					<div class="col-lg-2">
 						<div class="form-group">
-						<input name="pilih<?php echo $urut?>" value="1" class="hidden" type="radio">
+						<input name="pilih<?php echo $urut?>" value="1" class="hidden" type="radio" checked>
 							<label><?php echo $pilihan[$x]; ?></label>
 						</div>
 					</div>

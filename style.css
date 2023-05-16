@@ -1,0 +1,94 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  .page {
+    display: flex;
+    flex-direction: column;
+    min-height: 90%;
+  }
+  .content {
+    flex-grow: 1;
+  }
+  .hidden {
+    display: none;
+  }
+  .card-footer {
+    flex-shrink: 0;
+  }
+
+  @media print {
+    .page {
+      height: auto;
+    }
+    .content {
+      height: auto;
+    }
+    .card {
+      page-break-inside: avoid;
+    }
+    @page {
+      size: auto;
+      margin: 20mm;
+    }
+  }
+**{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+body{
+    height: 100vh;
+    background-image: url(img/alog.jpg);
+    background-color:   #778899;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px 25px;
+    width: 300px;
+
+    background-color:   rgb(255, 255, 255);
+    box-shadow: 0 0 5px     rgb(0, 0, 0);
+}
+.container h1{
+    text-align: left;
+    color: #000000;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    border-bottom: 3px solid #000000;
+}
+.container label{
+    text-align: left;
+    color: #000000;
+}
+.container form input{
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid #000000;
+    color: #000000;
+    font-size: 20px;
+}
+.container form button{
+    width: 100%;
+    padding: 5px 0;
+    border: none;
+    background-color:#2979ff;
+    font-size: 18px;
+    color: #000000;
+}
+.container p{
+     text-align: center;
+    color: #000000;
+
+}*

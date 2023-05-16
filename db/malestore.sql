@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2023 at 10:38 AM
+-- Generation Time: May 16, 2023 at 06:09 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -118,7 +118,7 @@ INSERT INTO `tb_banding_alternatif` (`id`, `alternatif1`, `alternatif2`, `pemban
 (21, 1, 2, 3, 0.2),
 (22, 1, 3, 3, 3),
 (23, 1, 4, 3, 0.25),
-(24, 1, 5, 3, 2),
+(24, 1, 5, 3, 3),
 (25, 2, 3, 3, 4),
 (26, 2, 4, 3, 0.333333),
 (27, 2, 5, 3, 5),
@@ -149,7 +149,10 @@ INSERT INTO `tb_banding_kriteria` (`id`, `kriteria1`, `kriteria2`, `nilai`) VALU
 (3, 2, 3, 0.333333),
 (4, 1, 7, 0.333333),
 (5, 2, 7, 0.166667),
-(6, 3, 7, 0.5);
+(6, 3, 7, 0.5),
+(7, 1, 8, 1),
+(8, 2, 8, 1),
+(9, 3, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -223,11 +226,11 @@ INSERT INTO `tb_pv_alternatif` (`id`, `id_alternatif`, `id_kriteria`, `nilai`) V
 (8, 3, 2, 0.286354),
 (9, 4, 2, 0.0637669),
 (10, 5, 2, 0.378797),
-(11, 1, 3, 0.118954),
-(12, 2, 3, 0.2824),
-(13, 3, 3, 0.0738883),
-(14, 4, 3, 0.477261),
-(15, 5, 3, 0.0474968);
+(11, 1, 3, 0.12819),
+(12, 2, 3, 0.281211),
+(13, 3, 3, 0.0729319),
+(14, 4, 3, 0.473678),
+(15, 5, 3, 0.0439898);
 
 -- --------------------------------------------------------
 
@@ -249,7 +252,8 @@ INSERT INTO `tb_pv_kriteria` (`id`, `id_kriteria`, `nilai`) VALUES
 (1, 1, 0.633346),
 (2, 2, 0.106156),
 (3, 3, 0.260498),
-(4, 7, 0.45196);
+(4, 7, 0.45196),
+(5, 8, 0.246429);
 
 -- --------------------------------------------------------
 
@@ -351,19 +355,19 @@ ALTER TABLE `tb_banding_alternatif`
 -- AUTO_INCREMENT for table `tb_banding_kriteria`
 --
 ALTER TABLE `tb_banding_kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_kriteria`
 --
 ALTER TABLE `tb_kriteria`
-  MODIFY `kriteria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `kriteria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_pv_alternatif`
@@ -375,7 +379,7 @@ ALTER TABLE `tb_pv_alternatif`
 -- AUTO_INCREMENT for table `tb_pv_kriteria`
 --
 ALTER TABLE `tb_pv_kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`

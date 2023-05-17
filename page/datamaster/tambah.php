@@ -34,21 +34,19 @@
         </div>
     </div>
     <?php
-
     $id_karyawan = $_POST['id_karyawan'];
     $nama_karyawan = $_POST['nama_karyawan'];
     $jabatan = $_POST['jabatan'];
     $Simpan = $_POST['Simpan'];
-
+    
     if ($Simpan) {
         $sql = $koneksi->query("insert into tb_karyawan (id_karyawan, nama_karyawan,jabatan) values ('$id_karyawan','$nama_karyawan','$jabatan')");
         if ($sql) {
-    ?>
+            ?>
             <script type="text/javascript">
                 alert("Data Berhasil Disimpan");
                 window.location.href = "?page=datamaster";
             </script>
-    <?php
+            <?php
         }
     }
-    ?>

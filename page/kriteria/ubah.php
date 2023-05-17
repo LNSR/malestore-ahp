@@ -15,9 +15,10 @@ while ($tampil = mysqli_fetch_array($pilih)) {
                         <div class="card-body">
                             <form action="" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label>ID Kriteria</label>
-                                    <input class="form-control" name="kriteria_id" value="<?php echo $tampil['kriteria_id']; ?>" readonly />
-
+                                    <div class="form-group" hidden />
+                                        <label>ID Kriteria</label>
+                                        <input class="form-control" name="kriteria_id" value="<?php echo $tampil['kriteria_id']; ?>" readonly />
+                                    </div>
                                     <div class="form-group">
                                         <label>Deskripsi Kriteria</label>
                                         <input type="text" class="form-control" name="kriteria_deskripsi" value="<?php echo $tampil['kriteria_deskripsi']; ?>" />

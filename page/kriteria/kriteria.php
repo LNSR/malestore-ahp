@@ -14,7 +14,6 @@
                     </div>
                     <div class="card-body">
                         <a href="?page=kriteria&aksi=tambah" class="btn btn-primary" style="float: left; margin-bottom: 20px;">Tambah Data</a>
-                        <a href="?page=kriteria&aksi=hapus-table" class="btn btn-danger" style="float: right; margin-bottom: 20px;">Hapus Data</a>
                         <div class="panel-body">
                             <table class="table table-striped table-bordered" id="dataTables-example">
                                 <thead>

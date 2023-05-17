@@ -69,6 +69,11 @@ for ($x = 0; $x <= ($n - 1); $x++) {
   $bobot[$x]   = $jmlmkk[$x] / $ev[$x];
 }
 ?>
+<div class="row">
+  <div class="col-md-12">
+      <a href="?page=akriteria&aksi=hapus" class="btn btn-danger" style="float: right; margin-bottom: 20px;" onclick="return confirm('Jika Anda menghapus tabel, Anda perlu memasukkan ulang nilai kriteria')">Hapus Tabel</a>
+  </div>
+</div>
 <div class="card">
   <div class="card-header">
     <h3 class="card-title">Tabel Matriks Berpasangan Desimal</h3>

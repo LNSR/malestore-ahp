@@ -1,3 +1,8 @@
+<div class="row">
+  <div class="col-md-12">
+      <a href="?page=aalternatif&aksi=hapus" class="btn btn-danger" style="float: right; margin-bottom: 20px;" onclick="return confirm('Jika Anda menghapus tabel, Anda perlu memasukkan ulang nilai karyawan')">Hapus Tabel</a>
+  </div>
+</div>
 <?php
 
 $n    = getJumlahAlternatif();

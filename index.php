@@ -325,7 +325,7 @@ if ($_SESSION['admin'] || $_SESSION['user']) {
                 include "page/perangkingan/tambah.php";
               } elseif ($aksi == "ubah") {
                 include "page/perangkingan/ubah.php";
-              } elseif ($aksi == "hapus") {
+              } elseif ($aksi == "hapus-table") {
                 include "page/perangkingan/hapus.php";
               }
             } elseif ($page == "laporan") {

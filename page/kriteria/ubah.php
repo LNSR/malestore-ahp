@@ -1,5 +1,5 @@
 <?php
-include "config.php";
+include "../../config.php";
 $pilih = mysqli_query($koneksi, "select * from tb_kriteria WHERE kriteria_id='$_GET[id]'");
 while ($tampil = mysqli_fetch_array($pilih)) {
     $deskripsi = $tampil['deskripsi'];
@@ -20,13 +20,13 @@ while ($tampil = mysqli_fetch_array($pilih)) {
                                         <input class="form-control" name="kriteria_id" value="<?php echo $tampil['kriteria_id']; ?>" readonly />
                                     </div>
                                     <div class="form-group">
-                                        <label>Deskripsi Kriteria</label>
-                                        <input type="text" class="form-control" name="kriteria_deskripsi" value="<?php echo $tampil['kriteria_deskripsi']; ?>" />
-                                    </div>
-
-                                    <div class="form-group">
                                         <label>Nama Kriteria</label>
                                         <input type="text" class="form-control" name="kriteria_nama" value="<?php echo $tampil['kriteria_nama']; ?>" />
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Deskripsi Kriteria</label>
+                                        <textarea class="form-control" name="kriteria_deskripsi"><?php echo $tampil['kriteria_deskripsi']; ?></textarea>
                                     </div>
 
                                     <input type="Submit" name="Simpan" value="Simpan" class="btn btn-success">

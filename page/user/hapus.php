@@ -1,5 +1,5 @@
 <?php
-include "config.php";
+include "../../config.php";
 $id = $_GET['id'];
 mysqli_query($koneksi, "DELETE FROM user WHERE id_users='$id'");
 

@@ -80,7 +80,7 @@ for ($x = 0; $x <= ($n - 1); $x++) {
   </div>
   <!-- /.card-header -->
   <div class="card-body">
-    <table class="table table-bordered">
+    <table class="table table-bordered text-center">
       <thead>
         <tr>
           <th>Kriteria</th>
@@ -126,7 +126,7 @@ for ($x = 0; $x <= ($n - 1); $x++) {
     <h3 class="card-title">Tabel Matriks Berpasangan Ternormalisasi</h3>
   </div>
   <div class="card-body">
-    <table class="table table-bordered">
+    <table class="table table-bordered text-center">
       <thead>
         <tr>
           <th>Kriteria</th>
@@ -224,8 +224,8 @@ for ($x = 0; $x <= ($n - 1); $x++) {
     <h3 class="card-title">Rasio Konsistensi</h3>
   </div>
   <div class="card-body">
-    <h6><b>λ maks	 : <?php echo (round(($∑jml), 4)) ?></b></h6>
-    <h6><b>Konsistensi Indeks : <?php echo (round(((($∑jml - $n)) / ($n - 1)), 4)) ?></b></h6>
+    <h6><b>λ maks	 : <?php echo (round(($∑jml), 3)) ?></b></h6>
+    <h6><b>Konsistensi Indeks : <?php echo (round(((($∑jml - $n)) / ($n - 1)), 3)) ?></b></h6>
     <h6><b>Konsistensi Rasio: <?php echo (round(((($∑jml - $n)) / ($n - 1)) / getNilaiIR($n), 4) * 100) ?>%</b></h6>
   </div>
  <!-- Rasio Konsistensi Memakai Tabel Bobot -->

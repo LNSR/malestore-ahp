@@ -1,10 +1,16 @@
 <?php
+<<<<<<< Updated upstream
 error_reporting(0);
 session_start();
 
 $koneksi = new mysqli("localhost", "root", "", "malestore");
+=======
+include('config.php');
+>>>>>>> Stashed changes
 include('page/pembobotan/fungsi.php');
+session_start();
 
+<<<<<<< Updated upstream
 if ($_SESSION['admin'] || $_SESSION['user']) {
 
 ?>
@@ -422,6 +428,69 @@ if ($_SESSION['admin'] || $_SESSION['user']) {
 
 } else {
   header("location:login.php");
+=======
+// Check user type and redirect to login page if not logged in
+if (!isset($_SESSION['admin']) && !isset($_SESSION['karyawan'])) {
+    header("location:login.php");
+    exit;
 }
 
-?>
+// Check user type and include common header and navbar
+if (isset($_SESSION['admin'])) {
+    $userType = "admin";
+    includeHeaderAndNav($userType);
+} elseif (isset($_SESSION['karyawan'])) {
+    $userType = "karyawan";
+    includeHeaderAndNav($userType);
+>>>>>>> Stashed changes
+}
+
+// Switch on user type
+switch ($userType) {
+  case "admin":
+      // Code for admin user
+      // Include page content
+      error_reporting(1);
+      $page = $_GET['page'] ?? '';
+      $aksi = $_GET['aksi'] ?? '';
+
+      $pages = [
+          "datamaster" => ["data", "tambah", "ubah", "hapus"],
+          "jabatan" => ["jabatan", "tambah", "ubah", "hapus"],
+          "user" => ["user", "tambah", "ubah", "hapus"],
+          "kriteria" => ["kriteria", "tambah", "ubah", "hapus"],
+          "bobot_kriteria" => ["bobot_kriteria"],
+          "akriteria" => ["akriteria", "tambah", "ubah", "hapus"],
+          "aalternatif" => ["aalternatif", "tambah", "ubah", "hapus"],
+          "perangkingan" => ["perangkingan", "tambah", "ubah", "hapus-table"],
+          "laporan" => ["laporan"],
+      ];
+
+      if ($page == "bobot_alternatif") {
+          $jenis = $_GET['c'] ?? 1;
+          include "page/pembobotan/pembobotan.php";
+      } elseif (array_key_exists($page, $pages)) {
+          $path = ($page == "bobot_kriteria") ? "page/pembobotan/pembobotan.php" : "page/$page/" . ($aksi ?: $pages[$page][0]) . ".php";
+          include $path;
+      } else {
+          include "home.php";
+      }
+
+      includeFooter();
+      break;
+  case "karyawan": 
+      // Code for karyawan user
+      // Include page content
+      error_reporting(1);
+      $page = $_GET['page'] ?? '';
+
+      $paths = array(
+          "perangkingan" => "page/perangkingan/perangkingan.php",
+          "" => "home.php"
+      );
+
+      include $paths[$page] ?: $paths[""];
+
+      includeFooter();
+      break;
+}

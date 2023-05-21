@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <?php
-                include "config.php";
+                include "../../config.php";
                 $pilih = mysqli_query($koneksi, "SELECT * FROM jabatan");
                 $no = 1;
                 ?>

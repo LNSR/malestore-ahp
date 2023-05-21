@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <?php
-                include "config.php";
+                include "../../config.php";
                 $pilih = mysqli_query($koneksi, "SELECT * FROM tb_kriteria");
                 $no = 1;
                 ?>
@@ -31,9 +31,9 @@
                                             <td><?php echo $data['kriteria_nama']; ?></td>
                                             <td><?php echo $data['kriteria_deskripsi']; ?></td>
                                             <td>
-                                                <a href="?page=kriteria&aksi=ubah&id=<?php echo $data['kriteria_id']; ?>" class="btn btn-info"><i class=" fa fa-edit"></i> Edit</a>
-                                                <a onclick="return confirm('Anda yakin ingin menghapus data ini...?')" href="?page=kriteria&aksi=hapus&id=<?php echo $data['kriteria_id']; ?>" class="btn btn-danger"><i class=" fa fa-trash"></i> Hapus</a>
-                                            </td>
+                                            <a href="?page=kriteria&aksi=ubah&id=<?php echo $data['kriteria_id']; ?>" class="btn btn-info" style="margin: 7px 0;"><i class=" fa fa-edit"></i> Edit</a>
+                                            <a onclick="return confirm('Anda yakin ingin menghapus data ini...?')" href="?page=kriteria&aksi=hapus&id=<?php echo $data['kriteria_id']; ?>" class="btn btn-danger" style="margin: 7px 0;"><i class=" fa fa-trash"></i> Hapus</a>
+                                        </td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

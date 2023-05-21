@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< Updated upstream
 -- Generation Time: May 16, 2023 at 06:09 PM
+=======
+-- Generation Time: May 21, 2023 at 02:10 PM
+>>>>>>> Stashed changes
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -70,11 +74,11 @@ CREATE TABLE `jabatan` (
 --
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `job_desc`) VALUES
-(2, 'Penjaga', 'Jaga Toko'),
-(7, 'Bendahara', 'Manajemen keuangan bulanan'),
-(8, 'Sortir Barang', 'Filter barang gudang'),
-(9, 'Sekretaris', 'Mengelola, mengatur shift kerja dan management bahan dari supplier'),
-(10, 'Desainer', 'Marketing design');
+(1, 'Penjaga', 'Jaga Toko'),
+(2, 'Bendahara', 'Manajemen keuangan bulanan'),
+(3, 'Sortir Barang', 'Filter barang gudang'),
+(4, 'Sekretaris', 'Mengelola, mengatur shift kerja dan management bahan dari supplier'),
+(5, 'Desainer', 'Marketing design');
 
 -- --------------------------------------------------------
 
@@ -222,11 +226,19 @@ INSERT INTO `tb_pv_alternatif` (`id`, `id_alternatif`, `id_kriteria`, `nilai`) V
 (4, 4, 1, 0.461307),
 (5, 5, 1, 0.16329),
 (6, 1, 2, 0.165852),
+<<<<<<< Updated upstream
 (7, 2, 2, 0.10523),
 (8, 3, 2, 0.286354),
 (9, 4, 2, 0.0637669),
 (10, 5, 2, 0.378797),
 (11, 1, 3, 0.12819),
+=======
+(7, 1, 3, 0.12819),
+(8, 2, 2, 0.10523),
+(9, 3, 2, 0.286354),
+(10, 4, 2, 0.0637669),
+(11, 5, 2, 0.378797),
+>>>>>>> Stashed changes
 (12, 2, 3, 0.281211),
 (13, 3, 3, 0.0729319),
 (14, 4, 3, 0.473678),
@@ -266,7 +278,7 @@ CREATE TABLE `user` (
   `nama` varchar(50) NOT NULL,
   `tipe` varchar(30) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -274,8 +286,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_users`, `nama`, `tipe`, `username`, `password`) VALUES
-(1, 'Aldy', 'admin', 'admin', 'admin'),
-(6, 'Lana', 'karyawan', 'lana', '123');
+(1, 'Aldy', 'admin', 'admin', '$2y$10$N5F7dHLO27qCJ1.TPHrpCOpCZ4PXe2MBzroVNfB0gRWQKa2boDONS'),
+(2, 'Karyawan', 'karyawan', 'Pee', '$2y$10$TfLlTpsWRq.Wcp9DxdN8EeD32BRD.PQBG0vFmLhtM2I2HQsWcJrJO'),
+(3, 'Lana', 'admin', 'Lana', '$2y$10$aQuGt6XCK8svU6TvglgAp.xnaSgwmrIvEmxGdaRi3AhNc/DEJ7eka');
 
 --
 -- Indexes for dumped tables
@@ -343,7 +356,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id_jabatan` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_jabatan` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_banding_alternatif`
@@ -361,13 +374,13 @@ ALTER TABLE `tb_banding_kriteria`
 -- AUTO_INCREMENT for table `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_kriteria`
 --
 ALTER TABLE `tb_kriteria`
-  MODIFY `kriteria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `kriteria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_pv_alternatif`
@@ -385,7 +398,7 @@ ALTER TABLE `tb_pv_kriteria`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

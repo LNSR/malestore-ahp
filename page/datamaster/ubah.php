@@ -1,5 +1,5 @@
 <?php
-include "config.php";
+include "../../config.php";
 $pilih = mysqli_query($koneksi, "select * from tb_karyawan WHERE id_karyawan='$_GET[id]'");
 while ($tampil = mysqli_fetch_array($pilih)) {
     $deskripsi = $tampil['deskripsi'];

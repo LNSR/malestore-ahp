@@ -359,6 +359,52 @@ function getEVAlternatif($id_alternatif, $id_kriteria)
 	return $nilai;
 }
 
+// List opsi pilihan tabel perbandingan
+function TablePerbandingan($pilihan, $edit_pilihan, $idi, $urut, $x, $y) {
+    $options = [
+        1 => ["label" => "1. Sama penting dengan", "value" => 1],
+        2 => ["label" => "2. Sama hingga sedikit lebih penting", "value" => 0.5],
+        3 => ["label" => "3. Sedikit lebih penting", "value" => 0.333333],
+        4 => ["label" => "4. Sedikit lebih hingga jelas lebih penting", "value" => 0.25],
+        5 => ["label" => "5. Jelas lebih penting", "value" => 0.2],
+        6 => ["label" => "6. Jelas hingga sangat jelas lebih penting", "value" => 0.166667],
+        7 => ["label" => "7. Sangat jelas lebih penting", "value" => 0.142857],
+        8 => ["label" => "8. Sangat jelas hingga mutlak lebih penting", "value" => 0.125],
+        9 => ["label" => "9. Mutlak lebih penting", "value" => 0.111111],
+    ];
+    $is_checked = array_search($edit_pilihan[$idi], array_column($options, 'value')) === false ? '1' : '2';
+    ?>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="form-group">
+                <input name="pilih<?= $urut ?>" value="1" class="hidden" type="radio" <?= ($is_checked == "1") ? "checked" : "" ?>>
+                <label><?= $pilihan[$x] ?></label>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <select class="form-control" name="bobot<?= $urut ?>" id="nilai" style="width:100%">
+                    <?php
+                        foreach ($options as $value => $option) {
+                            $selected = ($edit_pilihan[$idi] == $option["value"] || $edit_pilihan[$idi] == $value) ? "selected" : "";
+                            echo "<option value=\"$value\" $selected>{$option['label']}</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <input name="pilih<?= $urut ?>" value="2" class="hidden" type="radio" <?= ($is_checked == "2") ? "checked" : "" ?>>
+                <label><?= $pilihan[$y] ?></label>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
+
 // menampilkan tabel perbandingan bobot kriteria
 function showTabelPerbandingan($jenis, $kriteria)
 {
@@ -389,6 +435,7 @@ function showTabelPerbandingan($jenis, $kriteria)
 		$urut = 0;
 		$idi = 0;
 
+<<<<<<< Updated upstream
 		for ($x = 0; $x <= ($n - 2); $x++) {
 			for ($y = ($x + 1); $y <= ($n - 1); $y++) {
 				$urut++;
@@ -438,6 +485,27 @@ function showTabelPerbandingan($jenis, $kriteria)
 		<input type="text" name="jenis" value="<?php echo $jenis; ?>" hidden>
 		<input class="btn btn-success" type="submit" name="submit" value="SUBMIT" style="margin-left: 59%;">
 	</form>
+=======
+    <form class="ui form" action="page/pembobotan/proses.php" method="post">
+        <?php
+        $n = getJumlahKriteria();
+        $urut = 0;
+        $idi = 0;
+
+        for ($x = 0; $x <= ($n - 2); $x++) {
+			for ($y = ($x + 1); $y <= ($n - 1); $y++) {
+				$urut++;
+				TablePerbandingan($pilihan, $edit_pilihan, $idi, $urut, $x, $y);
+				$idi++;
+			}
+		}
+        ?>
+
+        <input type="text" name="jenis" value="<?= $jenis ?>" hidden>
+        <input class="btn btn-success" type="submit" name="submit" value="SUBMIT" style="margin-left: 59%;">
+    </form>
+
+>>>>>>> Stashed changes
 <?php
 }
 
@@ -470,6 +538,7 @@ function showTabelPerbandingan2($jenis, $alternatif)
 		$urut = 0;
 		$idi = 0;
 
+<<<<<<< Updated upstream
 		for ($x = 0; $x <= ($n - 2); $x++) {
 			for ($y = ($x + 1); $y <= ($n - 1); $y++) {
 				$urut++;
@@ -520,3 +589,25 @@ function showTabelPerbandingan2($jenis, $alternatif)
 		<input class="btn btn-success" type="submit" name="submit" value="SUBMIT" style="margin-left: 59%;">
 	</form>
 <?php } ?>
+=======
+    <form class="ui form" action="page/pembobotan/proses.php" method="post">
+        <?php
+        $n = getJumlahAlternatif();
+        $urut = 0;
+        $idi = 0;
+
+        for ($x = 0; $x <= ($n - 2); $x++) {
+			for ($y = ($x + 1); $y <= ($n - 1); $y++) {
+				$urut++;
+				TablePerbandingan($pilihan, $edit_pilihan, $idi, $urut, $x, $y);
+				$idi++;
+			}
+		}
+        ?>
+
+        <input type="text" name="jenis" value="<?= $jenis ?>" hidden>
+        <input class="btn btn-success" type="submit" name="submit" value="SUBMIT" style="margin-left: 59%;">
+    </form>
+<?php
+}  ?>
+>>>>>>> Stashed changes

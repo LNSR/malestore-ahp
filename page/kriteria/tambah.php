@@ -14,7 +14,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi Kriteria</label>
-                                <input type="text" class="form-control" name="kriteria_deskripsi" required="" />
+                                <textarea class="form-control" name="kriteria_deskripsi"></textarea>
                             </div>
                             <input type="Submit" name="Simpan" value="Simpan" class="btn btn-success">
                             <a href="?page=kriteria" class="btn btn-danger">Tutup</a>
@@ -27,6 +27,10 @@
 </section>
 
 <?php
+<<<<<<< Updated upstream
+=======
+include '../../config.php';
+>>>>>>> Stashed changes
 $kriteria_id = $_POST['kriteria_id'];
 $kriteria_deskripsi = $_POST['kriteria_deskripsi'];
 $kriteria_nama = $_POST['kriteria_nama'];

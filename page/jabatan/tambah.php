@@ -24,22 +24,31 @@
             </div>
         </div>
     </div>
+<<<<<<< Updated upstream
     <?php
 
     $id_jabatan = $_POST['id_jabatan'];
     $nama_jabatan = $_POST['nama_jabatan'];
     $job_desc = $_POST['job_desc'];
     $Simpan = $_POST['Simpan'];
+=======
+</section>
+>>>>>>> Stashed changes
 
-    if ($Simpan) {
-        $sql = $koneksi->query("insert into jabatan (id_jabatan, nama_jabatan,job_desc) values ('$id_jabatan','$nama_jabatan','$job_desc')");
-        if ($sql) {
-    ?>
-            <script type="text/javascript">
-                alert("Data Berhasil Disimpan");
-                window.location.href = "?page=jabatan";
-            </script>
-    <?php
-        }
+<?php
+include "../../config.php";
+
+if (isset($_POST['Simpan'])) {
+    $data = [
+        "nama_jabatan" => $_POST['nama_jabatan'],
+        "job_desc" => $_POST['job_desc'],
+    ];
+
+    $sql = "INSERT INTO jabatan (nama_jabatan, job_desc) VALUES ('{$data['nama_jabatan']}', '{$data['job_desc']}')";
+    $query = $koneksi->query($sql);
+
+    if ($query) {
+        exit("<script>alert('Data Berhasil Disimpan'); window.location.href='?page=jabatan';</script>");
     }
-    ?>
+}
+?>

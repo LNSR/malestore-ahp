@@ -8,8 +8,8 @@ $pages = array(
   'bobot_alternatif' => array(
     'title' => 'Perbandingan Karyawan &rarr; ' . getKriteriaNama($jenis - 1),
     'params' => array('c'),
-    'function' => 'showTabelPerbandingan2',
-    'args' => array('tb_karyawan')
+    'function' => 'showTabelPerbandingan',
+    'args' => array(null, 'tb_karyawan')
   ),
   'bobot_kriteria' => array(
     'title' => 'Perbandingan Kriteria(Pilih yang lebih penting)',

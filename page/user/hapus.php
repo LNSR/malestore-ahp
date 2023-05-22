@@ -1,7 +1,7 @@
 <?php
 include "../../config.php";
 $id = $_GET['id'];
-mysqli_query($koneksi, "DELETE FROM user WHERE id_users='$id'");
+if (mysqli_query($koneksi, "DELETE FROM user WHERE id_users='$id'")) {
 
 // Untuk mendapatkan semua 'id_users' yang diurutkan dari yang terbesar
 $result = mysqli_query($koneksi, "SELECT id_users FROM user ORDER BY id_users ASC");
@@ -20,7 +20,13 @@ $max_id = mysqli_query($koneksi, "SELECT MAX(id_users) FROM user");
 $new_auto_increment = mysqli_fetch_array($max_id)[0] + 1;
 mysqli_query($koneksi, "ALTER TABLE user AUTO_INCREMENT = $new_auto_increment");
 
-echo "<script>alert('Data Berhasil Di Hapus');
+    echo "<script>alert('Data Berhasil Di Hapus');
             window.location='?page=user';
             </script>";
+} else {
+
+    echo "<script>alert('Data Gagal Di Hapus');
+            window.location='?page=user';
+            </script>";   
+}
 ?>

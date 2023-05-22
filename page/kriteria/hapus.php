@@ -1,7 +1,7 @@
 <?php
 include "../../config.php";
 $id = $_GET['id'];
-mysqli_query($koneksi, "DELETE FROM tb_kriteria WHERE kriteria_id='$id'");
+if (mysqli_query($koneksi, "DELETE FROM tb_kriteria WHERE kriteria_id='$id'")) {
 
 // Untuk mendapatkan semua 'kriteria_id' yang diurutkan dari yang terbesar
 $result = mysqli_query($koneksi, "SELECT kriteria_id FROM tb_kriteria ORDER BY kriteria_id ASC");
@@ -20,7 +20,13 @@ $max_id = mysqli_query($koneksi, "SELECT MAX(kriteria_id) FROM tb_kriteria");
 $new_auto_increment = mysqli_fetch_array($max_id)[0] + 1;
 mysqli_query($koneksi, "ALTER TABLE tb_kriteria AUTO_INCREMENT = $new_auto_increment");
 
-echo "<script>alert('Data Berhasil Di Hapus');
+    echo "<script>alert('Data Berhasil Di Hapus');
             window.location='?page=kriteria';
             </script>";
+} else {
+    
+    echo "<script>alert('Data Gagal Di Hapus');
+            window.location='?page=kriteria';
+            </script>";
+}
 ?>

@@ -4,17 +4,14 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $truncate_pv_alternatif = mysqli_query($koneksi, "TRUNCATE TABLE tb_pv_alternatif");
-    $truncate_pv_kriteria = mysqli_query($koneksi, "TRUNCATE TABLE tb_pv_kriteria");
-    $truncate_banding_alternatif = mysqli_query($koneksi, "TRUNCATE TABLE tb_banding_alternatif");
-    $truncate_banding_kriteria = mysqli_query($koneksi, "TRUNCATE TABLE tb_banding_kriteria");
+    $truncate_all_tables = mysqli_query($koneksi, "TRUNCATE TABLE tb_pv_alternatif, tb_pv_kriteria, tb_banding_alternatif, tb_banding_kriteria");
 
-    if($truncate_pv_alternatif && $truncate_pv_kriteria && $truncate_banding_alternatif && $truncate_banding_kriteria) {
+    if($truncate_all_tables) {
         echo "<script>alert('Matriks Perbandingan Tabel Berhasil Di Hapus');
                 window.location='?page=perankingan';
                 </script>";
     } else {
-        echo "<script>alert('Error: Unable to truncate tables.');
+        echo "<script>alert('Error: Matriks Perbandingan Gagal Di Hapus');
                 window.location='?page=perankingan';
                 </script>";
     }

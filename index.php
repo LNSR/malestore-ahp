@@ -34,7 +34,7 @@ switch ($userType) {
             "kriteria" => ["kriteria", "tambah", "ubah", "hapus"],
             "akriteria" => ["akriteria", "hapus"],
             "aalternatif" => ["aalternatif", "hapus"],
-            "perankingan" => ["perankingan", "hapus"],
+            "perangkingan" => ["perangkingan", "hapus"],
             "laporan" => ["laporan"],
         ];
 
@@ -57,7 +57,7 @@ switch ($userType) {
       $page = $_GET['page'] ?? '';
 
       $paths = array(
-          "perankingan" => "page/perankingan/perankingan.php",
+          "perangkingan" => "page/perangkingan/perangkingan.php",
           "" => "home.php"
       );
 

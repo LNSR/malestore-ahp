@@ -17,16 +17,16 @@ while ($tampil = mysqli_fetch_array($pilih)) {
                                 <div class="form-group">
                                     <div class="form-group" hidden />
                                         <label>ID Kriteria</label>
-                                        <input class="form-control" name="kriteria_id" value="<?php echo $tampil['kriteria_id']; ?>" readonly />
+                                        <input class="form-control" name="kriteria_id" value="<?= $tampil['kriteria_id']; ?>" readonly />
                                     </div>
                                     <div class="form-group">
                                         <label>Nama Kriteria</label>
-                                        <input type="text" class="form-control" name="kriteria_nama" value="<?php echo $tampil['kriteria_nama']; ?>" />
+                                        <input type="text" class="form-control" name="kriteria_nama" value="<?= $tampil['kriteria_nama']; ?>" />
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label>Deskripsi Kriteria</label>
-                                        <textarea class="form-control" name="kriteria_deskripsi"><?php echo $tampil['kriteria_deskripsi']; ?></textarea>
+                                        <textarea class="form-control" name="kriteria_deskripsi"><?= $tampil['kriteria_deskripsi']; ?></textarea>
                                     </div>
 
                                     <input type="Submit" name="Simpan" value="Simpan" class="btn btn-success">
@@ -42,20 +42,26 @@ while ($tampil = mysqli_fetch_array($pilih)) {
 <?php } ?>
 
 <?php
-$kriteria_id = $_POST['kriteria_id'];
-$kriteria_deskripsi = $_POST['kriteria_deskripsi'];
-$kriteria_nama = $_POST['kriteria_nama'];
-$Simpan = $_POST['Simpan'];
+$kriteria_id = $_POST['kriteria_id'] ?? '';
+$kriteria_deskripsi = $_POST['kriteria_deskripsi'] ?? '';
+$kriteria_nama = $_POST['kriteria_nama'] ?? '';
+$Simpan = $_POST['Simpan'] ?? '';
 
 if ($Simpan) {
-    $sql = $koneksi->query("UPDATE tb_kriteria set kriteria_deskripsi='$kriteria_deskripsi',kriteria_nama='$kriteria_nama' where kriteria_id ='$kriteria_id'");
-    if ($sql) {
+    $sql = $koneksi->query("SELECT * FROM tb_kriteria WHERE kriteria_id ='$kriteria_id'");
+    $data = mysqli_fetch_array($sql);
+    if ($data['kriteria_nama'] == $kriteria_nama && $data['kriteria_deskripsi'] == $kriteria_deskripsi) {
+        echo "<script>alert('Tidak ada perubahan data');</script>";
+    } else {
+        $sql = $koneksi->query("UPDATE tb_kriteria SET kriteria_deskripsi='$kriteria_deskripsi',kriteria_nama='$kriteria_nama' WHERE kriteria_id ='$kriteria_id'");
+        if ($sql) {
 ?>
-        <script type="text/javascript">
-            alert("Data Berhasil di Edit");
-            window.location.href = "?page=kriteria";
-        </script>
+            <script type="text/javascript">
+                alert("Data Berhasil di Edit");
+                window.location.href = "?page=kriteria";
+            </script>
 <?php
+        }
     }
 }
 ?>

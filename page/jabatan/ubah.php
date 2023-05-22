@@ -6,6 +6,10 @@ if(isset($_POST['Simpan'])) {
         "job_desc" => $_POST["job_desc"],
         "id_jabatan" => $_POST["id_jabatan"]
     ];
+    $tampil = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM jabatan WHERE id_jabatan='{$data['id_jabatan']}'"));
+    if($tampil['nama_jabatan'] == $data['nama_jabatan'] && $tampil['job_desc'] == $data['job_desc']) {
+        exit("<script>alert('Tidak ada perubahan data'); window.location.href='?page=jabatan';</script>");
+    }
     $sql = "UPDATE jabatan SET nama_jabatan='{$data['nama_jabatan']}', job_desc='{$data['job_desc']}' WHERE id_jabatan='{$data['id_jabatan']}'";
     $query = $koneksi->query($sql);
     $query ? exit("<script>alert('Data Berhasil di Edit'); window.location.href='?page=jabatan';</script>") : "";

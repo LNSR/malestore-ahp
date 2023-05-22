@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-<<<<<<< Updated upstream
--- Generation Time: May 16, 2023 at 06:09 PM
-=======
 -- Generation Time: May 21, 2023 at 02:10 PM
->>>>>>> Stashed changes
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -226,19 +222,11 @@ INSERT INTO `tb_pv_alternatif` (`id`, `id_alternatif`, `id_kriteria`, `nilai`) V
 (4, 4, 1, 0.461307),
 (5, 5, 1, 0.16329),
 (6, 1, 2, 0.165852),
-<<<<<<< Updated upstream
-(7, 2, 2, 0.10523),
-(8, 3, 2, 0.286354),
-(9, 4, 2, 0.0637669),
-(10, 5, 2, 0.378797),
-(11, 1, 3, 0.12819),
-=======
 (7, 1, 3, 0.12819),
 (8, 2, 2, 0.10523),
 (9, 3, 2, 0.286354),
 (10, 4, 2, 0.0637669),
 (11, 5, 2, 0.378797),
->>>>>>> Stashed changes
 (12, 2, 3, 0.281211),
 (13, 3, 3, 0.0729319),
 (14, 4, 3, 0.473678),

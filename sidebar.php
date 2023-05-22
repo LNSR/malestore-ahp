@@ -42,7 +42,7 @@
                     <p>Data Master<i class="fas fa-angle-left right"></i><span class="badge badge-info right"></span></p>
                 </a>
                 <ul class="nav nav-treeview">
-                    <li class="nav-item"><a href="?page=datamaster" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Karyawan</p></a></li>
+                    <li class="nav-item"><a href="?page=karyawan" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Karyawan</p></a></li>
                     <li class="nav-item"><a href="?page=kriteria" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Kriteria</p></a></li>
                     <li class="nav-item"><a href="?page=jabatan" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Jabatan</p></a></li>
                     <li class="nav-item"><a href="?page=user" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Login Pengguna</p></a></li>

@@ -21,6 +21,6 @@ $new_auto_increment = mysqli_fetch_array($max_id)[0] + 1;
 mysqli_query($koneksi, "ALTER TABLE tb_karyawan AUTO_INCREMENT = $new_auto_increment");
 
 echo "<script>alert('Data Berhasil Di Hapus');
-            window.location='?page=datamaster';
+            window.location='?page=karyawan';
             </script>";
 ?>

@@ -28,7 +28,7 @@ switch ($userType) {
         $aksi = $_GET['aksi'] ?? '';
 
         $pages = [
-            "datamaster" => ["data", "tambah", "ubah", "hapus"],
+            "karyawan" => ["karyawan", "tambah", "ubah", "hapus"],
             "jabatan" => ["jabatan", "tambah", "ubah", "hapus"],
             "user" => ["user", "tambah", "ubah", "hapus"],
             "kriteria" => ["kriteria", "tambah", "ubah", "hapus"],

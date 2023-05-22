@@ -8,12 +8,12 @@ if(isset($_POST['Simpan'])) {
 
     $tampil = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM tb_karyawan WHERE id_karyawan='$id_karyawan'"));
     if($tampil['nama_karyawan'] == $nama_karyawan && $tampil['jabatan'] == $jabatan) {
-        exit("<script>alert('Tidak ada perubahan data'); window.location.href='?page=datamaster';</script>");
+        exit("<script>alert('Tidak ada perubahan data'); window.location.href='?page=karyawan';</script>");
     }
 
     $sql = $koneksi->query("UPDATE tb_karyawan set nama_karyawan='$nama_karyawan',jabatan='$jabatan' where id_karyawan ='$id_karyawan'");
     if ($sql) {
-        echo "<script>alert('Data Berhasil di Edit'); window.location.href = '?page=datamaster';</script>";
+        echo "<script>alert('Data Berhasil di Edit'); window.location.href = '?page=karyawan';</script>";
     }
 }
 
@@ -56,7 +56,7 @@ $deskripsi = $tampil['deskripsi'];
                                     </select>
                                 </div> 
                                 <input type="Submit" name="Simpan" value="Simpan" class="btn btn-success">
-                                <a href="?page=datamaster" class="btn btn-danger">Tutup</a>
+                                <a href="?page=karyawan" class="btn btn-danger">Tutup</a>
                             </div>
                         </form>
                     </div>

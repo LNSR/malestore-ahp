@@ -13,7 +13,7 @@
         // Tentukan array dari elemen, di mana setiap elemen adalah array asosiatif informasi tentang suatu tabel
         $elements = [
           ['name' => 'Data Kriteria', 'link' => '?page=kriteria', 'color' => 'bg-info', 'table' => 'tb_kriteria'],
-          ['name' => 'Data Karyawan', 'link' => '?page=datamaster', 'color' => 'bg-warning', 'table' => 'tb_karyawan'],
+          ['name' => 'Data Karyawan', 'link' => '?page=karyawan', 'color' => 'bg-warning', 'table' => 'tb_karyawan'],
           ['name' => 'Data Login Pengguna', 'link' => '?page=user', 'color' => 'bg-gradient-success', 'table' => 'user'],
           ['name' => 'Data Jabatan', 'link' => '?page=jabatan', 'color' => 'bg-danger', 'table' => 'jabatan'],
         ];

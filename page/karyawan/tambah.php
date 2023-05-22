@@ -27,7 +27,7 @@
                                 </select>
                             </div>                           
                             <input type="Submit" name="Simpan" value="Simpan" class="btn btn-success">
-                            <a href="?page=datamaster" class="btn btn-danger">Tutup</a>
+                            <a href="?page=karyawan" class="btn btn-danger">Tutup</a>
                         </form>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
             ?>
             <script type="text/javascript">
                 alert("Data Berhasil Disimpan");
-                window.location.href = "?page=datamaster";
+                window.location.href = "?page=karyawan";
             </script>
             <?php
         }

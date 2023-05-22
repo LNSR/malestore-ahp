@@ -2,7 +2,7 @@
 // Include config file and start session
 include 'config.php';
 session_start();
-
+error_reporting(1);
 // Check if user is already logged in, redirect to index.php if true
 if (isset($_SESSION['admin']) || isset($_SESSION['karyawan'])) {
   header("location:index.php");

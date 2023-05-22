@@ -36,7 +36,14 @@ for ($x = 1; $x <= $m; $x++) {
 <!-- Content -->
 <div class="row">
   <div class="col-md-12">
-      <a href="?page=perangkingan&aksi=hapus-table" class="btn btn-danger" style="float: right; margin-bottom: 20px;" onclick="return confirm('Jika Anda menghapus tabel, Anda perlu memasukkan ulang nilai kriteria dan alternatif')">Hapus Tabel</a>
+  <?php
+    if($_SESSION['karyawan'] != $data['nama']) {
+    // do not show the button
+    } else {
+    // show the button
+    echo '<a href="?page=perangkingan&aksi=hapus-table" class="btn btn-danger" style="float: right; margin-bottom: 20px;" onclick="return confirm(\'Jika Anda menghapus tabel, Anda perlu memasukkan ulang nilai kriteria dan alternatif\')">Hapus Tabel</a>';
+    }
+    ?>
   </div>
 </div>
 <section class="content">

@@ -41,7 +41,7 @@ for ($x = 1; $x <= $m; $x++) {
     // do not show the button
     } else {
     // show the button
-    echo '<a href="?page=perangkingan&aksi=hapus-table" class="btn btn-danger" style="float: right; margin-bottom: 20px;" onclick="return confirm(\'Jika Anda menghapus tabel, Anda perlu memasukkan ulang nilai kriteria dan alternatif\')">Hapus Tabel</a>';
+    echo '<a href="?page=perankingan&aksi=hapus" class="btn btn-danger" style="float: right; margin-bottom: 20px;" onclick="return confirm(\'Jika Anda menghapus tabel, Anda perlu memasukkan ulang nilai kriteria dan alternatif\')">Hapus Tabel</a>';
     }
     ?>
   </div>

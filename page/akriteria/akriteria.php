@@ -160,10 +160,10 @@ for ($x = 0; $x <= ($n - 1); $x++) {
           <th bgcolor="#4db00c">Jumlah</th>
           <?php
           for ($i = 0; $i <= (($n - 1)); $i++) {
-            echo "<th bgcolor='#4db00c'>" . number_format($jmlmnk2[$i], 3) . "</th>";
+            echo "<th bgcolor='#4db00c'>" . number_format($jmlmnk2[$i], 0) . "</th>";
           }
-          echo "<th bgcolor='#4db00c'>" . number_format($jmljml, 3) . "</th>";
-          echo "<th bgcolor='#4db00c'>" . number_format($jmlev, 3) . "</th>";
+          echo "<th bgcolor='#4db00c'>" . number_format($jmljml, 0) . "</th>";
+          echo "<th bgcolor='#4db00c'>" . number_format($jmlev, 0) . "</th>";
           ?>
         </tr>
       </tfoot>

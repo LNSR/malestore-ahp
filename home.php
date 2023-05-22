@@ -50,16 +50,16 @@
         ?>
       </div>
       <?php } 
-      // Jika pengguna adalah karyawan, tampilkan satu kotak untuk perangkingan
+      // Jika pengguna adalah karyawan, tampilkan satu kotak untuk perankingan
       else if (isset($_SESSION['karyawan'])) { ?>
       <div class="row">
         <div class="col-lg-4 col-6">
           <div class="small-box bg-info">
             <div class="inner">
-              <h5>Perangkingan</h5>
+              <h5>Perankingan</h5>
             </div>
             <div class="icon"></div>
-            <a href="?page=perangkingan" class="small-box-footer">
+            <a href="?page=perankingan" class="small-box-footer">
               Selengkapnya 
               <i class="fas fa-arrow-circle-right"></i>
             </a>

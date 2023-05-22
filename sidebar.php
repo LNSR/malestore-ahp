@@ -80,18 +80,18 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item"><a href="?page=akriteria" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Analisa Kriteria</p></a></li>
                     <li class="nav-item"><a href="?page=aalternatif" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Analisa Karyawan</p></a></li>
-                    <li class="nav-item"><a href="?page=perangkingan" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Perangkingan</p></a></li>
+                    <li class="nav-item"><a href="?page=perankingan" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Perankingan</p></a></li>
                     <li class="nav-item"><a href="?page=laporan" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Laporan</p></a></li>
                 </ul>
             </li>
             <?php 
                 } else if(isset($_SESSION['karyawan'])) { 
             ?>
-            <!-- Perangkingan -->
+            <!-- Perankingan -->
             <li class="nav-item">
-                <a href="?page=perangkingan" class="nav-link">
+                <a href="?page=perankingan" class="nav-link">
                     <i class="nav-icon fas fa-chart-bar"></i>
-                    <p>Perangkingan<i class="right badge badge-danger"></i></p>
+                    <p>Perankingan<i class="right badge badge-danger"></i></p>
                 </a>
             </li>
             <?php 

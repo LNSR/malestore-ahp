@@ -6,11 +6,8 @@
 
   <div class="card">
     <section class="content-header">
-<<<<<<< Updated upstream
-=======
       <?php if (isset($_SESSION['admin'])) { ?>
       <!-- Jika pengguna adalah admin, tampilkan data untuk setiap tabel dalam baris kotak (box) -->
->>>>>>> Stashed changes
       <div class="row">
         <?php 
         // Tentukan array dari elemen, di mana setiap elemen adalah array asosiatif informasi tentang suatu tabel
@@ -52,8 +49,6 @@
         }
         ?>
       </div>
-<<<<<<< Updated upstream
-=======
       <?php } 
       // Jika pengguna adalah karyawan, tampilkan satu kotak untuk perangkingan
       else if (isset($_SESSION['karyawan'])) { ?>
@@ -74,6 +69,5 @@
       <?php } ?>
 
     </section>
->>>>>>> Stashed changes
   </div>
 </body>

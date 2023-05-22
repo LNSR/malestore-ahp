@@ -22,22 +22,12 @@
                                         <th>No</th>
                                         <th>Nama Pengguna</th>
                                         <th>Username</th>
-                                        <th>Password</th>
+                                        <!-- <th>Password</th> -->
                                         <th>Tipe Pengguna</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-<<<<<<< Updated upstream
-                                    <?php while ($data = mysqli_fetch_array($pilih)) { ?>
-                                        <tr>
-                                            <td><?php echo $no++; ?></td>
-                                            <td><?php echo $data['nama']; ?></td>
-                                            <td><?php echo $data['username']; ?></td>
-                                            <td><?php echo password_hash($data['password'], PASSWORD_DEFAULT); ?></td>
-                                            <td><?php echo $data['tipe']; ?></td>
-                                            <td>
-=======
                                 <?php while ($data = mysqli_fetch_array($pilih)) { ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
@@ -46,7 +36,6 @@
                                         <td><?php echo $data['tipe']; ?></td>
                                         <td>
                                             <?php if ($_SESSION['id_users'] != 1 || $data['id_users'] != 1) { ?>
->>>>>>> Stashed changes
                                                 <a href="?page=user&aksi=ubah&id=<?php echo $data['id_users']; ?>" class="btn btn-info"><i class=" fa fa-edit"></i> Edit</a>
                                                 <?php if ($_SESSION['admin'] != $data['nama']) { ?>
                                                     <a onclick="return confirm('Anda yakin ingin menghapus data ini...?')" href="?page=user&aksi=hapus&id=<?php echo $data['id_users']; ?>" class="btn btn-danger"><i class=" fa fa-trash"></i> Hapus</a>

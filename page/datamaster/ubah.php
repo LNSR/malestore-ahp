@@ -15,8 +15,8 @@ while ($tampil = mysqli_fetch_array($pilih)) {
                         <div class="card-body">
                             <form action="" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label>ID Karyawan</label>
-                                    <input class="form-control" name="id_karyawan" value="<?php echo $tampil['id_karyawan']; ?>" readonly />
+                                    <!-- <label>ID Karyawan</label>
+                                    <input class="form-control" name="id_karyawan" value="<?php echo $tampil['id_karyawan']; ?>" readonly /> -->
 
                                     <div class="form-group">
                                         <label>Nama Karyawan</label>
@@ -24,19 +24,18 @@ while ($tampil = mysqli_fetch_array($pilih)) {
                                     </div>
 
                                     <div class="form-group">
-                                <label>Jabatan</label>
-                                <select class="form-control" name="jabatan" required="">
-                                    <?php
-                                        $pilih = mysqli_query($koneksi, "SELECT * FROM jabatan ORDER BY id_jabatan");
-                                            while ($jab = mysqli_fetch_array($pilih)) {
-                                            $id = $jab['id_jabatan'];
-                                            $najab = $jab['nama_jabatan'];
-                                            echo "<option value='$najab'>$najab</option>";
-                                        }
-                                    ?>
-                                </select>
-                            </div> 
-
+                                        <label>Jabatan</label>
+                                        <select class="form-control" name="jabatan" required="">
+                                        <?php
+                                            $pilih = mysqli_query($koneksi, "SELECT * FROM jabatan ORDER BY id_jabatan");
+                                                while ($jab = mysqli_fetch_array($pilih)) {
+                                                $id = $jab['id_jabatan'];
+                                                $najab = $jab['nama_jabatan'];
+                                                echo "<option value='$najab'>$najab</option>";
+                                            }
+                                        ?>
+                                        </select>
+                                    </div> 
                                     <input type="Submit" name="Simpan" value="Simpan" class="btn btn-success">
                                     <a href="?page=datamaster" class="btn btn-danger">Tutup</a>
                                 </div>

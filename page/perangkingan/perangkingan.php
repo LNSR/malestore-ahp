@@ -44,64 +44,6 @@ for ($x = 1; $x <= $m; $x++) {
     <div class="row">
       <div class="col-md-12">
         <!-- Tabel Bobot Karyawan -->
-<<<<<<< Updated upstream
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Tabel Bobot Karyawan</h3>
-  </div>
-  <div class="card-body">
-    <form method="POST">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Karyawan</th>
-            <?php for ($i = 0; $i <= ($n - 1); $i++) { ?>
-              <th><?= getKriteriaNama($i) ?></th>
-            <?php } ?>
-          </tr>
-        </thead>
-        <tbody>
-          <?php for ($x = 1; $x <= $m; $x++) { ?>
-            <tr>
-              <th><?= getAlternatifNama($x - 1) ?></th>
-              <?php for ($y = 1; $y <= $n; $y++) { ?>
-                <td><?= number_format(getEVAlternatif($x, $y), 3) ?></td>
-              <?php } ?>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
-    </form>
-  </div>
-</div>
-
-<!-- Tabel Bobot Kriteria -->
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Tabel Bobot Kriteria</h3>
-  </div>
-  <div class="card-body">
-    <form method="POST">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <?php for ($i = 0; $i <= ($n - 1); $i++) { ?>
-              <th><?= getKriteriaNama($i) ?></th>
-            <?php } ?>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <?php for ($x = 1; $x <= $n; $x++) { ?>
-              <td><?= number_format(getEVKriteria($x), 3) ?></td>
-            <?php } ?>
-          </tr>
-        </tbody>
-      </table>
-    </form>
-  </div>
-</div>
-=======
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Tabel Bobot Karyawan</h3>
@@ -158,7 +100,6 @@ for ($x = 1; $x <= $m; $x++) {
             </form>
           </div>
         </div>
->>>>>>> Stashed changes
 
 <!-- Tabel Ranking -->
 <div class="card">
@@ -212,31 +153,6 @@ for ($x = 1; $x <= $m; $x++) {
   </div>
 </div>
 
-<<<<<<< Updated upstream
-<!-- Tabel Ranking for each criteria -->
-<?php for ($y = 1; $y <= $n; $y++) { ?>
-  <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">Tabel Ranking - <?= getKriteriaNama($y-1) ?></h3>
-    </div>
-    <div class="card-body">
-      <form method="POST">
-        <table class="table table-bordered text-center">
-          <thead>
-            <tr>
-              <th>Ranking</th>
-              <th>Karyawan</th>
-              <th>Skor <?= getKriteriaNama($y-1) ?></th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            // Kalkulasi masing-masing total skor karyawan untuk kriteria tertentu
-            $total_kriteria = [];
-            for ($x = 1; $x <= $m; $x++) {
-              $total_kriteria[$x] = ($matrik[$x][$y] * $matrikb[$y]);
-            }
-=======
         <!-- Tabel Ranking masing-masing kriteria -->
         <?php for ($y = 1; $y <= $n; $y++) { ?>
           <div class="card">
@@ -260,7 +176,6 @@ for ($x = 1; $x <= $m; $x++) {
                     for ($x = 1; $x <= $m; $x++) {
                       $total_kriteria[$x] = ($matrik[$x][$y] * $matrikb[$y]);
                     }
->>>>>>> Stashed changes
 
             // Tampilkan Skor karyawan untuk kriteria tertentu
             arsort($total_kriteria);

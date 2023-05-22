@@ -27,10 +27,7 @@
 </section>
 
 <?php
-<<<<<<< Updated upstream
-=======
 include '../../config.php';
->>>>>>> Stashed changes
 $kriteria_id = $_POST['kriteria_id'];
 $kriteria_deskripsi = $_POST['kriteria_deskripsi'];
 $kriteria_nama = $_POST['kriteria_nama'];

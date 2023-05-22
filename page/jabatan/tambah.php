@@ -24,16 +24,7 @@
             </div>
         </div>
     </div>
-<<<<<<< Updated upstream
-    <?php
-
-    $id_jabatan = $_POST['id_jabatan'];
-    $nama_jabatan = $_POST['nama_jabatan'];
-    $job_desc = $_POST['job_desc'];
-    $Simpan = $_POST['Simpan'];
-=======
 </section>
->>>>>>> Stashed changes
 
 <?php
 include "../../config.php";

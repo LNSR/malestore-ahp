@@ -32,6 +32,8 @@ if (isset($_POST['Login'])) {
       $stmt = $koneksi->prepare("UPDATE user SET password = ? WHERE username = ?");
       $stmt->bind_param("ss", $new_password, $username);
       $stmt->execute();
+    
+      echo "<script>alert('Password terupdate. coba login memakai password yang sama');</script>";
     }
 
     if (password_verify($password, $user['password'])) {

@@ -48,29 +48,55 @@
                     <li class="nav-item"><a href="?page=user" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Login Pengguna</p></a></li>
                 </ul>
             </li>
-
             <!-- Pembobotan Kriteria -->
-            <li class="nav-item"><a href="?page=bobot_kriteria" class="nav-link"><i class="far fa-edit nav-icon"></i><p>Pembobotan Kriteria</p></a></li>
-
+            <?php 
+                if(isset($_SESSION['admin'])) { 
+                    if(getJumlahKriteria() >= 3) { 
+            ?>
+                        <li class="nav-item"><a href="?page=bobot_kriteria" class="nav-link"><i class="far fa-edit nav-icon"></i><p>Pembobotan Kriteria</p></a></li>
+            <?php 
+                    } else { 
+            ?>
+                        <li class="nav-item"><a href="#" class="nav-link" onclick="alert('Tolong isi kriteria minimal 3')"><i class="far fa-edit nav-icon"></i><p>Pembobotan Kriteria</p></a></li>
+            <?php 
+                    } 
+                } 
+            ?>
             <!-- Pembobotan Karyawan -->
-            <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-edit"></i>
-                    <p>Pembobotan Karyawan<i class="fas fa-angle-left right"></i></p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <?php 
-                        for ($i = 0; $i <= (getJumlahKriteria() - 1); $i++) { 
-                    ?>
-                        <li class='nav-item'>
-                            <a class='nav-link' href='?page=bobot_alternatif&c=<?php echo ($i + 1); ?>'>
-                                <i class='nav-icon far fa-circle'></i><?php echo getKriteriaNama($i); ?>
+            <?php 
+                if(isset($_SESSION['admin'])) { 
+                    if(getJumlahAlternatif() >= 2 && getJumlahKriteria() >= 3) { 
+            ?>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>Pembobotan Karyawan<i class="fas fa-angle-left right"></i></p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <?php 
+                                    for ($i = 0; $i <= (getJumlahKriteria() - 1); $i++) { 
+                                ?>
+                                        <li class='nav-item'>
+                                            <a class='nav-link' href='?page=bobot_alternatif&c=<?php echo ($i + 1); ?>'>
+                                                <i class='nav-icon far fa-circle'></i><?php echo getKriteriaNama($i); ?>
+                                            </a>
+                                        </li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+            <?php 
+                    } else { 
+            ?>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" onclick="alert('Tolong isi kriteria minimal 3 dan karyawan minimal 2');">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>Pembobotan Karyawan</p>
                             </a>
                         </li>
-                    <?php } ?>
-                </ul>
-            </li>
-
+            <?php 
+                    } 
+                } 
+            ?>
             <!-- Data Analisa -->
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">

@@ -150,21 +150,31 @@ function getKriteriaID($no_urut)
 	while ($row = mysqli_fetch_array($result)) {
 		$listID[] = $row['kriteria_id'];
 	}
-	return $listID[($no_urut)];
+	if (isset($listID[$no_urut])) {
+        return $listID[$no_urut];
+    } else {
+        return null;
+    }
 }
 
 // mencari ID alternatif
 // berdasarkan urutan ke berapa (A1, A2, A3)
 function getAlternatifID($no_urut)
 {
-	include('config.php');
-	$query  = "SELECT id_karyawan FROM tb_karyawan ORDER BY id_karyawan";
-	$result = mysqli_query($koneksi, $query);
+    include('config.php');
+    $query  = "SELECT id_karyawan FROM tb_karyawan ORDER BY id_karyawan";
+    $result = mysqli_query($koneksi, $query);
 
-	while ($row = mysqli_fetch_array($result)) {
-		$listID[] = $row['id_karyawan'];
-	}
-	return $listID[($no_urut)];
+    $listID = array();
+    while ($row = mysqli_fetch_array($result)) {
+        $listID[] = $row['id_karyawan'];
+    }
+
+    if (isset($listID[$no_urut])) {
+        return $listID[$no_urut];
+    } else {
+        return null;
+    }
 }
 
 // mencari nama kriteria
@@ -289,10 +299,10 @@ function inputAlternatifPV($id_karyawan, $id_kriteria, $pv)
 	$query  = "SELECT * FROM tb_pv_alternatif WHERE id_alternatif = $id_karyawan AND id_kriteria = $id_kriteria";
 	$result = mysqli_query($koneksi, $query);
 
-	if (!$result) {
+	/* if (!$result) {
 		echo "Error bro!!!";
 		exit();
-	}
+	} */
 
 	// jika result kosong maka masukkan data baru
 	// jika telah ada maka diupdate
@@ -409,10 +419,10 @@ function getNilaiPerbandinganAlternatif($alternatif1, $alternatif2, $pembanding)
 	$query  = "SELECT nilai FROM tb_banding_alternatif WHERE alternatif1 = $id_alternatif1 AND alternatif2 = $id_alternatif2 AND pembanding = $pembanding";
 	$result = mysqli_query($koneksi, $query);
 
-	if (!$result) {
+	/* if (!$result) {
 		echo "Error bro!!!";
 		exit();
-	}
+	} */
 	if (mysqli_num_rows($result) == 0) {
 		$nilai = 0;
 	} else {

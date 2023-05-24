@@ -1,4 +1,5 @@
 <?php
+// error_reporting(E_ALL & ~E_WARNING);
 
 //|============================================================================================|
 //|***********************************Fungsi Index*********************************************|
@@ -412,7 +413,7 @@ function getNilaiPerbandinganKriteria($kriteria1, $kriteria2)
 function getNilaiPerbandinganAlternatif($alternatif1, $alternatif2, $pembanding)
 {
 	include('config.php');
-
+	// error_reporting(0);
 	$id_alternatif1 = getAlternatifID($alternatif1);
 	$id_alternatif2 = getAlternatifID($alternatif2);
 

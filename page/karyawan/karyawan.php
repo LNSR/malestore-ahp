@@ -1,9 +1,11 @@
-<!-- Advanced Tables -->
 <?php
 include "../../config.php";
 $pilih = mysqli_query($koneksi, "SELECT * FROM tb_karyawan");
 $no = 1;
 $tableHeaders = array("No", "Nama Karyawan", "Jabatan", "Aksi");
+
+$cek_jabatan = mysqli_query($koneksi, "SELECT COUNT(*) AS jumlah_jabatan FROM jabatan");
+$jumlah_jabatan = mysqli_fetch_assoc($cek_jabatan)['jumlah_jabatan'];
 ?>
 
 <div class="card">
@@ -11,7 +13,11 @@ $tableHeaders = array("No", "Nama Karyawan", "Jabatan", "Aksi");
         <h3 class="card-title">Data Karyawan</h3>
     </div>
     <div class="card-body">
-        <a href="?page=karyawan&aksi=tambah" class="btn btn-primary" style="float: left; margin-bottom:20px;">Tambah Data</a>
+        <?php if ($jumlah_jabatan > 0) { ?>
+            <a href="?page=karyawan&aksi=tambah" class="btn btn-primary" style="float: left; margin-bottom:20px;">Tambah Data</a>
+        <?php } else { ?>
+            <button class="btn btn-primary" style="float: left; margin-bottom:20px;" onclick="alert('Maaf, belum ada data jabatan. Silahkan tambahkan data jabatan terlebih dahulu.');">Tambah Data</button>
+        <?php } ?>
 
         <div class="panel-body">
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">

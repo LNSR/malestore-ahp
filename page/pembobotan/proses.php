@@ -30,10 +30,10 @@ if (isset($_POST['submit'])) {
             $bobot     = "bobot".$urut;
             if ($_POST[$pilih] == 1) {
                 $matrik[$x][$y] = $_POST[$bobot];
-                $matrik[$y][$x] = 1 / $_POST[$bobot];
+                $matrik[$y][$x] = @(1 / $_POST[$bobot]);
             } else {
                 $matrik[$x][$y] = 1 / $_POST[$bobot];
-                $matrik[$y][$x] = $_POST[$bobot];
+                $matrik[$y][$x] = @(1 / $_POST[$bobot]);
             }
 
             switch ($jenis) {
@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
                 $pilih    = "pilih".$urut;
                 $bobot  = getNilaiPerbandinganAlternatif($x, $y, ($j + 1));
                 $matrik[$x][$y] = $bobot;
-                $matrik[$y][$x] = 1 / $bobot;
+                $matrik[$y][$x] = @(1 / $bobot);
             }
         }
 
@@ -85,7 +85,7 @@ if (isset($_POST['submit'])) {
         // matrikb merupakan matrik yang telah dinormalisasi
         for ($x = 0; $x <= ($n - 1); $x++) {
             for ($y = 0; $y <= ($n - 1); $y++) {
-                $matrikb[$x][$y] = $matrik[$x][$y] / $jmlmpb[$y];
+                $matrikb[$x][$y] = @($matrik[$x][$y] / @$jmlmpb[$y]);
                 $value  = $matrikb[$x][$y];
                 $jmlmnk[$x] += $value;
                 $jmlmnk2[$y] += $value;

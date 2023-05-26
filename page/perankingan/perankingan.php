@@ -146,9 +146,9 @@ for ($x = 1; $x <= $m; $x++) {
                 <td><?= $ranking++ ?></td>
                 <th><?= getAlternatifNama($key - 1) ?></th>
                 <?php for ($y = 1; $y <= $n; $y++) { ?>
-                  <td><?= number_format(($matrik[$key][$y] * $matrikb[$y]), 4) ?></td>
+                  <td><?= number_format(($matrik[$key][$y] * $matrikb[$y]), 3) ?></td>
                 <?php } ?>
-                <td bgcolor='#41fc03'><?= number_format(($total[$key]), 4) ?></td>
+                <td bgcolor='#41fc03'><?= number_format(($total[$key]), 3) ?></td>
               </tr>
             <?php
             }

@@ -33,7 +33,7 @@ if (isset($_POST['Login'])) {
       $stmt->bind_param("ss", $new_password, $username);
       $stmt->execute();
     
-      echo "<script>alert('Password terupdate. coba login memakai password yang sama');</script>";
+      echo "<script>alert('Update Keamanan, silakan login memakai password yang sama');</script>";
     }
 
     if (password_verify($password, $user['password'])) {
@@ -44,7 +44,7 @@ if (isset($_POST['Login'])) {
   }
 
   // If user is not found or password is incorrect, display error message
-  echo "<script>alert('Login Gagal !! Username atau Password Salah, Silahkan Ulangi Lagi');</script>";
+  echo "<script>alert('Login Gagal !! Username atau Password Salah');</script>";
 }
 ?>
 

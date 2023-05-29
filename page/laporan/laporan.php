@@ -120,6 +120,7 @@
     <br/>
     <div class="card">
       <div class="card-header">
+        <img id="logo" src="img/logotrans.png" height="200px" style="display: none; margin:auto;">
         <h3 class="text-center"><b>Penilaian Kinerja Karyawan Malestore Periode <input type="month" id="periode" name="periode"/></b>
         </h3>
       </div>

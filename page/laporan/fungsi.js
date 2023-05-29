@@ -2,6 +2,7 @@ function printReport() {
   // Hide the print button
   document.getElementById("printButton").style.display = "none";
   document.getElementById("reset-button").style.display = "none";
+  document.getElementById("logo").style.display = "block";
 
   // Show the printable content
   const printableContent = document.getElementById('printable-content');
@@ -16,6 +17,7 @@ function printReport() {
   // Show the print button after printing
   document.getElementById("printButton").style.display = "block";
   document.getElementById("reset-button").style.display = "block";
+  document.getElementById("logo").style.display = "none";
 }
 
 // Pilih Bulan, Tahun di Date Picker

@@ -413,7 +413,7 @@ function getNilaiPerbandinganKriteria($kriteria1, $kriteria2)
 function getNilaiPerbandinganAlternatif($alternatif1, $alternatif2, $pembanding)
 {
 	include('config.php');
-	// error_reporting(0);
+	error_reporting(0);
 	$id_alternatif1 = getAlternatifID($alternatif1);
 	$id_alternatif2 = getAlternatifID($alternatif2);
 
@@ -421,7 +421,7 @@ function getNilaiPerbandinganAlternatif($alternatif1, $alternatif2, $pembanding)
 	$result = mysqli_query($koneksi, $query);
 
 	/* if (!$result) {
-		echo "Error bro!!!";
+		echo "Error!!!";
 		exit();
 	} */
 	if (mysqli_num_rows($result) == 0) {

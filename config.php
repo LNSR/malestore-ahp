@@ -1,3 +1,2 @@
 <?php
-$config = array('localhost', 'root', '', 'malestore');
-$koneksi = mysqli_connect(...$config);
+$koneksi = mysqli_connect('localhost', 'root', '', 'malestore') or die("Koneksi error");

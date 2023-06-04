@@ -20,6 +20,14 @@ function printReport() {
   document.getElementById("logo").style.display = "none";
 }
 
+// Set Period Month and Year according to 'laporan.php'
+function setPeriodTitle() {
+  const selectedDate = new Date(localStorage.getItem("selectedMonth") || new Date());
+  const bln = selectedDate.toLocaleString('id-ID', { month: 'long' });
+  const thn = selectedDate.getFullYear();
+  document.getElementById("period-title").innerHTML = "Performa Karyawan Periode " + bln + " " + thn;
+}
+
 // Pilih Bulan, Tahun di Date Picker
 const periode = document.getElementById("periode");
 const title = document.querySelector("title");

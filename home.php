@@ -66,8 +66,9 @@
           </div>
         </div>
       </div>
-      <?php } ?>
-
+      <?php } 
+      include ("chart.php");
+      ?>
     </section>
   </div>
 </body>

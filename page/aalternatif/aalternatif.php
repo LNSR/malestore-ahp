@@ -141,7 +141,7 @@ for ($j = 0; $j < $m; $j++) {
         </tbody>
         <tfoot>
           <tr>
-            <th bgcolor="#4db00c">Jumlah</th>
+            <th bgcolor="#4db00c">Validasi</th>
             <?php
             for ($i = 0; $i <= ($n - 1); $i++) {
               echo "<th bgcolor='#4db00c'>" . number_format($jmlmnk2[$i], 0) . "</th>";

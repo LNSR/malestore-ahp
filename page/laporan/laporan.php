@@ -153,96 +153,95 @@
           </form>
         </div>
       </div>
-      <div class="card">
-  <div class="card-header">
-    <h3 class="card-title"><b>Tabel Laporan Karyawan</b></h3>
-  </div>
-  <div class="card-body">
-    <form method="POST">
-      <?php
-      // Calculate the total score for each alternative
-      arsort($total);
-      foreach ($total as $key => $value) {
-        if ($value > 0) {
-          $alternatifNama = getAlternatifNama($key - 1);
-          $alternatifJabatan = getAlternatifJabatan($key - 1);
-          ?>
-          <div class="card">
-            <div class="card-header">
-              <h6><b>Nama: <?php echo $alternatifNama ?></b></h6>
-              <h6><b>Peran: <?php echo $alternatifJabatan ?></b></h6>
-            </div>
-            <div class="card-body">
-              <table class="table table-bordered text-center table-sm" <th style="padding: 5px;">
-                <thead>
-                  <tr>
-                    <th style="padding: 8px 12px;">Kriteria</th>
-                    <th style="padding: 8px 12px;">Skor</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $rank = 1;
-                  foreach ($matrik[$key] as $k => $v) {
-                    $percentage = number_format(($v * $matrikb[$k]) * 100, 2) . "%";
-                    ?>
-                    <tr>
-                      <td style="padding: 8px 12px;"><?php echo getKriteriaNama($k - 1) ?></td>
-                      <td style="padding: 8px 12px;"><?php echo $percentage ?></td>
-                    </tr>
-                    <?php
-                    $rank++;
-                  }
-                  $totalPercentage = number_format(($total[$key]) * 100, 2) . "%";
-                  ?>
-                  <tr>
-                    <td style="padding: 8px 12px;"><b>Skor Final</b></td>
-                    <td style="padding: 8px 12px;"><b><?php echo $totalPercentage ?></b></td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 8px 12px;"><b>Keterangan</b></td>
-                    <td style="padding: 8px 12px;">
-                      <?php
-                      if ($totalPercentage > 23 && $totalPercentage <= 100) {
-                        echo "<span style='background-color: #41fc03;'><b>Sangat Baik</b></span>";
-                      } elseif ($totalPercentage > 17 && $totalPercentage <= 23) {
-                        echo "<span style='background-color: #c1fc03;'><b>Baik</b></span>";
-                      } elseif ($totalPercentage > 10 && $totalPercentage <= 17) {
-                        echo "<span style='background-color: yellow;'><b>Cukup</b></span>";
-                      } elseif ($totalPercentage > 4 && $totalPercentage <= 10) {
-                        echo "<span style='background-color: red;'><b>Kurang</b></span>";
-                      } else {
-                        echo "<span style='background-color: red;'><b>Sangat Kurang</b></span>";
-                      }
-                      ?>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><b>Tabel Laporan Karyawan</b></h3>
+      </div>
+      <div class="card-body">
+        <form method="POST">
           <?php
-        }
-      }
-      ?>
-    </form>
-  </div>
+          // Calculate the total score for each alternative
+          arsort($total);
+          foreach ($total as $key => $value) {
+            if ($value > 0) {
+              $alternatifNama = getAlternatifNama($key - 1);
+              $alternatifJabatan = getAlternatifJabatan($key - 1);
+              ?>
+              <div class="card">
+                <div class="card-header">
+                  <h6><b>Nama: <?php echo $alternatifNama ?></b></h6>
+                  <h6><b>Peran: <?php echo $alternatifJabatan ?></b></h6>
+                </div>
+                <div class="card-body">
+                  <table class="table table-bordered text-center table-sm" <th style="padding: 5px;">
+                    <thead>
+                      <tr>
+                        <th style="padding: 8px 12px;">Kriteria</th>
+                        <th style="padding: 8px 12px;">Skor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $rank = 1;
+                      foreach ($matrik[$key] as $k => $v) {
+                        $percentage = number_format(($v * $matrikb[$k]) * 100, 2) . "%";
+                        ?>
+                        <tr>
+                          <td style="padding: 8px 12px;"><?php echo getKriteriaNama($k - 1) ?></td>
+                          <td style="padding: 8px 12px;"><?php echo $percentage ?></td>
+                        </tr>
+                        <?php
+                        $rank++;
+                      }
+                      $totalPercentage = number_format(($total[$key]) * 100, 2) . "%";
+                      ?>
+                      <tr>
+                        <td style="padding: 8px 12px;"><b>Skor Final</b></td>
+                        <td style="padding: 8px 12px;"><b><?php echo $totalPercentage ?></b></td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 12px;"><b>Keterangan</b></td>
+                        <td style="padding: 8px 12px;">
+                          <?php
+                          if ($totalPercentage > 15 && $totalPercentage <= 100) {
+                            echo "<span style='background-color: #41fc03;'><b>Sangat Baik</b></span>";
+                          } elseif ($totalPercentage > 12 && $totalPercentage <= 15) {
+                            echo "<span style='background-color: #c1fc03;'><b>Baik</b></span>";
+                          } elseif ($totalPercentage > 9 && $totalPercentage <= 12) {
+                            echo "<span style='background-color: yellow;'><b>Cukup</b></span>";
+                          } elseif ($totalPercentage > 4 && $totalPercentage <= 9) {
+                            echo "<span style='background-color: red;'><b>Kurang</b></span>";
+                          } else {
+                            echo "<span style='background-color: red;'><b>Sangat Kurang</b></span>";
+                          }
+                          ?>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <?php
+            }
+          }
+          ?>
+        </form>
+      </div>
+    </div>
   <script src="page/laporan/fungsi.js"></script>
-</div>
 </body>
 <br>
-    <!-- Tanda Tangan -->
-    <footer id="printable-content" class="footer hidden">
-      <div class="card">
-        <div class="row justify-content-center">
-          <div class="col-md-12 text-center">
-            <p><strong style="font-size: larger;">Banjarmasin,.....................................</strong></p>
-            <p><strong style="font-size: larger;">Pimpinan</strong></p>
-            <br />
-            <p><strong style="font-size: larger;">________________________</strong></p>
-            <p><strong style="font-size: larger;">Aldy</strong></p>
-          </div>
-        </div>
+  <!-- Tanda Tangan -->
+  <footer id="printable-content" class="footer hidden">
+    <div class="card">
+      <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+        <p><strong style="font-size: larger;">Banjarmasin,.....................................</strong></p>
+        <p><strong style="font-size: larger;">Pimpinan</strong></p>
+        <br />
+        <p><strong style="font-size: larger;">________________________</strong></p>
+        <p><strong style="font-size: larger;">Aldy</strong></p>
       </div>
-    </footer>
+    </div>
+  </footer>
 </html>

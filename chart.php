@@ -56,27 +56,31 @@
 
           // Create the chart
           var chart = new Chart(canvas, {
-            type: 'bar',
-            data: {
-              labels: <?php echo json_encode(array_map(function($key) {
-                return getAlternatifNama($key - 1);
-              }, array_keys($total)));?>,
-              datasets: [{
-                label: 'Skor Karyawan',
-                data: <?php echo json_encode(array_values($total));?>,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
+          type: 'bar',
+          data: {
+            labels: <?php echo json_encode(array_map(function($key, $value) {
+              return $value === 0.00? null : getAlternatifNama($key - 1);
+            }, array_keys($total), array_values($total)));?>,
+            datasets: [{
+              label: 'Overall Kinerja Karyawan',
+              data: <?php echo json_encode(array_map(function($value) {
+                return $value === 0.00? null : $value * 100;
+              }, array_values(array_filter($total, function($value) {
+                return $value!== 0.00;
+              }))));?>,
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: false
+                }
               }]
-            },
-            options: {
-              scales: {
-                yAxes: [{
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }]
-              }
             }
-          });
+          }
+        });
         </script>

@@ -20,13 +20,20 @@ function printReport() {
   document.getElementById("logo").style.display = "none";
 }
 
+
 // Set Period Month and Year according to 'laporan.php'
 function setPeriodTitle() {
   const selectedDate = new Date(localStorage.getItem("selectedMonth") || new Date());
   const bln = selectedDate.toLocaleString('id-ID', { month: 'long' });
   const thn = selectedDate.getFullYear();
-  document.getElementById("period-title").innerHTML = "Performa Karyawan Periode " + bln + " " + thn;
+  document.getElementById("period-title").innerHTML = "Grafik Performa Karyawan Periode " + bln + " " + thn;
+
+  // Update the footer with the selected month and year
+  const footer = document.getElementById("printable-content");
+  const footerText = `Banjarmasin . ${bln} ${thn}`;
+  footer.querySelector("strong").textContent = footerText;
 }
+
 
 // Pilih Bulan, Tahun di Date Picker
 const periode = document.getElementById("periode");
@@ -49,6 +56,11 @@ periode.addEventListener("change", function() {
   title.innerHTML = `Laporan ${bln} ${thn} Malestore`;
   document.title = `Laporan ${bln} ${thn} Malestore`;
   document.querySelector("h3 b").innerHTML = `Penilaian Kinerja Karyawan Malestore <br> Periode ${bln} ${thn}`;
+
+  // Update the footer with the selected month and year
+  const footer = document.getElementById("printable-content");
+  const footerText = `Banjarmasin, ____ ${bln} ${thn}`;
+  footer.querySelector("strong").textContent = footerText;
 });
 
 // Add an event listener to the document
@@ -65,5 +77,10 @@ resetButton.addEventListener("click", function() {
     document.title = `Laporan ${bln} ${thn} Malestore`;
     document.querySelector("h3 b").innerHTML = "Penilaian Kinerja Karyawan Malestore Periode";
     window.location.reload();
+
+    // Update the footer with the current month and year
+    const footer = document.getElementById("printable-content");
+    const footerText = `Banjarmasin . ${bln} ${thn}`;
+    footer.querySelector("strong").textContent = footerText;
   }
 });

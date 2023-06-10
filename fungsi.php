@@ -35,6 +35,7 @@ function includeHeaderAndNav($userType) {
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<!-- My Own Page Scripts -->
 		<script src="page/script.js"></script>
     </head>

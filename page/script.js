@@ -43,6 +43,17 @@ function GambarProfile() {
   }
 }
 
+// Perankingan Tabel Toggle
+function toggleCard(button) {
+  var target = $(button).data('target');
+  $(target).on('show.bs.collapse', function() {
+    $(this).prev('.card-header').find('.btn i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+  }).on('hide.bs.collapse', function() {
+    $(this).prev('.card-header').find('.btn i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+  });
+}
+
+
 // Laporan Print
 function printReport() {
   // Hide the print button

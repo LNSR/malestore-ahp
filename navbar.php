@@ -27,13 +27,9 @@
 
           &nbsp;
           <!-- Display logout button if user is logged in -->
-          <?php
-          if(isset($_SESSION['admin']) || isset($_SESSION['karyawan'])) {
-          ?>
+          <?php if($userType) { ?>
               <a href="logout.php" class="btn btn-danger">Logout</a>
-          <?php
-          }
-          ?>
+          <?php } ?>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <a href="#" class="dropdown-item"></a>
             <div class="dropdown-divider"></div>

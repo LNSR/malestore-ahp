@@ -36,20 +36,9 @@ $no = 1;
                         <?php }?>
                     </tbody>
                 </table>
-                <script src="page/script.js"></script>
+                <script>CheckboxSelect()</script>
                 <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini...?')"><i class=" fa fa-trash"></i> Hapus yang dipilih</button>
             </form>
         </div>
     </div>
 </div>
-
-<script>
-    // Add event listener to "Select All" checkbox
-    const selectAllCheckbox = document.getElementById('select-all-checkbox');
-    selectAllCheckbox.addEventListener('change', function() {
-        const checkboxes = document.querySelectorAll('input[name="id_jabatan[]"]');
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = selectAllCheckbox.checked;
-        });
-    });
-</script>

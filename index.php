@@ -18,51 +18,55 @@ if (isset($_SESSION['admin'])) {
     includeHeaderAndNav($userType);
 }
 
-// Switch on user type
 switch ($userType) {
   case "admin":
-      // Code for admin user
-      // Include page content
-        error_reporting(1);
-        $page = $_GET['page'] ?? '';
-        $aksi = $_GET['aksi'] ?? '';
+    // Code for admin user
+    error_reporting(1);
+    $page = $_GET['page']?? '';
+    $aksi = $_GET['aksi']?? '';
 
-        $pages = [
-            "karyawan" => ["karyawan", "tambah", "ubah", "hapus"],
-            "jabatan" => ["jabatan", "tambah", "ubah", "hapus"],
-            "user" => ["user", "tambah", "ubah", "hapus"],
-            "kriteria" => ["kriteria", "tambah", "ubah", "hapus"],
-            "akriteria" => ["akriteria", "hapus"],
-            "aalternatif" => ["aalternatif", "hapus"],
-            "perankingan" => ["perankingan", "hapus"],
-            "laporan" => ["laporan"],
-        ];
+    $pages = [
+      "karyawan" => ["karyawan", "tambah", "ubah", "hapus"],
+      "jabatan" => ["jabatan", "tambah", "ubah", "hapus"],
+      "user" => ["user", "tambah", "ubah", "hapus"],
+      "kriteria" => ["kriteria", "tambah", "ubah", "hapus"],
+      "akriteria" => ["akriteria", "hapus"],
+      "aalternatif" => ["aalternatif", "hapus"],
+      "perankingan" => ["perankingan", "hapus"],
+      "laporan" => ["laporan"],
+    ];
 
-        if ($page === "bobot_alternatif" || $page === "bobot_kriteria") {
-            $jenis = $_GET['c'] ?? 1;
-            include "page/pembobotan/pembobotan.php";
-        } elseif (array_key_exists($page, $pages)) {
-            $path = "page/$page/" . ($aksi ?: $pages[$page][0]) . ".php";
-            include $path;
-        } else {
-            include "home.php";
-        }
+    $pageContent = "home.php";
 
-      includeFooter();
-      break;
-  case "karyawan": 
-      // Code for karyawan user
-      // Include page content
-      error_reporting(1);
-      $page = $_GET['page'] ?? '';
+    if (array_key_exists($page, $pages)) {
+      $pageContent = "page/$page/". ($aksi?: $pages[$page][0]). ".php";
+    } elseif ($page === "bobot_alternatif" || $page === "bobot_kriteria") {
+      $jenis = $_GET['c']?? 1;
+      $pageContent = "page/pembobotan/pembobotan.php";
+    }
 
-      $paths = array(
-          "perankingan" => "page/perankingan/perankingan.php",
-          "" => "home.php"
-      );
+    include $pageContent;
+    includeFooter();
+    break;
 
-      include $paths[$page] ?: $paths[""];
+  case "karyawan":
+    // Code for karyawan user
+    error_reporting(1);
+    $page = $_GET['page']?? '';
+    $aksi = $_GET['aksi']?? '';
 
-      includeFooter();
-      break;
+    $pages = [
+      "user" => ["user", "tambah", "ubah", "hapus"],
+      "perankingan" => ["perankingan"],
+    ];
+
+    $pageContent = "home.php";
+
+    if (array_key_exists($page, $pages)) {
+      $pageContent = "page/$page/". ($aksi?: $pages[$page][0]). ".php";
+    }
+
+    include $pageContent;
+    includeFooter();
+    break;
 }

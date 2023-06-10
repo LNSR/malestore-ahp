@@ -44,8 +44,8 @@ $jumlah_jabatan = mysqli_fetch_assoc($cek_jabatan)['jumlah_jabatan'];
                         <?php }?>
                     </tbody>
                 </table>
-                <script src="page/script.js"></script>
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini...?')">Hapus yang dipilih</button>
+                <script>CheckboxSelect()</script>
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini...?')"><i class=" fa fa-trash"></i> Hapus yang dipilih</button>
             </form>
         </div>
     </div>

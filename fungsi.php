@@ -35,6 +35,8 @@ function includeHeaderAndNav($userType) {
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+		<!-- My Own Page Scripts -->
+		<script src="page/script.js"></script>
     </head>
 
     <body class="hold-transition skin-black sidebar-mini layout-fixed">
@@ -44,6 +46,10 @@ function includeHeaderAndNav($userType) {
             <!-- /.navbar -->
 
             <!-- Main Sidebar Container -->
+			<?php
+			$page = $_GET['page']?? '';
+			$aksi = $_GET['aksi']?? $_GET['c']?? '';
+			?>
             <?php include "sidebar.php"?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -132,6 +138,30 @@ function includeFooter() {
   </body>
     </html>
     <?php
+}
+
+
+// Check if there are any Profile directories that don't belong to any user
+function deleteUnregisteredDirectories() {
+	include('config.php');
+	$directories = glob('uploads/profiles/*', GLOB_ONLYDIR);
+	foreach ($directories as $directory) {
+		$user_name = basename($directory);
+		$query = mysqli_query($koneksi, "SELECT * FROM user WHERE nama='$user_name'");
+		if (mysqli_num_rows($query) == 0) {
+		// Directory doesn't belong to a user, delete it
+		$iterator = new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS);
+		$files = new RecursiveIteratorIterator($iterator, RecursiveIteratorIterator::CHILD_FIRST);
+		foreach ($files as $file) {
+			if ($file->isDir()) {
+			rmdir($file->getPathname());
+			} else {
+			unlink($file->getPathname());
+			}
+		}
+		rmdir($directory);
+		}
+	}
 }
 
 

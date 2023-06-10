@@ -114,7 +114,7 @@
     <div class="row">
       <div class="col-md-12">
         <button id="printButton" class="btn btn-primary" onclick="printReport()" style="float: left; margin-bottom: 20px;">Print</button>
-        <button id="reset-button" class="btn btn-danger" style="float: right; margin-bottom: 20px;">Reset Bulan</button>
+        <button id="reset-button" class="btn btn-danger" onclick="resetMonth()" style="float: right; margin-bottom: 20px;">Reset Bulan</button>
       </div>
     </div>
     <br/>
@@ -228,10 +228,10 @@
         </form>
       </div>
     </div>
-  <script src="page/laporan/fungsi.js"></script>
 </body>
 <br>
   <!-- Tanda Tangan -->
+  <script>updateReportTitle()</script>
   <footer id="printable-content" class="footer hidden">
     <div class="card">
       <div class="row justify-content-center">

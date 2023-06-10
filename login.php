@@ -38,6 +38,11 @@ if (isset($_POST['Login'])) {
 
     if (password_verify($password, $user['password'])) {
       $_SESSION[$user['tipe']] = $user['nama'];
+      $_SESSION['id_users'] = $user['id_users'];
+      $_SESSION['tipe'] = $user['tipe'];
+      if (!empty($user['foto'])) {
+        $_SESSION['foto'] = $user['foto'];
+      }
       header("location:index.php");
       exit;
     }

@@ -55,10 +55,10 @@
                     <p>Data Master<i class="fas fa-angle-left right"></i><span class="badge badge-info right"></span></p>
                 </a>
                 <ul class="nav nav-treeview">
-                    <li class="nav-item <?php echo ($page == 'karyawan' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=karyawan" class="nav-link <?php echo ($page == 'karyawan' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Data Karyawan</p></a></li>
-                    <li class="nav-item <?php echo ($page == 'kriteria' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=kriteria" class="nav-link <?php echo ($page == 'kriteria' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Data Kriteria</p></a></li>
-                    <li class="nav-item <?php echo ($page == 'jabatan' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=jabatan" class="nav-link <?php echo ($page == 'jabatan' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Data Jabatan</p></a></li>
-                    <li class="nav-item <?php echo ($page == 'user' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=user" class="nav-link <?php echo ($page == 'user' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Data Login Pengguna</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'karyawan' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=karyawan" class="nav-link <?php echo ($page == 'karyawan' && $aksi == $_GET['aksi'] ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Data Karyawan</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'kriteria' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=kriteria" class="nav-link <?php echo ($page == 'kriteria' && $aksi == $_GET['aksi'] ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Data Kriteria</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'jabatan' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=jabatan" class="nav-link <?php echo ($page == 'jabatan' && $aksi == $_GET['aksi'] ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Data Jabatan</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'user' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=user" class="nav-link <?php echo ($page == 'user' && $aksi == $_GET['aksi'] ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Data Login Pengguna</p></a></li>
                 </ul>
             </li>
             <!-- Pembobotan Kriteria -->

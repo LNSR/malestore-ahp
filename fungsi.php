@@ -12,35 +12,44 @@ function includeHeaderAndNav($userType) {
     <html>
 
     <head>
+		<!-- Link rel & href -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SPK Malestore(<?php echo $userType ?>)</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.css">
         <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="assets/plugins/Ionicons/css/ionicons.css">
         <!-- iCheck -->
-        <link rel="stylesheet" href="assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+        <link rel="stylesheet" href="assets/plugins/icheck-bootstrap/icheck-bootstrap.css">
         <!-- JQVMap -->
-        <link rel="stylesheet" href="assets/plugins/jqvmap/jqvmap.min.css">
+        <link rel="stylesheet" href="assets/plugins/jqvmap/jqvmap.css">
         <!-- Theme style -->
-        <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+        <link rel="stylesheet" href="assets/dist/css/adminlte.css">
         <!-- overlayScrollbars -->
-        <link rel="stylesheet" href="assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <link rel="stylesheet" href="assets/plugins/overlayScrollbars/css/OverlayScrollbars.css">
         <!-- Daterange picker -->
         <link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+		<!-- summernote -->
+		<link rel="stylesheet" href="assets/plugins/summernote/summernote.css
+		<!-- Scripts -->
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		<!-- Bootstrap 4 -->
+		<script src="assets/plugins/bootstrap/js/bootstrap.bundle.js"></script>
+		<!-- ChartJS -->
+		<script src="assets/plugins/chart.js/Chart.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<!-- My Own Page Scripts -->
 		<script src="page/script.js"></script>
     </head>
 
-    <body class="hold-transition skin-black sidebar-mini layout-fixed">
+    <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
         <div class="wrapper">
             <!-- Navbar -->
             <?php include "navbar.php" ?>
@@ -108,27 +117,23 @@ function includeFooter() {
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="assets/plugins/jquery/jquery.js"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="assets/plugins/jquery-ui/jquery-ui.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       $.widget.bridge('uibutton', $.ui.button)
     </script>
-    <!-- Bootstrap 4 -->
-    <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="assets/plugins/chart.js/Chart.min.js"></script>
     <!-- JQVMap -->
-    <script src="assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="assets/plugins/jqvmap/jquery.vmap.js"></script>
     <script src="assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
     <!-- jQuery Knob Chart -->
-    <script src="assets/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <script src="assets/plugins/jquery-knob/jquery.knob.js"></script>
     <!-- daterangepicker -->
-    <script src="assets/plugins/moment/moment.min.js"></script>
+    <script src="assets/plugins/moment/moment.js"></script>
     <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- overlayScrollbars -->
-    <script src="assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.js"></script>
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -144,7 +149,7 @@ function includeFooter() {
 
 // Check if there are any Profile directories that don't belong to any user
 function deleteUnregisteredDirectories() {
-	include('config.php');
+	include ('config.php');
 	$directories = glob('uploads/profiles/*', GLOB_ONLYDIR);
 	foreach ($directories as $directory) {
 		$user_name = basename($directory);
@@ -175,7 +180,7 @@ function deleteUnregisteredDirectories() {
 // berdasarkan urutan ke berapa (C1, C2, C3)
 function getKriteriaID($no_urut)
 {
-	include('config.php');
+	include ('config.php');
 	$query  = "SELECT kriteria_id FROM tb_kriteria ORDER BY kriteria_id";
 	$result = mysqli_query($koneksi, $query);
 
@@ -193,7 +198,7 @@ function getKriteriaID($no_urut)
 // berdasarkan urutan ke berapa (A1, A2, A3)
 function getAlternatifID($no_urut)
 {
-    include('config.php');
+    include ('config.php');
     $query  = "SELECT id_karyawan FROM tb_karyawan ORDER BY id_karyawan";
     $result = mysqli_query($koneksi, $query);
 
@@ -212,7 +217,7 @@ function getAlternatifID($no_urut)
 // mencari nama kriteria
 function getKriteriaNama($no_urut)
 {
-	include('config.php');
+	include ('config.php');
 	$query  = "SELECT kriteria_nama FROM tb_kriteria ORDER BY kriteria_id";
 	$result = mysqli_query($koneksi, $query);
 
@@ -225,7 +230,7 @@ function getKriteriaNama($no_urut)
 // mencari nama alternatif
 function getAlternatifNama($no_urut)
 {
-	include('config.php');
+	include ('config.php');
 	$query  = "SELECT nama_karyawan, jabatan FROM tb_karyawan ORDER BY id_karyawan";
 	$result = mysqli_query($koneksi, $query);
 	
@@ -237,7 +242,7 @@ function getAlternatifNama($no_urut)
 // mencari nama jabatan
 function getAlternatifJabatan($no_urut)
 {
-	include('config.php');
+	include ('config.php');
 	$query  = "SELECT nama_karyawan, jabatan FROM tb_karyawan ORDER BY id_karyawan";
 	$result = mysqli_query($koneksi, $query);
 	
@@ -250,7 +255,7 @@ function getAlternatifJabatan($no_urut)
 // mencari priority vector alternatif
 function getAlternatifPV($id_karyawan, $id_kriteria)
 {
-	include('config.php');
+	include ('config.php');
 	$query = "SELECT nilai FROM pv_alternatif WHERE id_alternatif=$id_karyawan AND id_kriteria=$id_kriteria";
 	$result = mysqli_query($koneksi, $query);
 	while ($row = mysqli_fetch_array($result)) {
@@ -262,7 +267,7 @@ function getAlternatifPV($id_karyawan, $id_kriteria)
 // mencari priority vector kriteria
 function getKriteriaPV($id_kriteria)
 {
-	include('config.php');
+	include ('config.php');
 	$query = "SELECT nilai FROM tb_pv_kriteria WHERE id_kriteria=$id_kriteria";
 	$result = mysqli_query($koneksi, $query);
 	while ($row = mysqli_fetch_array($result)) {
@@ -274,7 +279,7 @@ function getKriteriaPV($id_kriteria)
 // mencari jumlah alternatif
 function getJumlahAlternatif()
 {
-	include('config.php');
+	include ('config.php');
 	$query  = "SELECT count(*) FROM tb_karyawan";
 	$result = mysqli_query($koneksi, $query);
 	while ($row = mysqli_fetch_array($result)) {
@@ -286,7 +291,7 @@ function getJumlahAlternatif()
 // mencari jumlah kriteria
 function getJumlahKriteria()
 {
-	include('config.php');
+	include ('config.php');
 	$query  = "SELECT count(*) FROM tb_kriteria";
 	$result = mysqli_query($koneksi, $query);
 	while ($row = mysqli_fetch_array($result)) {
@@ -298,7 +303,7 @@ function getJumlahKriteria()
 // memasukkan nilai priority vektor kriteria
 function inputKriteriaPV($id_kriteria, $pv)
 {
-	include('config.php');
+	include ('config.php');
 
 	$query = "SELECT * FROM tb_pv_kriteria WHERE id_kriteria=$id_kriteria";
 	$result = mysqli_query($koneksi, $query);
@@ -326,7 +331,7 @@ function inputKriteriaPV($id_kriteria, $pv)
 // memasukkan nilai priority vektor alternatif
 function inputAlternatifPV($id_karyawan, $id_kriteria, $pv)
 {
-	include('config.php');
+	include ('config.php');
 
 	$query  = "SELECT * FROM tb_pv_alternatif WHERE id_alternatif = $id_karyawan AND id_kriteria = $id_kriteria";
 	$result = mysqli_query($koneksi, $query);
@@ -354,7 +359,7 @@ function inputAlternatifPV($id_karyawan, $id_kriteria, $pv)
 // memasukkan bobot nilai perbandingan kriteria
 function inputDataPerbandinganKriteria($kriteria1, $kriteria2, $nilai)
 {
-	include('config.php');
+	include ('config.php');
 
 	$id_kriteria1 = getKriteriaID($kriteria1);
 	$id_kriteria2 = getKriteriaID($kriteria2);
@@ -385,7 +390,7 @@ function inputDataPerbandinganKriteria($kriteria1, $kriteria2, $nilai)
 // memasukkan bobot nilai Perbandingan Karyawan
 function inputDataPerbandinganAlternatif($alternatif1, $alternatif2, $pembanding, $nilai)
 {
-	include('config.php');
+	include ('config.php');
 
 	$id_alternatif1 = getAlternatifID($alternatif1);
 	$id_alternatif2 = getAlternatifID($alternatif2);
@@ -417,7 +422,7 @@ function inputDataPerbandinganAlternatif($alternatif1, $alternatif2, $pembanding
 // mencari nilai bobot perbandingan kriteria
 function getNilaiPerbandinganKriteria($kriteria1, $kriteria2)
 {
-	include('config.php');
+	include ('config.php');
 
 	$id_kriteria1 = getKriteriaID($kriteria1);
 	$id_kriteria2 = getKriteriaID($kriteria2);
@@ -443,7 +448,7 @@ function getNilaiPerbandinganKriteria($kriteria1, $kriteria2)
 // mencari nilai bobot Perbandingan Karyawan
 function getNilaiPerbandinganAlternatif($alternatif1, $alternatif2, $pembanding)
 {
-	include('config.php');
+	include ('config.php');
 	error_reporting(0);
 	$id_alternatif1 = getAlternatifID($alternatif1);
 	$id_alternatif2 = getAlternatifID($alternatif2);
@@ -468,7 +473,7 @@ function getNilaiPerbandinganAlternatif($alternatif1, $alternatif2, $pembanding)
 // menampilkan nilai IR
 function getNilaiIR($jmlKriteria)
 {
-	include('config.php');
+	include ('config.php');
 	$query  = "SELECT nilai FROM ir WHERE jumlah=$jmlKriteria";
 	$result = mysqli_query($koneksi, $query);
 	while ($row = mysqli_fetch_array($result)) {
@@ -509,7 +514,7 @@ function getConsRatio($matrik_a, $matrik_b, $n)
 
 function getEVKriteria($id_kriteria)
 {
-	include('config.php');
+	include ('config.php');
 
 	$query = "SELECT nilai FROM tb_pv_kriteria WHERE id_kriteria=$id_kriteria";
 	$result = mysqli_query($koneksi, $query);
@@ -526,7 +531,7 @@ function getEVKriteria($id_kriteria)
 
 function getEVAlternatif($id_alternatif, $id_kriteria)
 {
-	include('config.php');
+	include ('config.php');
 
 	$query = "SELECT nilai FROM tb_pv_alternatif WHERE id_alternatif=$id_alternatif AND id_kriteria=$id_kriteria";
 	$result = mysqli_query($koneksi, $query);
@@ -590,7 +595,7 @@ function TablePerbandingan($pilihan, $edit_pilihan, $idi, $urut, $x, $y) {
 // menampilkan tabel perbandingan bobot kriteria atau bobot alternatif
 function showTabelPerbandingan($jenis, $kriteria = null, $alternatif = null)
 {
-    include('config.php');
+    include ('config.php');
 
 	if ($kriteria !== null) {
 		$query = "SELECT kriteria_nama FROM $kriteria ORDER BY kriteria_id";

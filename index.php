@@ -1,6 +1,6 @@
 <?php
-include('config.php');
-include('fungsi.php');
+require('config.php');
+require('fungsi.php');
 session_start();
 
 // Check user type and redirect to login page if not logged in

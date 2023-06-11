@@ -27,7 +27,7 @@
 </section>
 
 <?php
-include "../../config.php";
+include ('config.php');
 
 if (isset($_POST['Simpan'])) {
     $data = [

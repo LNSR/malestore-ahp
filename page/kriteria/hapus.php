@@ -1,5 +1,5 @@
 <?php
-include "../../config.php";
+include ('config.php');
 
 if (isset($_POST['kriteria_id'])) {
     // Get the IDs of the selected kriteria

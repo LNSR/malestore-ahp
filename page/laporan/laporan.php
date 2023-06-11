@@ -76,9 +76,7 @@
   </style>
 </head>
 <body>
-<div class="page">
-  <div class="content">
-    <?php
+  <?php
     $n = getJumlahKriteria();
     $m = getJumlahAlternatif();
     $matrik = [];
@@ -91,16 +89,16 @@
         $matrik[$x][$y] = $pilih;
       }
     }
-
+    
     // Fill the criteria matrix with values from the database
     for ($y = 1; $y <= $n; $y++) {
       $pilih = getKriteriaPV($y);
       $matrikb[$y] = $pilih;
     }
-
+    
     // Initialize the total array
     $total = array_fill(0, $n, 0);
-
+    
     // Calculate the total for each row in the criteria table
     for ($x = 1; $x <= $m; $x++) {
       for ($y = 1; $y <= $n; $y++) {
@@ -110,63 +108,68 @@
     }
     ?>
 
-    <!-- Add this section above the card -->
+<!-- Add this section above the card -->
+<div class="page">
+  <div class="content">
     <div class="row">
       <div class="col-md-12">
         <button id="printButton" class="btn btn-primary" onclick="printReport()" style="float: left; margin-bottom: 20px;">Print</button>
         <button id="reset-button" class="btn btn-danger" onclick="resetMonth()" style="float: right; margin-bottom: 20px;">Reset Bulan</button>
       </div>
     </div>
-    <br/>
-    <div class="card">
-      <div class="card-header">
-        <img id="logo" src="img/logotrans.png" height="200px" style="display: none; margin:auto;">
-        <h3 class="text-center"><b>Penilaian Kinerja Karyawan Malestore Periode <input type="month" id="periode" name="periode"/></b>
-        </h3>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title"><b>Tabel Bobot Kriteria</b></h3>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-header">
+            <img id="logo" src="img/logotrans.png" height="200px" style="display: none; margin:auto;">
+            <h3 class="text-center"><b>Penilaian Kinerja Karyawan Malestore Periode <input type="month" id="periode" name="periode"/></b></h3>
+          </div>
         </div>
-        <div class="card-body">
-          <form method="POST">
-            <table class="table table-bordered text-center">
-              <thead>
-              <tr>
-                <?php
-                for ($i = 0; $i <= ($n - 1); $i++) {
-                  echo "<th>" . getKriteriaNama($i) . "</th>";
-                }
-                ?>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <?php
-                for ($x = 1; $x <= $n; $x++) {
-                  echo "<td>" . number_format(getEVKriteria($x) * 100, 2) . "%</td>";
-                }
-                ?>
-              </tr>
-              </tbody>
-            </table>
-          </form>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><b>Tabel Bobot Kriteria</b></h3>
+          </div>
+          <div class="card-body">
+            <form method="POST">
+              <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                  <thead>
+                  <tr>
+                    <?php
+                    for ($i = 0; $i <= ($n - 1); $i++) {
+                    echo "<th>" . getKriteriaNama($i) . "</th>";
+                    }
+                    ?>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <?php
+                    for ($x = 1; $x <= $n; $x++) {
+                    echo "<td>" . number_format(getEVKriteria($x) * 100, 2) . "%</td>";
+                    }
+                    ?>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title"><b>Tabel Laporan Karyawan</b></h3>
-      </div>
-      <div class="card-body">
-        <form method="POST">
-          <?php
-          // Calculate the total score for each alternative
-          arsort($total);
-          foreach ($total as $key => $value) {
-            if ($value > 0) {
-              $alternatifNama = getAlternatifNama($key - 1);
-              $alternatifJabatan = getAlternatifJabatan($key - 1);
-              ?>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><b>Tabel Laporan Karyawan</b></h3>
+          </div>
+          <div class="card-body">
+            <form method="POST">
+              <?php
+              // Calculate the total score for each alternative
+              arsort($total);
+              foreach ($total as $key => $value) {
+                if ($value > 0) {
+                  $alternatifNama = getAlternatifNama($key - 1);
+                  $alternatifJabatan = getAlternatifJabatan($key - 1);
+                  ?>
               <div class="card">
                 <div class="card-header">
                   <h6><b>Nama: <?php echo $alternatifNama ?></b></h6>
@@ -222,17 +225,20 @@
                 </div>
               </div>
               <?php
+              }
             }
-          }
-          ?>
-        </form>
+              ?>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+  </div>
+</div>
 </body>
-<br>
   <!-- Tanda Tangan -->
   <script>updateReportTitle()</script>
-  <footer id="printable-content" class="footer hidden">
+  <footer id="printable-content" class="main-footer hidden">
     <div class="card">
       <div class="row justify-content-center">
         <div class="col-md-12 text-center">

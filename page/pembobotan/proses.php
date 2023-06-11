@@ -1,6 +1,6 @@
 <?php
 // error_reporting(E_ALL & ~E_WARNING);
-include('../../config.php');
+include ('config.php');
 include('../../fungsi.php');
 
 if (isset($_POST['submit'])) {

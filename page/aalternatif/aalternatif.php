@@ -67,7 +67,7 @@ for ($j = 0; $j < $m; $j++) {
               <i class="fas fa-chevron-down"></i>
             </button>
           </div>
-          <div class="collapse" id="collapseExample<?= $j?>">
+          <div class="collapse" id="collapseExample<?= $j?>" class="collapsed">
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered">
@@ -107,7 +107,7 @@ for ($j = 0; $j < $m; $j++) {
               <i class="fas fa-chevron-down"></i>
             </button>
           </div>
-          <div class="collapse" id="collapseExample2<?= $j?>">
+          <div class="collapse" id="collapseExample2<?= $j?>" class="collapsed">
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered">

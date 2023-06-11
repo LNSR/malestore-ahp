@@ -43,14 +43,21 @@ function GambarProfile() {
   }
 }
 
-// Perankingan Tabel Toggle
+// Toggle Collapse button
 function toggleCard(button) {
-  var target = $(button).data('target');
+  var target = $(button).attr('data-target');
   $(target).on('show.bs.collapse', function() {
     $(this).prev('.card-header').find('.btn i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
   }).on('hide.bs.collapse', function() {
     $(this).prev('.card-header').find('.btn i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
   });
+
+  var icon = $(button).find('i');
+  icon.removeClass('fa-chevron-down fa-chevron-up').addClass($(target).hasClass('show')? 'fa-chevron-up' : 'fa-chevron-down');
+
+  if ($(target).hasClass('collapse')) {
+    icon.removeClass('fa-chevron-up fa-chevron-down').addClass($(target).hasClass('show')? 'fa-chevron-down' : 'fa-chevron-up');
+  }
 }
 
 

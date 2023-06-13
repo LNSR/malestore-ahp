@@ -36,7 +36,9 @@ function includeHeaderAndNav($userType) {
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
 		<!-- summernote -->
-		<link rel="stylesheet" href="assets/plugins/summernote/summernote.css
+		<link rel="stylesheet" href="assets/plugins/summernote/summernote.css">
+		<!-- My own CSS -->
+		<link rel="stylesheet" href="style.css">
 		<!-- Scripts -->
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -561,57 +563,6 @@ function TablePerbandingan($pilihan, $edit_pilihan, $idi, $urut, $x, $y) {
     ];
     $is_checked = array_search($edit_pilihan[$idi], array_column($options, 'value')) === false ? '1' : '2';
     ?>
-
-<style>
-
-	
-.radio-primary {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 15px;
-  height: 15px;
-  border: 2px solid #007bff;
-  border-radius: 50%;
-  outline: none;
-  transition: all 0.3s ease-in-out;
-  display: inline-block;
-  position: relative;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.radio-primary:checked {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.radio-label {
-  display: inline-block;
-  font-weight: bold;
-  color: #007bff;
-  cursor: pointer;
-}
-
-.radio-primary:before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #007bff;
-  transform: translate(-50%, -50%) scale(0);
-  transition: all 0.3s ease-in-out;
-}
-
-.radio-primary:checked:before {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-</style>
 
 <div class="row border-bottom mb-3">
     <div class="col-sm-6 col-lg-2">

@@ -8,25 +8,6 @@
     .hidden {
       display: none;
     }
-    @media print {
-  table,.avoid-break {
-    page-break-inside: avoid;
-  }
-  @page {
-    size: A4;
-    margin: 0;
-  }
- .main-footer {
-    position: relative;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background-color: #f5f5f5;
-    padding: 10px;
-  }
-}
-  
   </style>
 </head>
 <body>
@@ -130,11 +111,11 @@
                   <h6><b>Peran: <?php echo $alternatifJabatan ?></b></h6>
                 </div>
                 <div class="card-body">
-                  <table class="table table-bordered text-center table-sm" <th style="padding: 5px;">
+                  <table class="table table-bordered text-center table-sm">
                     <thead>
                       <tr>
-                        <th style="padding: 8px 12px;">Kriteria</th>
-                        <th style="padding: 8px 12px;">Skor</th>
+                        <th>Kriteria</th>
+                        <th>Skor</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -144,8 +125,8 @@
                         $percentage = number_format(($v * $matrikb[$k]) * 100, 2) . "%";
                         ?>
                         <tr>
-                          <td style="padding: 8px 12px;"><?php echo getKriteriaNama($k - 1) ?></td>
-                          <td style="padding: 8px 12px;"><?php echo $percentage ?></td>
+                          <td><?php echo getKriteriaNama($k - 1) ?></td>
+                          <td><?php echo $percentage ?></td>
                         </tr>
                         <?php
                         $rank++;
@@ -153,12 +134,12 @@
                       $totalPercentage = number_format(($total[$key]) * 100, 2) . "%";
                       ?>
                       <tr>
-                        <td style="padding: 8px 12px;"><b>Skor Final</b></td>
-                        <td style="padding: 8px 12px;"><b><?php echo $totalPercentage ?></b></td>
+                        <td><b>Skor Final</b></td>
+                        <td><b><?php echo $totalPercentage ?></b></td>
                       </tr>
                       <tr>
-                        <td style="padding: 8px 12px;"><b>Keterangan</b></td>
-                        <td style="padding: 8px 12px; background-color: <?php echo $totalPercentage > 15 && $totalPercentage <= 100? '#41fc03' : ($totalPercentage > 12 && $totalPercentage <= 15? '#c1fc03' : ($totalPercentage > 9 && $totalPercentage <= 12? 'yellow' : ($totalPercentage > 4 && $totalPercentage <= 9? 'red' : '#ff0000')));?>; color: <?php echo $totalPercentage > 15 && $totalPercentage <= 100? '#000' : ($totalPercentage > 12 && $totalPercentage <= 15? '#000' : ($totalPercentage > 9 && $totalPercentage <= 12? '#000' : ($totalPercentage > 4 && $totalPercentage <= 9? '#fff' : '#fff')));?>;"><b><?php echo $totalPercentage > 15 && $totalPercentage <= 100? 'Sangat Baik' : ($totalPercentage > 12 && $totalPercentage <= 15? 'Baik' : ($totalPercentage > 9 && $totalPercentage <= 12? 'Cukup' : ($totalPercentage > 4 && $totalPercentage <= 9? 'Kurang' : 'Sangat Kurang')));?></b></td>
+                        <td><b>Keterangan</b></td>
+                        <td style="background-color: <?php echo $totalPercentage > 15 && $totalPercentage <= 100? '#41fc03' : ($totalPercentage > 12 && $totalPercentage <= 15? '#c1fc03' : ($totalPercentage > 9 && $totalPercentage <= 12? 'yellow' : ($totalPercentage > 4 && $totalPercentage <= 9? 'red' : '#ff0000')));?>; color: <?php echo $totalPercentage > 15 && $totalPercentage <= 100? '#000' : ($totalPercentage > 12 && $totalPercentage <= 15? '#000' : ($totalPercentage > 9 && $totalPercentage <= 12? '#000' : ($totalPercentage > 4 && $totalPercentage <= 9? '#fff' : '#fff')));?>;"><b><?php echo $totalPercentage > 15 && $totalPercentage <= 100? 'Sangat Baik' : ($totalPercentage > 12 && $totalPercentage <= 15? 'Baik' : ($totalPercentage > 9 && $totalPercentage <= 12? 'Cukup' : ($totalPercentage > 4 && $totalPercentage <= 9? 'Kurang' : 'Sangat Kurang')));?></b></td>
                       </tr>
                     </tbody>
                   </table>

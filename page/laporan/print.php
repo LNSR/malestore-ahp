@@ -4,11 +4,9 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Laporan Bulan Malestore</title>
-  <style>
-    .hidden {
-      display: none;
-    }
-    @media print {
+</head>
+<style>
+  @media print {
   table,.avoid-break {
     page-break-inside: avoid;
   }
@@ -26,9 +24,7 @@
     padding: 10px;
   }
 }
-  
   </style>
-</head>
 <body>
   <?php
     $n = getJumlahKriteria();
@@ -65,17 +61,11 @@
 <!-- Add this section above the card -->
 <div class="page">
   <div class="content">
-    <div class="row">
-      <div class="col-md-12">
-        <button id="printButton" class="btn btn-primary" onclick="printReport1()" style="float: left; margin-bottom: 20px;">Print</button>
-        <button id="reset-button" class="btn btn-danger" onclick="resetMonth()" style="float: right; margin-bottom: 20px;">Reset Bulan</button>
-      </div>
-    </div>
     <section class="content">
       <div class="container-fluid">
         <div class="card">
           <div class="card-header">
-            <img id="logo" src="img/logotrans.png" height="200px" style="display: none; margin:auto;">
+            <img id="logo" src="img/logotrans.png" height="200px" style="display:block; margin:auto;">
             <h3 class="text-center"><b>Penilaian Kinerja Karyawan Malestore Periode <input type="month" id="periode" name="periode"/></b></h3>
           </div>
         </div>
@@ -126,56 +116,60 @@
                   ?>
               <div class="card">
                 <div class="card-header">
-                  <h6><b>Nama: <?php echo $alternatifNama ?></b></h6>
-                  <h6><b>Peran: <?php echo $alternatifJabatan ?></b></h6>
+                  <div class="avoid-break">
+                    <h6><b>Nama: <?php echo $alternatifNama ?></b></h6>
+                    <h6><b>Peran: <?php echo $alternatifJabatan ?></b></h6>
+                  </div>
                 </div>
                 <div class="card-body">
-                  <table class="table table-bordered text-center table-sm" <th style="padding: 5px;">
-                    <thead>
-                      <tr>
-                        <th style="padding: 8px 12px;">Kriteria</th>
-                        <th style="padding: 8px 12px;">Skor</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      $rank = 1;
-                      foreach ($matrik[$key] as $k => $v) {
-                        $percentage = number_format(($v * $matrikb[$k]) * 100, 2) . "%";
+                  <div class="table-responsive">
+                    <table class="table table-bordered text-center table-sm" <th style="padding: 5px;">
+                      <thead>
+                        <tr>
+                          <th style="padding: 5px 10px;">Kriteria</th>
+                          <th style="padding: 5px 10px;">Skor</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        $rank = 1;
+                        foreach ($matrik[$key] as $k => $v) {
+                          $percentage = number_format(($v * $matrikb[$k]) * 100, 2) . "%";
+                          ?>
+                          <tr>
+                            <td style="padding: 5px 10px;"><?php echo getKriteriaNama($k - 1) ?></td>
+                            <td style="padding: 5px 10px;"><?php echo $percentage ?></td>
+                          </tr>
+                          <?php
+                          $rank++;
+                        }
+                        $totalPercentage = number_format(($total[$key]) * 100, 2) . "%";
                         ?>
                         <tr>
-                          <td style="padding: 8px 12px;"><?php echo getKriteriaNama($k - 1) ?></td>
-                          <td style="padding: 8px 12px;"><?php echo $percentage ?></td>
+                          <td style="padding: 5px 10px;"><b>Skor Final</b></td>
+                          <td style="padding: 5px 10px;"><b><?php echo $totalPercentage ?></b></td>
                         </tr>
-                        <?php
-                        $rank++;
-                      }
-                      $totalPercentage = number_format(($total[$key]) * 100, 2) . "%";
-                      ?>
-                      <tr>
-                        <td style="padding: 8px 12px;"><b>Skor Final</b></td>
-                        <td style="padding: 8px 12px;"><b><?php echo $totalPercentage ?></b></td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 8px 12px;"><b>Keterangan</b></td>
-                        <td style="padding: 8px 12px;">
-                          <?php
-                          if ($totalPercentage > 15 && $totalPercentage <= 100) {
-                            echo "<span style='background-color: #41fc03;'><b>Sangat Baik</b></span>";
-                          } elseif ($totalPercentage > 12 && $totalPercentage <= 15) {
-                            echo "<span style='background-color: #c1fc03;'><b>Baik</b></span>";
-                          } elseif ($totalPercentage > 9 && $totalPercentage <= 12) {
-                            echo "<span style='background-color: yellow;'><b>Cukup</b></span>";
-                          } elseif ($totalPercentage > 4 && $totalPercentage <= 9) {
-                            echo "<span style='background-color: red;'><b>Kurang</b></span>";
-                          } else {
-                            echo "<span style='background-color: red;'><b>Sangat Kurang</b></span>";
-                          }
-                          ?>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                        <tr>
+                          <td style="padding: 5px 10px;"><b>Keterangan</b></td>
+                          <td style="padding: 5px 10px;">
+                            <?php
+                            if ($totalPercentage > 15 && $totalPercentage <= 100) {
+                              echo "<span style='background-color: #41fc03;'><b>Sangat Baik</b></span>";
+                            } elseif ($totalPercentage > 12 && $totalPercentage <= 15) {
+                              echo "<span style='background-color: #c1fc03;'><b>Baik</b></span>";
+                            } elseif ($totalPercentage > 9 && $totalPercentage <= 12) {
+                              echo "<span style='background-color: yellow;'><b>Cukup</b></span>";
+                            } elseif ($totalPercentage > 4 && $totalPercentage <= 9) {
+                              echo "<span style='background-color: red;'><b>Kurang</b></span>";
+                            } else {
+                              echo "<span style='background-color: red;'><b>Sangat Kurang</b></span>";
+                            }
+                            ?>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
               <?php
@@ -192,7 +186,7 @@
 </body>
   <!-- Tanda Tangan -->
   <script>updateReportTitle()</script>
-  <footer id="printable-content" class="main-footer hidden">
+  <footer id="printable-content" class="main-footer">
     <div class="card">
       <div class="row justify-content-center">
         <div class="col-md-12 text-center">

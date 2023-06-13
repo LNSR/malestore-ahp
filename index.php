@@ -1,6 +1,6 @@
 <?php
-require('config.php');
-require('fungsi.php');
+include('config.php');
+include('fungsi.php');
 session_start();
 
 // Check user type and redirect to login page if not logged in
@@ -15,7 +15,7 @@ if (!$userType) {
 // Include common header and footer
 includeHeaderAndNav($userType);
 $page = $_GET['page']?? '';
-$aksi = $_GET['aksi']?? '';
+$aksi = $_GET['aksi']?? $_GET['c']?? '';
 
 switch ($userType) {
   case "admin":
@@ -30,7 +30,7 @@ switch ($userType) {
       "akriteria" => ["akriteria", "hapus"],
       "aalternatif" => ["aalternatif", "hapus"],
       "perankingan" => ["perankingan", "hapus"],
-      "laporan" => ["laporan"],
+      "laporan" => ["laporan", "print"],
     ];
     
     $pageContent = "home.php";

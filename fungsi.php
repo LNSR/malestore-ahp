@@ -137,9 +137,9 @@ function includeFooter() {
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="assets/dist/js/pages/dashboard.js"></script>
+    <!-- <script src="assets/dist/js/pages/dashboard.js"></script> -->
     <!-- AdminLTE for demo purposes -->
-    <script src="assets/dist/js/demo.js"></script>
+    <!-- <script src="assets/dist/js/demo.js"></script> -->
 
   </body>
     </html>
@@ -562,33 +562,83 @@ function TablePerbandingan($pilihan, $edit_pilihan, $idi, $urut, $x, $y) {
     $is_checked = array_search($edit_pilihan[$idi], array_column($options, 'value')) === false ? '1' : '2';
     ?>
 
-    <div class="row">
-        <div class="col-lg-2">
-            <div class="form-group">
-                <input name="pilih<?= $urut ?>" value="1" class="hidden" type="radio" <?= ($is_checked == "1") ? "checked" : "" ?>>
-                <label><?= $pilihan[$x] ?></label>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <select class="form-control" name="bobot<?= $urut ?>" id="nilai" style="width:100%">
-                    <?php
-                        foreach ($options as $value => $option) {
-                            $selected = ($edit_pilihan[$idi] == $option["value"] || $edit_pilihan[$idi] == $value) ? "selected" : "";
-                            echo "<option value=\"$value\" $selected>{$option['label']}</option>";
-                        }
-                    ?>
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="form-group">
-                <input name="pilih<?= $urut ?>" value="2" class="hidden" type="radio" <?= ($is_checked == "2") ? "checked" : "" ?>>
-                <label><?= $pilihan[$y] ?></label>
-            </div>
+<style>
+
+	
+.radio-primary {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #007bff;
+  border-radius: 50%;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.radio-primary:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.radio-label {
+  display: inline-block;
+  font-weight: bold;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.radio-primary:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #007bff;
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.radio-primary:checked:before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+</style>
+
+<div class="row border-bottom mb-3">
+    <div class="col-sm-6 col-lg-2">
+        <div class="form-group">
+            <input name="pilih<?= $urut?>" value="1" class="hidden radio-primary" type="radio" <?= ($is_checked == "1")? "checked" : ""?>>
+            <label><?= $pilihan[$x]?></label>
         </div>
     </div>
-
+    <div class="col-sm-6 col-lg-6">
+        <div class="form-group">
+            <select class="form-control" name="bobot<?= $urut?>" id="nilai" style="width:100%">
+                <?php
+                    foreach ($options as $value => $option) {
+                        $selected = ($edit_pilihan[$idi] == $option["value"] || $edit_pilihan[$idi] == $value)? "selected" : "";
+                        echo "<option value=\"$value\" $selected>{$option['label']}</option>";
+                    }
+              ?>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="form-group">
+            <input name="pilih<?= $urut?>" value="2" class="hidden radio-primary" type="radio" <?= ($is_checked == "2")? "checked" : ""?>>
+            <label><?= $pilihan[$y]?></label>
+        </div>
+    </div>
+</div>
     <?php
 }
 

@@ -43,6 +43,30 @@ function GambarProfile() {
   }
 }
 
+// Dark Mode
+function toggleDarkMode() {
+  const darkModeToggle = document.getElementById('dark-mode-toggle');
+  const body = document.body;
+  const toggleText = document.getElementById('dark-mode-toggle-text');
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    body.classList.add('dark-mode');
+    darkModeToggle.checked = true;
+    toggleText.textContent = 'Dark Mode Aktif';
+  }
+
+  darkModeToggle.addEventListener('change', () => {
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', darkModeToggle.checked);
+    if (darkModeToggle.checked) {
+      toggleText.textContent = 'Dark Mode Aktif';
+    } else {
+      toggleText.textContent = 'Dark Mode';
+    }
+  });
+}
+
+
 // Toggle Collapse button
 function toggleCard(button) {
   var target = $(button).attr('data-target');
@@ -82,6 +106,56 @@ function printReport() {
   document.getElementById("printButton").style.display = "block";
   document.getElementById("reset-button").style.display = "block";
   document.getElementById("logo").style.display = "none";
+}
+
+// Laporan Print(compatible for all)
+function printReport1() {
+  // Get the selected month
+  const storedValue = localStorage.getItem("selectedMonth");
+  const selectedDate = new Date(storedValue);
+  const bln = selectedDate.toLocaleString('id-ID', { month: 'long' });
+  const thn = selectedDate.getFullYear();
+  const footerText = `Banjarmasin, ____ ${bln} ${thn}`;
+
+  // Check if dark mode is on
+  const body = document.body;
+  if (body.classList.contains('dark-mode')) {
+    // Turn off dark mode
+    body.classList.remove('dark-mode');
+    localStorage.setItem('darkMode', false);
+  }
+
+  // Get the URL of the print page
+  const printUrl = `?page=laporan&aksi=print&bln=${bln}&thn=${thn}`;
+
+  // Open the print window
+  const printWindow = window.open(printUrl, '_blank');
+
+  // Wait for the window to load
+  printWindow.onload = function() {
+    // Update the title and footer text
+    printWindow.document.title = `Laporan ${bln} ${thn} Malestore`;
+    printWindow.document.getElementById("printable-content").querySelector("strong").textContent = footerText;
+
+    // Print the page
+    printWindow.print();
+  };
+
+  // Redirect to the laporan page after a delay
+  setTimeout(function() {
+    if (printWindow && !printWindow.closed) {
+      printWindow.close();
+    }
+    window.location.href = '?page=laporan';
+  }, 1000);
+
+  // Handle errors
+  window.onerror = function() {
+    if (printWindow && !printWindow.closed) {
+      printWindow.close();
+    }
+    window.location.href = '?page=laporan';
+  };
 }
 
 // Reset Bulan Laporan

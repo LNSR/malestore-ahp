@@ -99,23 +99,23 @@
                     <p>Data Analisa<i class="fas fa-angle-left right"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
-                    <li class="nav-item <?php echo ($page == 'akriteria' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=akriteria" class="nav-link <?php echo ($page == 'akriteria' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Analisa Kriteria</p></a></li>
-                    <li class="nav-item <?php echo ($page == 'aalternatif' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=aalternatif" class="nav-link <?php echo ($page == 'aalternatif' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Analisa Karyawan</p></a></li>
-                    <li class="nav-item <?php echo ($page == 'perankingan' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=perankingan" class="nav-link <?php echo ($page == 'perankingan' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Perankingan</p></a></li>
-                    <li class="nav-item <?php echo ($page == 'laporan' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=laporan" class="nav-link <?php echo ($page == 'laporan' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Laporan</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'akriteria' && $aksi == $_GET['aksi'] ? 'menu-open' : ''); ?>"><a href="?page=akriteria" class="nav-link <?php echo ($page == 'akriteria' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Analisa Kriteria</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'aalternatif' && $aksi == $_GET['aksi']? 'menu-open' : ''); ?>"><a href="?page=aalternatif" class="nav-link <?php echo ($page == 'aalternatif' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Analisa Karyawan</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'perankingan' && $aksi == $_GET['aksi'] ? 'menu-open' : ''); ?>"><a href="?page=perankingan" class="nav-link <?php echo ($page == 'perankingan' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Perankingan</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'laporan' && $aksi == $_GET['aksi'] ? 'menu-open' : ''); ?>"><a href="?page=laporan" class="nav-link <?php echo ($page == 'laporan' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Laporan</p></a></li>
                 </ul>
             </li>
             <?php } else if($userType == "karyawan") { ?>
             <!-- Profil Pengguna -->
             <li class="nav-item <?php echo ($page == 'user' && $aksi == '' ? 'menu-open' : ''); ?>">
-                <a href="?page=user" class="nav-link <?php echo ($page == 'user' && $aksi == '' ? 'active' : ''); ?>">
+                <a href="?page=user" class="nav-link <?php echo ($page == 'user' && $aksi == $_GET['aksi'] ? 'active' : ''); ?>">
                     <i class="nav-icon fas fa-archive"></i>
                     <p>Profil<i class="right badge badge-danger"></i></p>
                 </a>
             </li>
             <!-- Perankingan -->
             <li class="nav-item <?php echo ($page == 'perankingan' && $aksi == '' ? 'menu-open' : ''); ?>">
-                <a href="?page=perankingan" class="nav-link <?php echo ($page == 'perankingan' && $aksi == '' ? 'active' : ''); ?>">
+                <a href="?page=perankingan" class="nav-link <?php echo ($page == 'perankingan' && $aksi == $_GET['aksi'] ? 'active' : ''); ?>">
                     <i class="nav-icon fas fa-chart-bar"></i>
                     <p>Perankingan<i class="right badge badge-danger"></i></p>
                 </a>

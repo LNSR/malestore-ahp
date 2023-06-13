@@ -30,8 +30,8 @@
               <div class="form-group" <?php echo ($_SESSION['id_users'] != 1)? 'hidden' : '';?>>
                 <label>Tipe Pengguna</label>
                 <select class="form-control" name="tipe" required>
-                  <option value="admin" <?php echo ($data['tipe'] == 'admin')? 'elected' : '';?>>admin</option>
-                  <option value="karyawan" <?php echo ($data['tipe'] == 'karyawan')? 'elected' : '';?> <?php echo ($data['id_users'] == 1)? 'hidden' : '';?>>karyawan</option>
+                  <option value="admin" <?php echo ($data['tipe'] == 'admin')? 'selected' : '';?>>admin</option>
+                  <option value="karyawan" <?php echo ($data['tipe'] == 'karyawan')? 'selected' : '';?> <?php echo ($data['id_users'] == 1)? 'hidden' : '';?>>karyawan</option>
                 </select>
               </div>
               <div class="form-group">

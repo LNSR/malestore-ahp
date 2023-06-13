@@ -7,7 +7,7 @@
     <li class="nav-item">
       <div class="custom-control custom-switch">
         <input type="checkbox" class="custom-control-input" id="dark-mode-toggle">
-        <label class="custom-control-label" for="dark-mode-toggle" style="margin-top: 5px;"><span id="dark-mode-toggle-text">Dark Mode</span></label>
+        <label class="custom-control-label" id="dark-mode-css" for="dark-mode-toggle"><span id="dark-mode-toggle-text">Dark Mode</span></label>
         <script>toggleDarkMode();</script>
       </div>
     </li>

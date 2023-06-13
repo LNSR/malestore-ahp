@@ -158,21 +158,7 @@
                       </tr>
                       <tr>
                         <td style="padding: 8px 12px;"><b>Keterangan</b></td>
-                        <td style="padding: 8px 12px;">
-                          <?php
-                          if ($totalPercentage > 15 && $totalPercentage <= 100) {
-                            echo "<span style='background-color: #41fc03;'><b>Sangat Baik</b></span>";
-                          } elseif ($totalPercentage > 12 && $totalPercentage <= 15) {
-                            echo "<span style='background-color: #c1fc03;'><b>Baik</b></span>";
-                          } elseif ($totalPercentage > 9 && $totalPercentage <= 12) {
-                            echo "<span style='background-color: yellow;'><b>Cukup</b></span>";
-                          } elseif ($totalPercentage > 4 && $totalPercentage <= 9) {
-                            echo "<span style='background-color: red;'><b>Kurang</b></span>";
-                          } else {
-                            echo "<span style='background-color: red;'><b>Sangat Kurang</b></span>";
-                          }
-                          ?>
-                        </td>
+                        <td style="padding: 8px 12px; background-color: <?php echo $totalPercentage > 15 && $totalPercentage <= 100? '#41fc03' : ($totalPercentage > 12 && $totalPercentage <= 15? '#c1fc03' : ($totalPercentage > 9 && $totalPercentage <= 12? 'yellow' : ($totalPercentage > 4 && $totalPercentage <= 9? 'red' : '#ff0000')));?>; color: <?php echo $totalPercentage > 15 && $totalPercentage <= 100? '#000' : ($totalPercentage > 12 && $totalPercentage <= 15? '#000' : ($totalPercentage > 9 && $totalPercentage <= 12? '#000' : ($totalPercentage > 4 && $totalPercentage <= 9? '#fff' : '#fff')));?>;"><b><?php echo $totalPercentage > 15 && $totalPercentage <= 100? 'Sangat Baik' : ($totalPercentage > 12 && $totalPercentage <= 15? 'Baik' : ($totalPercentage > 9 && $totalPercentage <= 12? 'Cukup' : ($totalPercentage > 4 && $totalPercentage <= 9? 'Kurang' : 'Sangat Kurang')));?></b></td>
                       </tr>
                     </tbody>
                   </table>

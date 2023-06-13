@@ -128,7 +128,7 @@ for ($x = 1; $x <= $m; $x++) {
                     <?php for ($i = 0; $i <= ($n - 1); $i++) {?>
                       <th><?= getKriteriaNama($i)?></th>
                     <?php }?>
-                    <th bgcolor="#41fc03">TOTAL</th>
+                    <th bgcolor="#4db00c">TOTAL</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -153,7 +153,7 @@ for ($x = 1; $x <= $m; $x++) {
                         <?php for ($y = 1; $y <= $n; $y++) {?>
                           <td><?= number_format(($matrik[$key][$y] * $matrikb[$y]), 3)?></td>
                         <?php }?>
-                        <td bgcolor='#41fc03'><?= number_format(($total[$key]), 3)?></td>
+                        <td bgcolor='#4db00c'><b><?= number_format(($total[$key]), 3)?></b></td>
                       </tr>
                     <?php
                     }
@@ -184,7 +184,7 @@ for ($x = 1; $x <= $m; $x++) {
                       <tr>
                         <th>Ranking</th>
                         <th>Karyawan</th>
-                        <th bgcolor='#41fc03'>Skor <?= getKriteriaNama($y-1)?></th>
+                        <th bgcolor='#4db00c'>Skor <?= getKriteriaNama($y-1)?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -204,7 +204,7 @@ for ($x = 1; $x <= $m; $x++) {
                           <tr>
                             <td><?= $ranking++?></td>
                             <th><?= getAlternatifNama($key - 1)?></th>
-                            <td bgcolor='#41fc03'><?= number_format($value, 4)?></td>
+                            <td bgcolor='#4db00c'><b><?= number_format($value, 4)?></b></td>
                           </tr>
                         <?php
                         }

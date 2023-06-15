@@ -65,6 +65,7 @@
     // Upload foto profil
     $target_dir = "uploads". DIRECTORY_SEPARATOR. "profiles". DIRECTORY_SEPARATOR. $data['nama']. DIRECTORY_SEPARATOR;
     $target_file = $target_dir. str_replace(' ', '_', $data['foto']);
+    $data['foto'] = (isset($_FILES['foto']['name']) && $_FILES['foto']['name']!= '')? str_replace(' ', '_', $data['foto']) : '';
     if(!file_exists($target_dir)) {
       mkdir($target_dir, 0777, true);
     }
@@ -79,18 +80,16 @@
         'username' => ($data['username']!= $row['username'])? $data['username'] : $row['username'],
         'tipe' => ($data['tipe']!= $row['tipe'])? $data['tipe'] : $row['tipe'],
         'password' => (!empty($data['password']))? $data['password'] : $row['password'],
-        'foto' => (isset($_FILES['foto']['name']) && $_FILES['foto']['name']!= '')? $data['foto'] : $row['foto']
+        'foto' => $data['foto']
       ];
 
       // Check if profile picture has been changed or if nama updated, move the file picture
-      if (isset($_FILES['foto']['name']) && $_FILES['foto']['name']!= '') {
+      if ($data_update['foto']!= $row['foto']) {
         // Create new folder for new file profile picture
         $new_dir = "uploads/profiles/".$data['nama'];
         if (!file_exists($new_dir)) {
           mkdir($new_dir, 0777, true);
         }
-        // Check if foto has been updated
-        $data_update['foto'] = $data['foto'];
 
         // Delete old profile picture
         $old_file = "uploads/profiles/".$row['nama']."/".$row['foto'];
@@ -101,52 +100,38 @@
         // Move uploaded file to target directory
         $target_file = $new_dir. DIRECTORY_SEPARATOR. $data['foto'];
         move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file);
-      } else if (!empty($data_update)) {
-        // Check if nama has been updated
-        if ($data['nama']!= $row['nama']) {
-          // Create new folder for new file profile picture
-          $new_dir = "uploads/profiles/".$data['nama'];
-          if (!file_exists($new_dir)) {
-            mkdir($new_dir, 0777, true);
-          }
-
-          // Move old profile picture to new folder
-          $old_file = "uploads/profiles/".$row['nama']."/".$row['foto'];
-          $new_file = $new_dir. DIRECTORY_SEPARATOR. $row['foto'];
-          if (file_exists($old_file)) {
-            rename($old_file, $new_file);
-          }
+      } else if ($data_update['nama']!= $row['nama']) {
+        // Create new folder for new file profile picture
+        $new_dir = "uploads/profiles/".$data['nama'];
+        if (!file_exists($new_dir)) {
+          mkdir($new_dir, 0777, true);
         }
 
-        // Check if any other field has been updated
-        $updated_fields = array_keys($data_update);
-        if (!in_array('nama', $updated_fields)) {
-          // Update user data
-          $data_update['nama'] = $data['nama'];
+        // Move old profile picture to new folder
+        $old_file = "uploads/profiles/".$row['nama']."/".$row['foto'];
+        $new_file = $new_dir. DIRECTORY_SEPARATOR. $row['foto'];
+        if (file_exists($old_file)) {
+          rename($old_file, $new_file);
         }
       }
 
       // Update user data
-      if (!empty($data_update)) {
-        $sql = "UPDATE user SET ";
-        foreach($data_update as $key => $value){
-          $sql.= "$key = '$value', ";
-        }
-        $sql = rtrim($sql, ", "). " WHERE id_users = '".$data['id_users']."'";
-        $hasil = mysqli_query($koneksi, $sql);
-
-        $message = $hasil? 'Data Berhasil di Edit' : 'Data Gagal di Edit';
-      } else {
-        $message = 'Tidak ada data yang diubah!';
+      $sql = "UPDATE user SET ";
+      foreach($data_update as $key => $value){
+        $sql.= "$key = '".($value!= ''? $value : $row[$key])."', ";
       }
+      $sql = rtrim($sql, ", "). " WHERE id_users = '".$data['id_users']."'";
+      $hasil = mysqli_query($koneksi, $sql);
+
+      $message = $hasil? 'Data Berhasil di Edit' : 'Data Gagal di Edit';
     } else {
       $message = 'Terjadi kesalahan dalam mengambil data pengguna';
     }
 
-      // Hapus Profile Directories gak kepake
-      deleteUnregisteredDirectories();
-      
-        echo "<script>alert('$message');window.location.href='?page=user';</script>";
-      }
+    // Hapus Profile Directories gak kepake
+    deleteUnregisteredDirectories();
+
+    echo "<script>alert('$message');window.location.href='?page=user';</script>";
+  }
 ?>
 </section>

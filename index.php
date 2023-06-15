@@ -38,7 +38,6 @@ switch ($userType) {
     if (array_key_exists($page, $pages)) {
       $pageContent = "page/$page/". ($aksi?: $pages[$page][0]). ".php";
     } elseif ($page === "bobot_alternatif" || $page === "bobot_kriteria") {
-      $jenis = $_GET['c']?? 1;
       $pageContent = "page/pembobotan/pembobotan.php";
     }
     

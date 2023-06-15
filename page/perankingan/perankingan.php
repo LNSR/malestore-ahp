@@ -151,9 +151,9 @@ for ($x = 1; $x <= $m; $x++) {
                         <td><?= $ranking++?></td>
                         <th><?= getAlternatifNama($key - 1)?></th>
                         <?php for ($y = 1; $y <= $n; $y++) {?>
-                          <td><?= number_format(($matrik[$key][$y] * $matrikb[$y]), 3)?></td>
+                          <td><?= number_format(($matrik[$key][$y] * $matrikb[$y]), 4)?></td>
                         <?php }?>
-                        <td bgcolor='#4db00c'><b><?= number_format(($total[$key]), 3)?></b></td>
+                        <td bgcolor='#4db00c'><b><?= number_format(($total[$key]), 4)?></b></td>
                       </tr>
                     <?php
                     }
@@ -204,7 +204,7 @@ for ($x = 1; $x <= $m; $x++) {
                           <tr>
                             <td><?= $ranking++?></td>
                             <th><?= getAlternatifNama($key - 1)?></th>
-                            <td bgcolor='#4db00c'><b><?= number_format($value, 4)?></b></td>
+                            <td bgcolor='#4db00c'><b><?= number_format($value * 100, 2)?></b>%</td>
                           </tr>
                         <?php
                         }

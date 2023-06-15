@@ -12,7 +12,7 @@
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
             <?php
-                $defaultImage = ($userType === 'admin') ? 'assets/dist/img/avatar5.jpg' : 'assets/dist/img/avatar.png';
+                $defaultImage = ($userType === 'admin') ? 'assets/dist/img/user2-160x160.jpg' : 'assets/dist/img/avatar.png';
                 list($user, $foto) = getProfilePicture($userType);
                 $imagepath = (!empty($foto)) ? $user . $foto : $defaultImage;
             ?>

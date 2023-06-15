@@ -12,27 +12,14 @@
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
             <?php
-            if (isset($_SESSION[$userType])) {
-                $user = 'uploads/profiles/' . $_SESSION[$userType];
-                $foto = isset($_SESSION['foto']) ? '/' . $_SESSION['foto'] : '';
-            } else {
-                $user = '';
-                $foto = 'assets/dist/img/avatar.png';
-            }
-
-            if (!isset($_SESSION['foto'])) {
-                $user = '';
-                $foto = 'assets/dist/img/avatar.png';
-            }
+                $defaultImage = ($userType === 'admin') ? 'assets/dist/img/avatar5.jpg' : 'assets/dist/img/avatar.png';
+                list($user, $foto) = getProfilePicture($userType);
+                $imagepath = (!empty($foto)) ? $user . $foto : $defaultImage;
             ?>
-            <img src="<?php echo $user;?><?php echo $foto;?>" class="img-circle elevation-2" alt="User Image">    
+            <img src="<?= $imagepath ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <?php
-                if ($userType == 'admin' || $userType == 'karyawan') {
-                echo "<a href='#' class='d-block'>" . $_SESSION[$userType] . "</a>";
-                }
-            ?>
+            <?php echo "<a href='#' class='d-block'>" . $_SESSION[$userType] . "</a>";?>
         </div>
     </div>
 
@@ -99,10 +86,10 @@
                     <p>Data Analisa<i class="fas fa-angle-left right"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
-                    <li class="nav-item <?php echo ($page == 'akriteria' && $aksi == $_GET['aksi'] ? 'menu-open' : ''); ?>"><a href="?page=akriteria" class="nav-link <?php echo ($page == 'akriteria' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Analisa Kriteria</p></a></li>
-                    <li class="nav-item <?php echo ($page == 'aalternatif' && $aksi == $_GET['aksi']? 'menu-open' : ''); ?>"><a href="?page=aalternatif" class="nav-link <?php echo ($page == 'aalternatif' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Analisa Karyawan</p></a></li>
-                    <li class="nav-item <?php echo ($page == 'perankingan' && $aksi == $_GET['aksi'] ? 'menu-open' : ''); ?>"><a href="?page=perankingan" class="nav-link <?php echo ($page == 'perankingan' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Perankingan</p></a></li>
-                    <li class="nav-item <?php echo ($page == 'laporan' && $aksi == $_GET['aksi'] ? 'menu-open' : ''); ?>"><a href="?page=laporan" class="nav-link <?php echo ($page == 'laporan' && $aksi == '' ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Laporan</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'akriteria' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=akriteria" class="nav-link <?php echo ($page == 'akriteria' && $aksi == $_GET['aksi'] ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Analisa Kriteria</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'aalternatif' && $aksi == ''? 'menu-open' : ''); ?>"><a href="?page=aalternatif" class="nav-link <?php echo ($page == 'aalternatif' && $aksi == $_GET['aksi'] ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Analisa Karyawan</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'perankingan' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=perankingan" class="nav-link <?php echo ($page == 'perankingan' && $aksi == $_GET['aksi'] ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Perankingan</p></a></li>
+                    <li class="nav-item <?php echo ($page == 'laporan' && $aksi == '' ? 'menu-open' : ''); ?>"><a href="?page=laporan" class="nav-link <?php echo ($page == 'laporan' && $aksi == $_GET['aksi'] ? 'active' : ''); ?>"><i class="far fa-circle nav-icon"></i><p>Laporan</p></a></li>
                 </ul>
             </li>
             <?php } else if($userType == "karyawan") { ?>

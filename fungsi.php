@@ -8,6 +8,7 @@
 
 // Header and Navbar Scripts
 function includeHeaderAndNav($userType) {
+	include 'config.php';
     ?>
     <html>
 
@@ -90,6 +91,7 @@ function includeHeaderAndNav($userType) {
 
 // Footer Scripts
 function includeFooter() {
+	include 'config.php';
     ?>
     <!-- /.card-header -->
     <div class="card-body pt-0">
@@ -130,7 +132,7 @@ function includeFooter() {
     <script src="assets/plugins/jqvmap/jquery.vmap.js"></script>
     <script src="assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
     <!-- jQuery Knob Chart -->
-    <script src="assets/plugins/jquery-knob/jquery.knob.js"></script>
+    <script src="assets/plugins/jquery-knob/jquery.knob.min.js"></script>
     <!-- daterangepicker -->
     <script src="assets/plugins/moment/moment.js"></script>
     <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
@@ -146,6 +148,21 @@ function includeFooter() {
   </body>
     </html>
     <?php
+}
+
+// Gambar Profile
+function getProfilePicture($userType) {
+    include 'config.php';
+    $nama = $_SESSION[$userType];
+    $query = "SELECT foto FROM user WHERE nama = '$nama'";
+    $result = mysqli_query($koneksi, $query);
+    $row = mysqli_fetch_assoc($result);
+    $pp = $row['foto'];
+
+    $user = isset($_SESSION[$userType])? 'uploads/profiles/'. $_SESSION[$userType]. '/' : '';
+    $foto = $pp;
+
+    return array($user, $foto);
 }
 
 
@@ -564,70 +581,69 @@ function TablePerbandingan($pilihan, $edit_pilihan, $idi, $urut, $x, $y) {
     $is_checked = array_search($edit_pilihan[$idi], array_column($options, 'value')) === false ? '1' : '2';
     ?>
 
-<div class="row border-bottom mb-3">
-    <div class="col-sm-6 col-lg-2">
-        <div class="form-group">
-            <input name="pilih<?= $urut?>" value="1" class="hidden radio-primary" type="radio" <?= ($is_checked == "1")? "checked" : ""?>>
-            <label><?= $pilihan[$x]?></label>
-        </div>
-    </div>
-    <div class="col-sm-6 col-lg-6">
-        <div class="form-group">
-            <select class="form-control" name="bobot<?= $urut?>" id="nilai" style="width:100%">
-                <?php
-                    foreach ($options as $value => $option) {
-                        $selected = ($edit_pilihan[$idi] == $option["value"] || $edit_pilihan[$idi] == $value)? "selected" : "";
-                        echo "<option value=\"$value\" $selected>{$option['label']}</option>";
-                    }
-              ?>
-            </select>
-        </div>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <div class="form-group">
-            <input name="pilih<?= $urut?>" value="2" class="hidden radio-primary" type="radio" <?= ($is_checked == "2")? "checked" : ""?>>
-            <label><?= $pilihan[$y]?></label>
-        </div>
-    </div>
-</div>
+	<div class="row border-bottom mb-3">
+		<div class="col-sm-3 col-lg-3">
+			<div class="form-group">
+				<input name="pilih<?= $urut?>" value="1" class="hidden radio-primary" type="radio" <?= ($is_checked == "1")? "checked" : ""?>>
+				<label><?= $pilihan[$x]?></label>
+			</div>
+		</div>
+		<div class="col-sm-3 col-lg-3">
+			<div class="form-group">
+				<input name="pilih<?= $urut?>" value="2" class="hidden radio-primary" type="radio" <?= ($is_checked == "2")? "checked" : ""?>>
+				<label><?= $pilihan[$y]?></label>
+			</div>
+		</div>
+		<div class="col-sm-3 col-lg-5">
+			<div class="form-group">
+				<select class="form-control" name="bobot<?= $urut?>">
+					<?php
+						foreach ($options as $value => $option) {
+							$selected = ($edit_pilihan[$idi] == $option["value"] || $edit_pilihan[$idi] == $value)? "selected" : "";
+							echo "<option value=\"$value\" $selected>{$option['label']}</option>";
+						}
+				?>
+				</select>
+			</div>
+		</div>
+	</div>
     <?php
 }
 
 // menampilkan tabel perbandingan bobot kriteria atau bobot alternatif
-function showTabelPerbandingan($jenis, $kriteria = null, $alternatif = null)
+function showTabelPerbandingan($jenis, $jenis_perbandingan)
 {
     include ('config.php');
 
-	if ($kriteria !== null) {
-		$query = "SELECT kriteria_nama FROM $kriteria ORDER BY kriteria_id";
-		$hasil = "SELECT nilai FROM tb_banding_kriteria";
-	} elseif ($alternatif !== null) {
-		$query = "SELECT nama_karyawan FROM $alternatif ORDER BY id_karyawan";
-		$hasil = "SELECT nilai FROM tb_banding_alternatif WHERE pembanding=$jenis";
-	} else {
-		echo "Error: either kriteria or alternatif must be provided.";
-		exit();
-	}
+    if ($jenis_perbandingan == 'bobot_kriteria') {
+        $query = "SELECT kriteria_nama FROM tb_kriteria ORDER BY kriteria_id";
+        $hasil = "SELECT nilai FROM tb_banding_kriteria";
+    } elseif ($jenis_perbandingan == 'bobot_alternatif') {
+        $query = "SELECT nama_karyawan FROM tb_karyawan ORDER BY id_karyawan";
+        $hasil = "SELECT nilai FROM tb_banding_alternatif WHERE pembanding=$jenis";
+    } else {
+        echo "Error: invalid jenis_perbandingan parameter.";
+        exit();
+    }
 
-	$result = mysqli_query($koneksi, $query);
-	if (!$result) {
-		echo "Error koneksi database!!!";
-		exit();
-	}
+    $result = mysqli_query($koneksi, $query);
+    if (!$result) {
+        echo "Error koneksi database!!!";
+        exit();
+    }
 
-	// buat list nama pilihan
-	while ($row = mysqli_fetch_array($result)) {
-		$pilihan[] = $row[0];
-	}
+    // buat list nama pilihan
+    while ($row = mysqli_fetch_array($result)) {
+        $pilihan[] = $row[0];
+    }
 
-	$result1 = mysqli_query($koneksi, $hasil);
-	while ($row1 = mysqli_fetch_array($result1)) {
-		$edit_pilihan[] = $row1['nilai'];
-	}
+    $result1 = mysqli_query($koneksi, $hasil);
+    while ($row1 = mysqli_fetch_array($result1)) {
+        $edit_pilihan[] = $row1['nilai'];
+    }
 
-	$n = ($kriteria !== null) ? getJumlahKriteria() : getJumlahAlternatif();
+    $n = ($jenis_perbandingan == 'bobot_kriteria') ? getJumlahKriteria() : getJumlahAlternatif();
 ?>
-
     <form class="ui form" action="page/pembobotan/proses.php" method="post">
         <?php
         $urut = 0;

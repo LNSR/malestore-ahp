@@ -147,7 +147,7 @@ function printReport1() {
       printWindow.close();
     }
     window.location.href = '?page=laporan';
-  }, 1000);
+  }, 5000);
 
   // Handle errors
   window.onerror = function() {

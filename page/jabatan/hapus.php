@@ -4,6 +4,14 @@ include ('config.php');
 // Get the IDs of the selected jabatan
 $selected_ids = $_POST['id_jabatan'];
 
+// Check if any IDs were selected
+if (empty($selected_ids)) {
+    echo "<script>alert('Tidak ada data yang dipilih');
+            window.location = '?page=jabatan';
+            </script>";
+    exit();
+}
+
 // Loop through each selected ID and delete the corresponding record from the database
 foreach ($selected_ids as $id) {
     $query = "DELETE FROM jabatan WHERE id_jabatan = '$id'";

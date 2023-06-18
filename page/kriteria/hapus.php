@@ -1,9 +1,16 @@
 <?php
 include ('config.php');
 
-if (isset($_POST['kriteria_id'])) {
     // Get the IDs of the selected kriteria
     $selected_ids = $_POST['kriteria_id'];
+
+    // Check if any IDs were selected
+    if (empty($selected_ids)) {
+        echo "<script>alert('Tidak ada yang dipilih');
+                window.location = '?page=kriteria';
+                </script>";
+        exit();
+    }
 
     // Loop through each selected ID and delete the corresponding record from the database
     foreach ($selected_ids as $id) {
@@ -29,5 +36,4 @@ if (isset($_POST['kriteria_id'])) {
     echo "<script>alert('Data berhasil dihapus');
             window.location = '?page=kriteria';
             </script>";
-}
 ?>

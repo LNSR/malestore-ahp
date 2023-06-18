@@ -234,6 +234,7 @@ for ($x = 0; $x <= ($n - 1); $x++) {
           <div class="card-body">
             <h6><b>λ maks	 : <?php echo (round(($∑jml), 3)) ?></b></h6>
             <h6><b>Konsistensi Indeks : <?php echo (round(((($∑jml - $n)) / ($n - 1)), 4)) ?></b></h6>
+            <!-- <h6><b>Indeks Random Konsistensi  : <?php  echo getNilaiIR($n) ?></b></h6> -->
             <h6><b>Konsistensi Rasio: <?php echo (round(((($∑jml - $n)) / ($n - 1)) / getNilaiIR($n), 4) * 100) ?>%</b></h6>
           </div>
         <!-- Rasio Konsistensi Memakai Tabel Bobot -->

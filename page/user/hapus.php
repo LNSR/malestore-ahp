@@ -1,32 +1,47 @@
 <?php
-include "../../config.php";
+include ('config.php');
 $id = $_GET['id'];
+
+// Get the user's data before deleting it
+$user_data = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM user WHERE id_users='$id'"));
+
+// Delete the user from the database
 if (mysqli_query($koneksi, "DELETE FROM user WHERE id_users='$id'")) {
 
-// Untuk mendapatkan semua 'id_users' yang diurutkan dari yang terbesar
-$result = mysqli_query($koneksi, "SELECT id_users FROM user ORDER BY id_users ASC");
+  // Delete the user's profile picture if it exists
+  if (!empty($user_data['foto'])) {
+    $target_dir = "uploads/profiles/".$user_data['nama'];
+    if (file_exists($target_dir)) {
+      array_map('unlink', glob($target_dir. "*"));
+      rmdir($target_dir);
+    }
+  }
 
-// Perulangan dari hasil dan update nilai 'id_users'
-$i = 1;
-while ($row = mysqli_fetch_assoc($result)) {
-    $new_id = $i;
-    $old_id = $row['id_users'];
-    mysqli_query($koneksi, "UPDATE user SET id_users='$new_id' WHERE id_users='$old_id'");
+  // Get all the remaining user IDs
+  $result = mysqli_query($koneksi, "SELECT id_users FROM user ORDER BY id_users ASC");
+  $user_ids = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $user_ids[] = $row['id_users'];
+  }
+
+  // Update the remaining user IDs
+  $i = 1;
+  foreach ($user_ids as $user_id) {
+    mysqli_query($koneksi, "UPDATE user SET id_users='$i' WHERE id_users='$user_id'");
     $i++;
-}
+  }
 
-// Set the auto increment value to the next available id_users value
-$max_id = mysqli_query($koneksi, "SELECT MAX(id_users) FROM user");
-$new_auto_increment = mysqli_fetch_array($max_id)[0] + 1;
-mysqli_query($koneksi, "ALTER TABLE user AUTO_INCREMENT = $new_auto_increment");
+  // Reset the auto increment value
+  mysqli_query($koneksi, "ALTER TABLE user AUTO_INCREMENT = 1");
 
-    echo "<script>alert('Data Berhasil Di Hapus');
-            window.location='?page=user';
-            </script>";
+  // Call the function to delete unregistered directories
+  deleteUnregisteredDirectories();
+  echo "<script>alert('Data Berhasil Di Hapus');
+          window.location='?page=user';
+          </script>";
 } else {
-
-    echo "<script>alert('Data Gagal Di Hapus');
-            window.location='?page=user';
-            </script>";   
+  echo "<script>alert('Data Gagal Di Hapus');
+          window.location='?page=user';
+          </script>";   
 }
 ?>

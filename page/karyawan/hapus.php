@@ -1,26 +1,62 @@
 <?php
-include "../../config.php";
-$id = $_GET['id'];
-mysqli_query($koneksi, "DELETE FROM tb_karyawan WHERE id_karyawan='$id'");
+include ('config.php');
 
-// Untuk mendapatkan semua 'id_karyawan' yang diurutkan dari yang terbesar
+// Get the IDs of the selected karyawan
+$selected_ids = $_POST['id_karyawan'];
+
+// Check if any IDs were selected
+if (empty($selected_ids)) {
+    echo "<script>alert('Tidak ada data yang dipilih');
+            window.location = '?page=karyawan';
+            </script>";
+    exit();
+}
+
+// Loop through each selected ID and delete the corresponding record from the database
+foreach ($selected_ids as $id) {
+    $query = "DELETE FROM tb_karyawan WHERE id_karyawan = '$id'";
+    mysqli_query($koneksi, $query);
+
+    // Delete the corresponding record from the tb_banding table
+    $query = "DELETE FROM tb_banding_alternatif WHERE alternatif1 = '$id' OR alternatif2 = '$id'";
+    mysqli_query($koneksi, $query);
+
+    // Delete the corresponding record from the tb_pv_alternatif table
+    $query = "DELETE FROM tb_pv_alternatif WHERE id_alternatif = '$id'";
+    mysqli_query($koneksi, $query);
+}
+
+// Get all remaining tb_karyawan records from the database
 $result = mysqli_query($koneksi, "SELECT id_karyawan FROM tb_karyawan ORDER BY id_karyawan ASC");
 
-// Perulangan dari hasil dan update nilai 'id_karyawan'
+// Update the id_karyawan values to start from 1 and increment by 1 for each record
 $i = 1;
 while ($row = mysqli_fetch_assoc($result)) {
     $new_id = $i;
     $old_id = $row['id_karyawan'];
-    mysqli_query($koneksi, "UPDATE tb_karyawan SET id_karyawan='$new_id' WHERE id_karyawan='$old_id'");
+
+    // Update tb_karyawan table with new ID
+    $query = "UPDATE tb_karyawan SET id_karyawan = '$new_id' WHERE id_karyawan = '$old_id'";
+    mysqli_query($koneksi, $query);
+
+    // Update tb_banding_alternatif table with new IDs
+    $query = "UPDATE tb_banding_alternatif SET alternatif1 = '$new_id' WHERE alternatif1 = '$old_id'";
+    mysqli_query($koneksi, $query);
+    $query = "UPDATE tb_banding_alternatif SET alternatif2 = '$new_id' WHERE alternatif2 = '$old_id'";
+    mysqli_query($koneksi, $query);
+
+    // Update tb_pv_alternatif table with new ID
+    $query = "UPDATE tb_pv_alternatif SET id_alternatif = '$new_id' WHERE id_alternatif = '$old_id'";
+    mysqli_query($koneksi, $query);
+
     $i++;
 }
 
-// Set the auto increment value to the next available id_karyawan value
-$max_id = mysqli_query($koneksi, "SELECT MAX(id_karyawan) FROM tb_karyawan");
-$new_auto_increment = mysqli_fetch_array($max_id)[0] + 1;
-mysqli_query($koneksi, "ALTER TABLE tb_karyawan AUTO_INCREMENT = $new_auto_increment");
+// Reset the auto_increment value for the tb_karyawan table
+$query = "ALTER TABLE tb_karyawan AUTO_INCREMENT = 1";
+mysqli_query($koneksi, $query);
 
-echo "<script>alert('Data Berhasil Di Hapus');
-            window.location='?page=karyawan';
-            </script>";
+echo "<script>alert('Data berhasil dihapus');
+        window.location = '?page=karyawan';
+        </script>";
 ?>

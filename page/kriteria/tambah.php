@@ -27,7 +27,7 @@
 </section>
 
 <?php
-include '../../config.php';
+include ('config.php');
 $kriteria_id = $_POST['kriteria_id'];
 $kriteria_deskripsi = $_POST['kriteria_deskripsi'];
 $kriteria_nama = $_POST['kriteria_nama'];

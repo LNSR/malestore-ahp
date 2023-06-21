@@ -16,7 +16,7 @@
                                 <label>Jabatan</label>
                                 <select class="form-control" name="jabatan" required="">
                                     <?php
-                                        include '../../config.php';
+                                        include ('config.php');
                                         $pilih = mysqli_query($koneksi, "SELECT * FROM jabatan ORDER BY id_jabatan");
                                             while ($jab = mysqli_fetch_array($pilih)) {
                                             $id = $jab['id_jabatan'];

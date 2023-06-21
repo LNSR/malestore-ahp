@@ -1,5 +1,5 @@
 <?php 
-    include "../../config.php";
+    include ('../../config.php');
     if (!$koneksi) {
         die("Connection failed: " . mysqli_connect_error());
     }

@@ -1,5 +1,5 @@
 <?php
-include "../../config.php";
+include ('config.php');
 $n = getJumlahKriteria();
 $m = getJumlahAlternatif();
 
@@ -47,83 +47,88 @@ for ($x = 1; $x <= $m; $x++) {
   </div>
 </div>
 <section class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <!-- Tabel Bobot Karyawan -->
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Tabel Bobot Karyawan</h3>
-            </div>
-            <div class="card-body">
-              <form method="POST">
-                <table class="table table-bordered text-center">
-                  <thead>
-                    <tr>
-                      <th>Karyawan</th>
-                      <?php for ($i = 0; $i <= ($n - 1); $i++) { ?>
-                        <th><?= getKriteriaNama($i) ?></th>
-                      <?php } ?>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php for ($x = 1; $x <= $m; $x++) { ?>
-                      <tr>
-                        <th><?= getAlternatifNama($x - 1) ?></th>
-                        <?php for ($y = 1; $y <= $n; $y++) { ?>
-                          <td><?= number_format(getEVAlternatif($x, $y), 3) ?></td>
-                        <?php } ?>
-                      </tr>
-                    <?php } ?>
-                  </tbody>
-                </table>
-              </form>
-            </div>
-          </div>
-
-        <!-- Tabel Bobot Kriteria -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Tabel Bobot Kriteria</h3>
-          </div>
-          <div class="card-body">
-            <form method="POST">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Tabel Bobot Karyawan -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Tabel Bobot Karyawan</h3>
+        </div>
+        <div class="card-body">
+          <form method="POST">
+            <div class="table-responsive">
               <table class="table table-bordered text-center">
                 <thead>
                   <tr>
-                    <?php for ($i = 0; $i <= ($n - 1); $i++) { ?>
-                      <th><?= getKriteriaNama($i) ?></th>
-                    <?php } ?>
+                    <th>Karyawan</th>
+                    <?php for ($i = 0; $i <= ($n - 1); $i++) {?>
+                      <th><?= getKriteriaNama($i)?></th>
+                    <?php }?>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php for ($x = 1; $x <= $m; $x++) {?>
+                    <tr>
+                      <th><?= getAlternatifNama($x - 1)?></th>
+                      <?php for ($y = 1; $y <= $n; $y++) {?>
+                        <td><?= number_format(getEVAlternatif($x, $y), 3)?></td>
+                      <?php }?>
+                    </tr>
+                  <?php }?>
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Tabel Bobot Kriteria -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Tabel Bobot Kriteria</h3>
+        </div>
+        <div class="card-body">
+          <form method="POST">
+            <div class="table-responsive">
+              <table class="table table-bordered text-center">
+                <thead>
+                  <tr>
+                    <?php for ($i = 0; $i <= ($n - 1); $i++) {?>
+                      <th><?= getKriteriaNama($i)?></th>
+                    <?php }?>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <?php for ($x = 1; $x <= $n; $x++) { ?>
-                      <td><?= number_format(getEVKriteria($x), 3) ?></td>
-                    <?php } ?>
+                    <?php for ($x = 1; $x <= $n; $x++) {?>
+                      <td><?= number_format(getEVKriteria($x), 3)?></td>
+                    <?php }?>
                   </tr>
                 </tbody>
               </table>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
+      </div>
 
-        <!-- Tabel Ranking -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Tabel Ranking</h3>
-          </div>
-          <div class="card-body">
-            <form method="POST">
+      <!-- Tabel Ranking -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Tabel Ranking</h3>
+        </div>
+        <div class="card-body">
+          <form method="POST">
+            <div class="table-responsive">
               <table class="table table-bordered text-center">
                 <thead>
                   <tr>
                     <th>Ranking</th>
                     <th>Karyawan</th>
-                    <?php for ($i = 0; $i <= ($n - 1); $i++) { ?>
-                      <th><?= getKriteriaNama($i) ?></th>
-                    <?php } ?>
-                    <th bgcolor="#41fc03">TOTAL</th>
+                    <?php for ($i = 0; $i <= ($n - 1); $i++) {?>
+                      <th><?= getKriteriaNama($i)?></th>
+                    <?php }?>
+                    <th bgcolor="#4db00c">TOTAL</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -141,67 +146,75 @@ for ($x = 1; $x <= $m; $x++) {
                   $ranking = 1;
                   foreach ($total as $key => $value) {
                     if ($value > 0) {
-                      ?>
+                    ?>
                       <tr>
-                        <td><?= $ranking++ ?></td>
-                        <th><?= getAlternatifNama($key - 1) ?></th>
-                        <?php for ($y = 1; $y <= $n; $y++) { ?>
-                          <td><?= number_format(($matrik[$key][$y] * $matrikb[$y]), 3) ?></td>
-                        <?php } ?>
-                        <td bgcolor='#41fc03'><?= number_format(($total[$key]), 3) ?></td>
+                        <td><?= $ranking++?></td>
+                        <th><?= getAlternatifNama($key - 1)?></th>
+                        <?php for ($y = 1; $y <= $n; $y++) {?>
+                          <td><?= number_format(($matrik[$key][$y] * $matrikb[$y]), 4)?></td>
+                        <?php }?>
+                        <td bgcolor='#4db00c'><b><?= number_format(($total[$key]), 4)?></b></td>
                       </tr>
                     <?php
                     }
                   }
-                  ?>
+                ?>
                 </tbody>
               </table>
-            </form>
-          </div>
-        </div>
-
-        <!-- Tabel Ranking masing-masing kriteria -->
-        <?php for ($y = 1; $y <= $n; $y++) { ?>
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Tabel Ranking - <?= getKriteriaNama($y-1) ?></h3>
             </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Tabel Ranking masing-masing kriteria -->
+      <?php for ($y = 1; $y <= $n; $y++) {?>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Tabel Ranking - <?= getKriteriaNama($y-1)?></h3>
+            <button type="button" class="btn btn-primary btn-sm" style="float: right; margin-bottom: 20px;" data-toggle="collapse" data-target="#collapseExample<?= $y?>" aria-expanded="false" onclick="toggleCard(this)" aria-controls="collapseExample<?= $y?>">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div class="collapse" id="collapseExample<?= $y?>">
             <div class="card-body">
               <form method="POST">
+                <div class="table-responsive">
                 <table class="table table-bordered text-center">
-                  <thead>
-                    <tr>
-                      <th>Ranking</th>
-                      <th>Karyawan</th>
-                      <th bgcolor='#41fc03'>Skor <?= getKriteriaNama($y-1) ?></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    // Kalkulasi masing-masing total skor karyawan untuk kriteria tertentu
-                    $total_kriteria = [];
-                    for ($x = 1; $x <= $m; $x++) {
-                      $total_kriteria[$x] = ($matrik[$x][$y] * $matrikb[$y]);
-                    }
+                    <thead>
+                      <tr>
+                        <th>Ranking</th>
+                        <th>Karyawan</th>
+                        <th bgcolor='#4db00c'>Skor <?= getKriteriaNama($y-1)?></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      // Kalkulasi masing-masing total skor karyawan untuk kriteria tertentu
+                      $total_kriteria = [];
+                      for ($x = 1; $x <= $m; $x++) {
+                        $total_kriteria[$x] = ($matrik[$x][$y] * $matrikb[$y]);
+                      }
 
-            // Tampilkan Skor karyawan untuk kriteria tertentu
-            arsort($total_kriteria);
-            $ranking = 1;
-            foreach ($total_kriteria as $key => $value) {
-              if ($value > 0) {
-                ?>
-                <tr>
-                  <td><?= $ranking++ ?></td>
-                  <th><?= getAlternatifNama($key - 1) ?></th>
-                  <td bgcolor='#41fc03'><?= number_format($value, 4) ?></td>
-                </tr>
-              <?php
-              }
-            }
-            ?>
-          </tbody>
-        </table>
-      </form>
-    </div>
-  </div>
-<?php } ?>
+                      // Tampilkan Skor karyawan untuk kriteria tertentu
+                      arsort($total_kriteria);
+                      $ranking = 1;
+                      foreach ($total_kriteria as $key => $value) {
+                        if ($value > 0) {
+                        ?>
+                          <tr>
+                            <td><?= $ranking++?></td>
+                            <th><?= getAlternatifNama($key - 1)?></th>
+                            <td bgcolor='#4db00c'><b><?= number_format($value * 100, 2)?></b>%</td>
+                          </tr>
+                        <?php
+                        }
+                      }
+                    ?>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      <?php }?>

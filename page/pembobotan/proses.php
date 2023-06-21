@@ -1,6 +1,5 @@
 <?php
 // error_reporting(E_ALL & ~E_WARNING);
-include('../../config.php');
 include('../../fungsi.php');
 
 if (isset($_POST['submit'])) {
@@ -27,7 +26,7 @@ if (isset($_POST['submit'])) {
         for ($y=($x+1); $y <= ($n-1) ; $y++) {
             $urut++;
             $pilih    = "pilih".$urut;
-            $bobot     = "bobot".$urut;
+            $bobot    = "bobot".$urut;
             if ($_POST[$pilih] == 1) {
                 $matrik[$x][$y] = $_POST[$bobot];
                 $matrik[$y][$x] = @(1 / $_POST[$bobot]);

@@ -1,6 +1,6 @@
 <?php
 // Include config file and start session
-include 'config.php';
+require 'config.php';
 session_start();
 error_reporting(1);
 // Check if user is already logged in, redirect to index.php if true
@@ -38,6 +38,9 @@ if (isset($_POST['Login'])) {
 
     if (password_verify($password, $user['password'])) {
       $_SESSION[$user['tipe']] = $user['nama'];
+      $_SESSION['id_users'] = $user['id_users'];
+      $_SESSION['tipe'] = $user['tipe'];
+
       header("location:index.php");
       exit;
     }
@@ -56,12 +59,12 @@ if (isset($_POST['Login'])) {
   <link rel="shortcut icon" href="img/logo.png" />
   <title>MALESTORE | Log in</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.css">
+  <link rel="stylesheet" href="assets/plugins/icheck-bootstrap/icheck-bootstrap.css">
+  <link rel="stylesheet" href="assets/plugins/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="assets/plugins/nprogress/nprogress.css">
-  <link rel="stylesheet" href="assets/plugins/build/css/custom.min.css">
+  <link rel="stylesheet" href="assets/plugins/build/css/custom.css">
   <style type="text/css">
     body {
       background-image: url('img/alog.jpg');

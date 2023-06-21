@@ -4,65 +4,64 @@ include('fungsi.php');
 session_start();
 
 // Check user type and redirect to login page if not logged in
-if (!isset($_SESSION['admin']) && !isset($_SESSION['karyawan'])) {
+$userTypes = ['admin', 'karyawan'];
+$userType = isset($_SESSION['admin'])? 'admin' : (isset($_SESSION['karyawan'])? 'karyawan' : null);
+
+if (!$userType) {
     header("location:login.php");
     exit;
 }
 
-// Check user type and include common header and navbar
-if (isset($_SESSION['admin'])) {
-    $userType = "admin";
-    includeHeaderAndNav($userType);
-} elseif (isset($_SESSION['karyawan'])) {
-    $userType = "karyawan";
-    includeHeaderAndNav($userType);
-}
+// Include common header and footer
+includeHeaderAndNav($userType);
+$page = $_GET['page']?? '';
+$aksi = $_GET['aksi']?? $_GET['c']?? '';
 
-// Switch on user type
 switch ($userType) {
   case "admin":
-      // Code for admin user
-      // Include page content
-        error_reporting(1);
-        $page = $_GET['page'] ?? '';
-        $aksi = $_GET['aksi'] ?? '';
+    // Code for admin user
+    error_reporting(1);
+    
+    $pages = [
+      "karyawan" => ["karyawan", "tambah", "ubah", "hapus"],
+      "jabatan" => ["jabatan", "tambah", "ubah", "hapus"],
+      "user" => ["user", "tambah", "ubah", "hapus"],
+      "kriteria" => ["kriteria", "tambah", "ubah", "hapus"],
+      "akriteria" => ["akriteria", "hapus"],
+      "aalternatif" => ["aalternatif", "hapus"],
+      "perankingan" => ["perankingan", "hapus"],
+      "laporan" => ["laporan", "print"],
+    ];
+    
+    $pageContent = "home.php";
+    
+    if (array_key_exists($page, $pages)) {
+      $pageContent = "page/$page/". ($aksi?: $pages[$page][0]). ".php";
+    } elseif ($page === "bobot_alternatif" || $page === "bobot_kriteria") {
+      $pageContent = "page/pembobotan/pembobotan.php";
+    }
+    
+    include $pageContent;
+    break;
 
-        $pages = [
-            "karyawan" => ["karyawan", "tambah", "ubah", "hapus"],
-            "jabatan" => ["jabatan", "tambah", "ubah", "hapus"],
-            "user" => ["user", "tambah", "ubah", "hapus"],
-            "kriteria" => ["kriteria", "tambah", "ubah", "hapus"],
-            "akriteria" => ["akriteria", "hapus"],
-            "aalternatif" => ["aalternatif", "hapus"],
-            "perankingan" => ["perankingan", "hapus"],
-            "laporan" => ["laporan"],
-        ];
+  case "karyawan":
+    // Code for karyawan user
+    error_reporting(1);
 
-        if ($page === "bobot_alternatif" || $page === "bobot_kriteria") {
-            $jenis = $_GET['c'] ?? 1;
-            include "page/pembobotan/pembobotan.php";
-        } elseif (array_key_exists($page, $pages)) {
-            $path = "page/$page/" . ($aksi ?: $pages[$page][0]) . ".php";
-            include $path;
-        } else {
-            include "home.php";
-        }
+    $pages = [
+      "user" => ["user", "tambah", "ubah", "hapus"],
+      "perankingan" => ["perankingan"],
+    ];
 
-      includeFooter();
-      break;
-  case "karyawan": 
-      // Code for karyawan user
-      // Include page content
-      error_reporting(1);
-      $page = $_GET['page'] ?? '';
+    $pageContent = "home.php";
 
-      $paths = array(
-          "perankingan" => "page/perankingan/perankingan.php",
-          "" => "home.php"
-      );
+    if (array_key_exists($page, $pages)) {
+      $pageContent = "page/$page/". ($aksi?: $pages[$page][0]). ".php";
+    }
 
-      include $paths[$page] ?: $paths[""];
-
-      includeFooter();
-      break;
+    include $pageContent;
+    break;
 }
+
+// Include Footer
+includeFooter();

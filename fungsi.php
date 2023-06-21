@@ -345,97 +345,127 @@ function inputKriteriaPV($id_kriteria, $pv)
 		echo "Gagal memasukkan / update nilai priority vector kriteria";
 		exit();
 	} */
+
+
+    // delete row where id_kriteria do not have a corresponding kriteria_id in tb_kriteria
+    $query = "DELETE FROM tb_pv_kriteria WHERE id_kriteria NOT IN (SELECT kriteria_id FROM tb_kriteria)";
+    $result = mysqli_query($koneksi, $query);
+
 }
 
 // memasukkan nilai priority vektor alternatif
 function inputAlternatifPV($id_karyawan, $id_kriteria, $pv)
 {
-	include ('config.php');
+    include ('config.php');
 
-	$query  = "SELECT * FROM tb_pv_alternatif WHERE id_alternatif = $id_karyawan AND id_kriteria = $id_kriteria";
-	$result = mysqli_query($koneksi, $query);
+    $query  = "SELECT * FROM tb_pv_alternatif WHERE id_alternatif = $id_karyawan AND id_kriteria = $id_kriteria";
+    $result = mysqli_query($koneksi, $query);
 
-	/* if (!$result) {
-		echo "Error bro!!!";
-		exit();
-	} */
+    /* if (!$result) {
+        echo "Error bro!!!";
+        exit();
+    } */
 
-	// jika result kosong maka masukkan data baru
-	// jika telah ada maka diupdate
-	if (mysqli_num_rows($result) == 0) {
-		$query = "INSERT INTO tb_pv_alternatif (id_alternatif,id_kriteria,nilai) VALUES ($id_karyawan,$id_kriteria,$pv)";
-	} else {
-		$query = "UPDATE tb_pv_alternatif SET nilai=$pv WHERE id_alternatif=$id_karyawan AND id_kriteria=$id_kriteria";
-	}
+    // jika result kosong maka masukkan data baru
+    // jika telah ada maka diupdate
+    if (mysqli_num_rows($result) == 0) {
+        $query = "INSERT INTO tb_pv_alternatif (id_alternatif,id_kriteria,nilai) VALUES ($id_karyawan,$id_kriteria,$pv)";
+    } else {
+        $query = "UPDATE tb_pv_alternatif SET nilai=$pv WHERE id_alternatif=$id_karyawan AND id_kriteria=$id_kriteria";
+    }
 
-	$result = mysqli_query($koneksi, $query);
-	/* if (!$result) {
-		echo "Gagal memasukkan / update nilai priority vector alternatif";
-		exit();
-	} */
+    $result = mysqli_query($koneksi, $query);
+    /* if (!$result) {
+        echo "Gagal memasukkan / update nilai priority vector alternatif";
+        exit();
+    } */
+
+    // delete row where id_alternatif or id_kriteria do not have a corresponding id_karyawan in tb_karyawan or kriteria_id in tb_kriteria
+    $query = "DELETE FROM tb_pv_alternatif WHERE id_alternatif NOT IN (SELECT id_karyawan FROM tb_karyawan) OR id_kriteria NOT IN (SELECT kriteria_id FROM tb_kriteria)";
+    $result = mysqli_query($koneksi, $query);
+
+    return $result;
 }
 
 // memasukkan bobot nilai perbandingan kriteria
 function inputDataPerbandinganKriteria($kriteria1, $kriteria2, $nilai)
 {
-	include ('config.php');
+    include ('config.php');
 
-	$id_kriteria1 = getKriteriaID($kriteria1);
-	$id_kriteria2 = getKriteriaID($kriteria2);
+    $id_kriteria1 = getKriteriaID($kriteria1);
+    $id_kriteria2 = getKriteriaID($kriteria2);
 
-	$query  = "SELECT * FROM tb_banding_kriteria WHERE kriteria1 = $id_kriteria1 AND kriteria2 = $id_kriteria2";
-	$result = mysqli_query($koneksi, $query);
+    $query  = "SELECT * FROM tb_banding_kriteria WHERE kriteria1 = $id_kriteria1 AND kriteria2 = $id_kriteria2";
+    $result = mysqli_query($koneksi, $query);
 
-	if (!$result) {
-		echo "Error !!!";
-		exit();
-	}
+    if (!$result) {
+        echo "Error!!!";
+        exit();
+    }
 
-	// jika result kosong maka masukkan data baru
-	// jika telah ada maka diupdate
-	if (mysqli_num_rows($result) == 0) {
-		$query = "INSERT INTO tb_banding_kriteria (kriteria1,kriteria2,nilai) VALUES ($id_kriteria1,$id_kriteria2,$nilai)";
-	} else {
-		$query = "UPDATE tb_banding_kriteria SET nilai=$nilai WHERE kriteria1=$id_kriteria1 AND kriteria2=$id_kriteria2";
-	}
+    // jika result kosong maka masukkan data baru
+    // jika telah ada maka diupdate
+    if (mysqli_num_rows($result) == 0) {
+        $query = "INSERT INTO tb_banding_kriteria (kriteria1,kriteria2,nilai) VALUES ($id_kriteria1,$id_kriteria2,$nilai)";
+    } else {
+        $query = "UPDATE tb_banding_kriteria SET nilai=$nilai WHERE kriteria1=$id_kriteria1 AND kriteria2=$id_kriteria2";
+    }
 
-	$result = mysqli_query($koneksi, $query);
-	if (!$result) {
-		echo "Gagal memasukkan data perbandingan";
-		exit();
-	}
+    $result = mysqli_query($koneksi, $query);
+    if (!$result) {
+        echo "Gagal memasukkan data perbandingan";
+        exit();
+    }
+
+    // delete rows where kriteria1 or kriteria2 do not have a corresponding kriteria_id in tb_kriteria
+    $query = "DELETE FROM tb_banding_kriteria WHERE kriteria1 NOT IN (SELECT kriteria_id FROM tb_kriteria) OR kriteria2 NOT IN (SELECT kriteria_id FROM tb_kriteria)";
+    $result = mysqli_query($koneksi, $query);
+
+    if (!$result) {
+        echo "Error!!!";
+        exit();
+    }
 }
 
 // memasukkan bobot nilai Perbandingan Karyawan
 function inputDataPerbandinganAlternatif($alternatif1, $alternatif2, $pembanding, $nilai)
 {
-	include ('config.php');
+    include ('config.php');
 
-	$id_alternatif1 = getAlternatifID($alternatif1);
-	$id_alternatif2 = getAlternatifID($alternatif2);
-	$id_pembanding  = getKriteriaID($pembanding);
+    $id_alternatif1 = getAlternatifID($alternatif1);
+    $id_alternatif2 = getAlternatifID($alternatif2);
+    $id_pembanding  = getKriteriaID($pembanding);
 
-	$query  = "SELECT * FROM tb_banding_alternatif WHERE alternatif1 = $id_alternatif1 AND alternatif2 = $id_alternatif2 AND pembanding = $id_pembanding";
-	$result = mysqli_query($koneksi, $query);
+    $query  = "SELECT * FROM tb_banding_alternatif WHERE alternatif1 = $id_alternatif1 AND alternatif2 = $id_alternatif2 AND pembanding = $id_pembanding";
+    $result = mysqli_query($koneksi, $query);
 
-	if (!$result) {
-		echo "Error !!!";
-		exit();
-	}
+    if (!$result) {
+        echo "Error!!!";
+        exit();
+    }
 
-	// jika result kosong maka masukkan data baru
-	// jika telah ada maka diupdate
-	if (mysqli_num_rows($result) == 0) {
-		$query = "INSERT INTO tb_banding_alternatif (alternatif1,alternatif2,pembanding,nilai) VALUES ($id_alternatif1,$id_alternatif2,$id_pembanding,$nilai)";
-	} else {
-		$query = "UPDATE tb_banding_alternatif SET nilai=$nilai WHERE alternatif1=$id_alternatif1 AND alternatif2=$id_alternatif2 AND pembanding=$id_pembanding";
-	}
+    // jika result kosong maka masukkan data baru
+    // jika telah ada maka diupdate
+    if (mysqli_num_rows($result) == 0) {
+        $query = "INSERT INTO tb_banding_alternatif (alternatif1,alternatif2,pembanding,nilai) VALUES ($id_alternatif1,$id_alternatif2,$id_pembanding,$nilai)";
+    } else {
+        $query = "UPDATE tb_banding_alternatif SET nilai=$nilai WHERE alternatif1=$id_alternatif1 AND alternatif2=$id_alternatif2 AND pembanding=$id_pembanding";
+    }
 
-	$result = mysqli_query($koneksi, $query);
-	if (!$result) {
-		echo "Gagal memasukkan data perbandingan";
-		exit();
-	}
+    $result = mysqli_query($koneksi, $query);
+    if (!$result) {
+        echo "Gagal memasukkan data perbandingan";
+        exit();
+    }
+
+    // delete rows where alternatif1 or alternatif2 do not have a corresponding id_karyawan in tb_karyawan or pembanding do not have corresponding kriteria_id from tb_kriteria
+    $query = "DELETE FROM tb_banding_alternatif WHERE alternatif1 NOT IN (SELECT id_karyawan FROM tb_karyawan) OR alternatif2 NOT IN (SELECT id_karyawan FROM tb_karyawan) OR pembanding NOT IN (SELECT kriteria_id FROM tb_kriteria)";
+    $result = mysqli_query($koneksi, $query);
+
+    if (!$result) {
+        echo "Error!!!";
+        exit();
+    }
 }
 
 // mencari nilai bobot perbandingan kriteria
@@ -535,7 +565,7 @@ function getEVKriteria($id_kriteria)
 {
 	include ('config.php');
 
-	$query = "SELECT nilai FROM tb_pv_kriteria WHERE id_kriteria=$id_kriteria";
+	$query = "SELECT nilai FROM tb_pv_kriteria WHERE id_kriteria=(SELECT kriteria_id FROM tb_kriteria WHERE kriteria_id=$id_kriteria)";
 	$result = mysqli_query($koneksi, $query);
 
 	if (mysqli_num_rows($result) == 0) {
@@ -548,21 +578,21 @@ function getEVKriteria($id_kriteria)
 	return $nilai;
 }
 
-function getEVAlternatif($id_alternatif, $id_kriteria)
+function getEVAlternatif($id_alternatif, $kriteria_id)
 {
-	include ('config.php');
+    include ('config.php');
 
-	$query = "SELECT nilai FROM tb_pv_alternatif WHERE id_alternatif=$id_alternatif AND id_kriteria=$id_kriteria";
-	$result = mysqli_query($koneksi, $query);
+    $query = "SELECT nilai FROM tb_pv_alternatif WHERE id_alternatif=(SELECT id_karyawan FROM tb_karyawan WHERE id_karyawan=$id_alternatif) AND id_kriteria=(SELECT kriteria_id FROM tb_kriteria WHERE kriteria_id=$kriteria_id)";
+    $result = mysqli_query($koneksi, $query);
 
-	if (mysqli_num_rows($result) == 0) {
-		$nilai = 0;
-	} else {
-		while ($row = mysqli_fetch_array($result)) {
-			$nilai = $row['nilai'];
-		}
-	}
-	return $nilai;
+    if (mysqli_num_rows($result) == 0) {
+        $nilai = 0;
+    } else {
+        while ($row = mysqli_fetch_array($result)) {
+            $nilai = $row['nilai'];
+        }
+    }
+    return $nilai;
 }
 
 // List opsi pilihan tabel perbandingan

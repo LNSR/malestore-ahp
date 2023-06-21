@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2023 at 05:06 PM
+-- Generation Time: Jun 21, 2023 at 11:22 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -416,7 +416,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_users`, `nama`, `tipe`, `username`, `password`, `foto`) VALUES
-(1, 'Aldy', 'admin', 'admin', '$2y$10$N5F7dHLO27qCJ1.TPHrpCOpCZ4PXe2MBzroVNfB0gRWQKa2boDONS', 'avatar5.jpg'),
+(1, 'Aldy', 'admin', 'admin', '$2y$10$N5F7dHLO27qCJ1.TPHrpCOpCZ4PXe2MBzroVNfB0gRWQKa2boDONS', ''),
 (2, 'Karyawan', 'karyawan', 'Pee', '$2y$10$TfLlTpsWRq.Wcp9DxdN8EeD32BRD.PQBG0vFmLhtM2I2HQsWcJrJO', ''),
 (3, 'Lana', 'admin', 'Lana', '$2y$10$aQuGt6XCK8svU6TvglgAp.xnaSgwmrIvEmxGdaRi3AhNc/DEJ7eka', 'EDIT.jpg');
 
@@ -440,13 +440,18 @@ ALTER TABLE `jabatan`
 -- Indexes for table `tb_banding_alternatif`
 --
 ALTER TABLE `tb_banding_alternatif`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pembanding(kriteria)` (`pembanding`),
+  ADD KEY `banding_karyawan1` (`alternatif1`),
+  ADD KEY `banding_karyawan2` (`alternatif2`);
 
 --
 -- Indexes for table `tb_banding_kriteria`
 --
 ALTER TABLE `tb_banding_kriteria`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `banding_kriteria1` (`kriteria1`),
+  ADD KEY `banding_kriteria2` (`kriteria2`);
 
 --
 -- Indexes for table `tb_karyawan`
@@ -464,13 +469,16 @@ ALTER TABLE `tb_kriteria`
 -- Indexes for table `tb_pv_alternatif`
 --
 ALTER TABLE `tb_pv_alternatif`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pv_kriteria` (`id_kriteria`),
+  ADD KEY `pv_karyawan` (`id_alternatif`);
 
 --
 -- Indexes for table `tb_pv_kriteria`
 --
 ALTER TABLE `tb_pv_kriteria`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tb_pv_kriteria` (`id_kriteria`);
 
 --
 -- Indexes for table `user`
@@ -529,6 +537,38 @@ ALTER TABLE `tb_pv_kriteria`
 --
 ALTER TABLE `user`
   MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tb_banding_alternatif`
+--
+ALTER TABLE `tb_banding_alternatif`
+  ADD CONSTRAINT `banding_karyawan1` FOREIGN KEY (`alternatif1`) REFERENCES `tb_karyawan` (`id_karyawan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `banding_karyawan2` FOREIGN KEY (`alternatif2`) REFERENCES `tb_karyawan` (`id_karyawan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pembanding(kriteria)` FOREIGN KEY (`pembanding`) REFERENCES `tb_kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_banding_kriteria`
+--
+ALTER TABLE `tb_banding_kriteria`
+  ADD CONSTRAINT `banding_kriteria1` FOREIGN KEY (`kriteria1`) REFERENCES `tb_kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `banding_kriteria2` FOREIGN KEY (`kriteria2`) REFERENCES `tb_kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_pv_alternatif`
+--
+ALTER TABLE `tb_pv_alternatif`
+  ADD CONSTRAINT `pv_karyawan` FOREIGN KEY (`id_alternatif`) REFERENCES `tb_karyawan` (`id_karyawan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pv_kriteria` FOREIGN KEY (`id_kriteria`) REFERENCES `tb_kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_pv_kriteria`
+--
+ALTER TABLE `tb_pv_kriteria`
+  ADD CONSTRAINT `tb_pv_kriteria` FOREIGN KEY (`id_kriteria`) REFERENCES `tb_kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

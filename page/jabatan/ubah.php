@@ -1,5 +1,5 @@
 <?php
-include ('config.php');
+include ('../../config.php');
 if(isset($_POST['Simpan'])) {
     $data = [
         "nama_jabatan" => $_POST["nama_jabatan"],

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2023 at 11:22 PM
+-- Generation Time: Jun 22, 2023 at 11:31 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -434,7 +434,8 @@ ALTER TABLE `ir`
 -- Indexes for table `jabatan`
 --
 ALTER TABLE `jabatan`
-  ADD PRIMARY KEY (`id_jabatan`);
+  ADD PRIMARY KEY (`id_jabatan`),
+  ADD UNIQUE KEY `nama_jabatan` (`nama_jabatan`);
 
 --
 -- Indexes for table `tb_banding_alternatif`
@@ -457,7 +458,8 @@ ALTER TABLE `tb_banding_kriteria`
 -- Indexes for table `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
-  ADD PRIMARY KEY (`id_karyawan`);
+  ADD PRIMARY KEY (`id_karyawan`),
+  ADD KEY `jabatan` (`jabatan`);
 
 --
 -- Indexes for table `tb_kriteria`
@@ -556,6 +558,12 @@ ALTER TABLE `tb_banding_alternatif`
 ALTER TABLE `tb_banding_kriteria`
   ADD CONSTRAINT `banding_kriteria1` FOREIGN KEY (`kriteria1`) REFERENCES `tb_kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `banding_kriteria2` FOREIGN KEY (`kriteria2`) REFERENCES `tb_kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_karyawan`
+--
+ALTER TABLE `tb_karyawan`
+  ADD CONSTRAINT `jabatan` FOREIGN KEY (`jabatan`) REFERENCES `jabatan` (`nama_jabatan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_pv_alternatif`

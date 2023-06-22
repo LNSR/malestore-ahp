@@ -14,8 +14,8 @@ if (!$userType) {
 
 // Include common header and footer
 includeHeaderAndNav($userType);
-$page = $_GET['page']?? '';
-$aksi = $_GET['aksi']?? $_GET['c']?? '';
+$page = isset($_GET['page'])? $_GET['page'] : '';
+$aksi = isset($_GET['aksi'])? $_GET['aksi'] : (isset($_GET['c'])? $_GET['c'] : '');
 
 switch ($userType) {
   case "admin":

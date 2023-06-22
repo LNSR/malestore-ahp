@@ -1,8 +1,7 @@
 <?php
-include ('config.php');
+include ('../../config.php');
 $pilih = mysqli_query($koneksi, "select * from tb_kriteria WHERE kriteria_id='$_GET[id]'");
 while ($tampil = mysqli_fetch_array($pilih)) {
-    $deskripsi = $tampil['deskripsi'];
 ?>
     <section class="content">
         <div class="container-fluid">
@@ -17,16 +16,16 @@ while ($tampil = mysqli_fetch_array($pilih)) {
                                 <div class="form-group">
                                     <div class="form-group" hidden />
                                         <label>ID Kriteria</label>
-                                        <input class="form-control" name="kriteria_id" value="<?= $tampil['kriteria_id']; ?>" readonly />
+                                        <input class="form-control" name="kriteria_id" value="<?= isset($tampil['kriteria_id'])? $tampil['kriteria_id'] : '';?>" readonly />
                                     </div>
                                     <div class="form-group">
                                         <label>Nama Kriteria</label>
-                                        <input type="text" class="form-control" name="kriteria_nama" value="<?= $tampil['kriteria_nama']; ?>" />
+                                        <input type="text" class="form-control" name="kriteria_nama" value="<?= isset($tampil['kriteria_nama'])? $tampil['kriteria_nama'] : '';?>" />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Deskripsi Kriteria</label>
-                                        <textarea class="form-control" name="kriteria_deskripsi"><?= $tampil['kriteria_deskripsi']; ?></textarea>
+                                        <textarea class="form-control" name="kriteria_deskripsi"><?= isset($tampil['kriteria_deskripsi'])? $tampil['kriteria_deskripsi'] : '';?></textarea>
                                     </div>
 
                                     <input type="Submit" name="Simpan" value="Simpan" class="btn btn-success">

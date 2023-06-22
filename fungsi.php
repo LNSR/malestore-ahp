@@ -60,8 +60,8 @@ function includeHeaderAndNav($userType) {
 
             <!-- Main Sidebar Container -->
 			<?php
-			$page = $_GET['page']?? '';
-			$aksi = $_GET['aksi']?? $_GET['c']?? '';
+			$page = isset($_GET['page'])? $_GET['page'] : '';
+            $aksi = isset($_GET['aksi'])? $_GET['aksi'] : (isset($_GET['c'])? $_GET['c'] : '');
 			?>
             <?php include "sidebar.php"?>
             <!-- Content Wrapper. Contains page content -->

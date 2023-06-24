@@ -167,7 +167,12 @@
         <p><strong style="font-size: larger;">Pimpinan</strong></p>
         <br />
         <p><strong style="font-size: larger;">________________________</strong></p>
-        <p><strong style="font-size: larger;">Aldy</strong></p>
+        <?php
+        include '../../config.php';
+        $pimpinan = mysqli_query($koneksi, "SELECT nama FROM user WHERE id_users = 1");
+        $data = mysqli_fetch_array($pimpinan);
+        ?>
+        <p><strong style="font-size: larger;"><?php echo $data['nama']; ?></strong></p>
       </div>
     </div>
   </footer>

@@ -60,8 +60,8 @@ function includeHeaderAndNav($userType) {
 
             <!-- Main Sidebar Container -->
 			<?php
-			$page = $_GET['page']?? '';
-			$aksi = $_GET['aksi']?? $_GET['c']?? '';
+			$page = isset($_GET['page'])? $_GET['page'] : '';
+            $aksi = isset($_GET['aksi'])? $_GET['aksi'] : (isset($_GET['c'])? $_GET['c'] : '');
 			?>
             <?php include "sidebar.php"?>
             <!-- Content Wrapper. Contains page content -->
@@ -153,13 +153,13 @@ function includeFooter() {
 // Gambar Profile
 function getProfilePicture($userType) {
     include 'config.php';
-    $nama = $_SESSION[$userType];
+    $nama = $_SESSION['nama'];
     $query = "SELECT foto FROM user WHERE nama = '$nama'";
     $result = mysqli_query($koneksi, $query);
     $row = mysqli_fetch_assoc($result);
     $pp = $row['foto'];
 
-    $user = isset($_SESSION[$userType])? 'uploads/profiles/'. $_SESSION[$userType]. '/' : '';
+    $user = isset($_SESSION['nama'])? 'uploads/profiles/'. $_SESSION['nama']. '/' : '';
     $foto = $pp;
 
     return array($user, $foto);
@@ -197,78 +197,49 @@ function deleteUnregisteredDirectories() {
 
 // mencari ID kriteria
 // berdasarkan urutan ke berapa (C1, C2, C3)
-function getKriteriaID($no_urut)
-{
-	include ('config.php');
-	$query  = "SELECT kriteria_id FROM tb_kriteria ORDER BY kriteria_id";
-	$result = mysqli_query($koneksi, $query);
-
-	while ($row = mysqli_fetch_array($result)) {
-		$listID[] = $row['kriteria_id'];
-	}
-	if (isset($listID[$no_urut])) {
-        return $listID[$no_urut];
-    } else {
-        return null;
-    }
+function getKriteriaID($no_urut) {
+    include ('config.php');
+    $query = "SELECT kriteria_id FROM tb_kriteria ORDER BY kriteria_id";
+    $result = mysqli_query($koneksi, $query);
+    $listID = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return isset($listID[$no_urut]['kriteria_id']) ? $listID[$no_urut]['kriteria_id'] : null;
 }
 
 // mencari ID alternatif
 // berdasarkan urutan ke berapa (A1, A2, A3)
-function getAlternatifID($no_urut)
-{
+function getAlternatifID($no_urut) {
     include ('config.php');
-    $query  = "SELECT id_karyawan FROM tb_karyawan ORDER BY id_karyawan";
+    $query = "SELECT id_karyawan FROM tb_karyawan ORDER BY id_karyawan";
     $result = mysqli_query($koneksi, $query);
-
-    $listID = array();
-    while ($row = mysqli_fetch_array($result)) {
-        $listID[] = $row['id_karyawan'];
-    }
-
-    if (isset($listID[$no_urut])) {
-        return $listID[$no_urut];
-    } else {
-        return null;
-    }
+    $listID = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return isset($listID[$no_urut]['id_karyawan']) ? $listID[$no_urut]['id_karyawan'] : null;
 }
 
 // mencari nama kriteria
-function getKriteriaNama($no_urut)
-{
-	include ('config.php');
-	$query  = "SELECT kriteria_nama FROM tb_kriteria ORDER BY kriteria_id";
-	$result = mysqli_query($koneksi, $query);
-
-	while ($row = mysqli_fetch_array($result)) {
-		$nama[] = $row['kriteria_nama'];
-	}
-	return $nama[($no_urut)];
+function getKriteriaNama($no_urut) {
+    include ('config.php');
+    $query = "SELECT kriteria_nama FROM tb_kriteria ORDER BY kriteria_id";
+    $result = mysqli_query($koneksi, $query);
+    $nama = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return isset($nama[$no_urut]['kriteria_nama']) ? $nama[$no_urut]['kriteria_nama'] : null;
 }
 
 // mencari nama alternatif
-function getAlternatifNama($no_urut)
-{
-	include ('config.php');
-	$query  = "SELECT nama_karyawan, jabatan FROM tb_karyawan ORDER BY id_karyawan";
-	$result = mysqli_query($koneksi, $query);
-	
-	while ($row = mysqli_fetch_array($result)) {
-		$nama[] = $row['nama_karyawan'];
-	}
-	return $nama[($no_urut)];
+function getAlternatifNama($no_urut) {
+    include ('config.php');
+    $query = "SELECT nama_karyawan FROM tb_karyawan ORDER BY id_karyawan";
+    $result = mysqli_query($koneksi, $query);
+    $nama = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return isset($nama[$no_urut]['nama_karyawan']) ? $nama[$no_urut]['nama_karyawan'] : null;
 }
+
 // mencari nama jabatan
-function getAlternatifJabatan($no_urut)
-{
-	include ('config.php');
-	$query  = "SELECT nama_karyawan, jabatan FROM tb_karyawan ORDER BY id_karyawan";
-	$result = mysqli_query($koneksi, $query);
-	
-	while ($row = mysqli_fetch_array($result)) {
-		$jabatan[] = $row['jabatan'];
-	}
-	return $jabatan[($no_urut)];
+function getAlternatifJabatan($no_urut) {
+    include ('config.php');
+    $query = "SELECT jabatan FROM tb_karyawan ORDER BY id_karyawan";
+    $result = mysqli_query($koneksi, $query);
+    $jabatan = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return isset($jabatan[$no_urut]['jabatan']) ? $jabatan[$no_urut]['jabatan'] : null;
 }
 
 // mencari priority vector alternatif

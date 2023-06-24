@@ -1,7 +1,8 @@
 <?php
-include ('config.php');
+include ('../../config.php');
 $pilih = mysqli_query($koneksi, "SELECT * FROM tb_kriteria");
-$count = mysqli_num_rows($pilih);
+$max_count = mysqli_fetch_array(mysqli_query($koneksi, "SELECT MAX(jumlah) FROM ir"))[0];
+$count = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_kriteria"));
 $no = 1;
 ?>
 <section class="content">
@@ -11,11 +12,11 @@ $no = 1;
                 <h3 class="card-title">Data Kriteria</h3>
             </div>
             <div class="card-body">
-                <?php if ($count < 15) { ?>
+                <?php if ($count < $max_count) {?>
                     <a href="?page=kriteria&aksi=tambah" class="btn btn-primary" style="float: left; margin-bottom: 20px;">Tambah Data</a>
-                <?php } else { ?>
-                    <button class="btn btn-primary" style="float: left; margin-bottom: 20px;" onclick="alert('Maksimum kriteria adalah 15');">Tambah Data</button>
-                <?php } ?>
+                <?php } else {?>
+                    <button class="btn btn-primary" style="float: left; margin-bottom: 20px;" onclick="alert('Maksimum kriteria adalah <?php echo $max_count;?>');">Tambah Data</button>
+                <?php }?>
                 <div class="panel-body">
                     <form method="post" action="?page=kriteria&aksi=hapus">
                         <div class="table-responsive">

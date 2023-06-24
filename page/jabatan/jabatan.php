@@ -1,5 +1,5 @@
 <?php
-include ('config.php');
+include ('../../config.php');
 $pilih = mysqli_query($koneksi, "SELECT * FROM jabatan");
 $no = 1;
 ?>
@@ -40,7 +40,7 @@ $no = 1;
                             </table>
                         </div>
                         <script>CheckboxSelect()</script>
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini...?')"><i class=" fa fa-trash"></i> Hapus yang dipilih</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Jika Anda menghapus data ini, maka karyawan yang berkaitan dengan jabatan tersebut akan ikut terhapus!. Anda yakin ingin menghapus data ini...?')"><i class=" fa fa-trash"></i> Hapus yang dipilih</button>
                     </form>
                 </div>
             </div>

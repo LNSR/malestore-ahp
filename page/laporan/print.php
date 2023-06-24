@@ -50,9 +50,9 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-header">
+          <!-- <div class="card-header">
             <h3 class="card-title"><b>Tabel Bobot Kriteria</b></h3>
-          </div>
+          </div> -->
           <div class="card-body">
             <form method="POST">
               <div class="table-responsive">
@@ -81,9 +81,9 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-header">
+          <!-- <div class="card-header">
             <h3 class="card-title"><b>Tabel Laporan Karyawan</b></h3>
-          </div>
+          </div> -->
           <div class="card-body">
             <form method="POST">
               <?php
@@ -97,8 +97,8 @@
               <div class="card">
                 <div class="card-header">
                   <div class="container-fluid print-karyawan">
-                    <h6><b>Nama: <?php echo $alternatifNama?></b></h6>
-                    <h6><b>Peran: <?php echo $alternatifJabatan?></b></h6>
+                    <h5><b>Nama: <?php echo $alternatifNama?></b></h5>
+                    <h5><b>Peran: <?php echo $alternatifJabatan?></b></h5>
                     <div class="card-body">
                       <div class="table-responsive">
                         <table class="table table-bordered text-center table-sm">
@@ -174,7 +174,12 @@
         <p><strong style="font-size: larger;">Pimpinan</strong></p>
         <br />
         <p><strong style="font-size: larger;">________________________</strong></p>
-        <p><strong style="font-size: larger;">Aldy</strong></p>
+        <?php
+        include '../../config.php';
+        $pimpinan = mysqli_query($koneksi, "SELECT nama FROM user WHERE id_users = 1");
+        $data = mysqli_fetch_array($pimpinan);
+        ?>
+        <p><strong style="font-size: larger;"><?php echo $data['nama'];?></strong></p>
       </div>
     </div>
   </div>

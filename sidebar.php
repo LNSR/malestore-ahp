@@ -19,7 +19,7 @@
             <img src="<?= $imagepath ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <?php echo "<a href='#' class='d-block'>" . $_SESSION[$userType] . "</a>";?>
+            <?php echo "<a href='#' class='d-block'>" . $_SESSION['nama'] . "</a>";?>
         </div>
     </div>
 

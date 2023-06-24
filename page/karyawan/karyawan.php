@@ -1,5 +1,5 @@
 <?php
-include ('config.php');
+include ('../../config.php');
 $pilih = mysqli_query($koneksi, "SELECT * FROM tb_karyawan");
 $no = 1;
 $tableHeaders = array("No", "Nama Karyawan", "Jabatan", "Aksi");

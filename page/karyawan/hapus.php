@@ -1,5 +1,5 @@
 <?php
-include ('config.php');
+include ('../../config.php');
 
 // Get the IDs of the selected karyawan
 $selected_ids = $_POST['id_karyawan'];

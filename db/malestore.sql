@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2023 at 11:22 PM
+-- Generation Time: Jun 24, 2023 at 05:16 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -416,9 +416,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_users`, `nama`, `tipe`, `username`, `password`, `foto`) VALUES
-(1, 'Aldy', 'admin', 'admin', '$2y$10$N5F7dHLO27qCJ1.TPHrpCOpCZ4PXe2MBzroVNfB0gRWQKa2boDONS', ''),
+(1, 'Aldy', 'admin', 'admin', '$2y$10$GHM00NiHCUQc5lu7dJ8MgOAEXfp3wy4FLdIYJuDQYZxQepeY9IA.i', ''),
 (2, 'Karyawan', 'karyawan', 'Pee', '$2y$10$TfLlTpsWRq.Wcp9DxdN8EeD32BRD.PQBG0vFmLhtM2I2HQsWcJrJO', ''),
-(3, 'Lana', 'admin', 'Lana', '$2y$10$aQuGt6XCK8svU6TvglgAp.xnaSgwmrIvEmxGdaRi3AhNc/DEJ7eka', 'EDIT.jpg');
+(3, 'Lana', 'admin', 'Lana', '$2y$10$aBxBXtGTcYJeN71qfY0REeeB6RCI/6vYimUaA0STN36ITIuRcvJD6', 'EDIT.jpg');
 
 --
 -- Indexes for dumped tables
@@ -434,7 +434,8 @@ ALTER TABLE `ir`
 -- Indexes for table `jabatan`
 --
 ALTER TABLE `jabatan`
-  ADD PRIMARY KEY (`id_jabatan`);
+  ADD PRIMARY KEY (`id_jabatan`),
+  ADD UNIQUE KEY `nama_jabatan` (`nama_jabatan`);
 
 --
 -- Indexes for table `tb_banding_alternatif`
@@ -457,7 +458,8 @@ ALTER TABLE `tb_banding_kriteria`
 -- Indexes for table `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
-  ADD PRIMARY KEY (`id_karyawan`);
+  ADD PRIMARY KEY (`id_karyawan`),
+  ADD KEY `jabatan` (`jabatan`);
 
 --
 -- Indexes for table `tb_kriteria`
@@ -556,6 +558,12 @@ ALTER TABLE `tb_banding_alternatif`
 ALTER TABLE `tb_banding_kriteria`
   ADD CONSTRAINT `banding_kriteria1` FOREIGN KEY (`kriteria1`) REFERENCES `tb_kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `banding_kriteria2` FOREIGN KEY (`kriteria2`) REFERENCES `tb_kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_karyawan`
+--
+ALTER TABLE `tb_karyawan`
+  ADD CONSTRAINT `jabatan` FOREIGN KEY (`jabatan`) REFERENCES `jabatan` (`nama_jabatan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_pv_alternatif`

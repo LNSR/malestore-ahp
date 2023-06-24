@@ -39,6 +39,7 @@ if (isset($_POST['Login'])) {
     if (password_verify($password, $user['password'])) {
       $_SESSION[$user['tipe']] = $user['nama'];
       $_SESSION['id_users'] = $user['id_users'];
+      $_SESSION['nama'] = $user['nama'];
       $_SESSION['tipe'] = $user['tipe'];
 
       header("location:index.php");

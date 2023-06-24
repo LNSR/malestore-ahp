@@ -159,7 +159,7 @@ function getProfilePicture($userType) {
     $row = mysqli_fetch_assoc($result);
     $pp = $row['foto'];
 
-    $user = isset($_SESSION[$userType])? 'uploads/profiles/'. $_SESSION[$userType]. '/' : '';
+    $user = isset($_SESSION['nama'])? 'uploads/profiles/'. $_SESSION['nama']. '/' : '';
     $foto = $pp;
 
     return array($user, $foto);

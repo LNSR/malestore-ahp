@@ -153,7 +153,7 @@ function includeFooter() {
 // Gambar Profile
 function getProfilePicture($userType) {
     include 'config.php';
-    $nama = $_SESSION[$userType];
+    $nama = $_SESSION['nama'];
     $query = "SELECT foto FROM user WHERE nama = '$nama'";
     $result = mysqli_query($koneksi, $query);
     $row = mysqli_fetch_assoc($result);

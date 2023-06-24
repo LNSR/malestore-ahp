@@ -37,6 +37,7 @@
               <div class="form-group">
                 <label>Foto Profil</label>
                 <input type="file" class="form-control" name="foto" accept="image/*">
+                <input type="hidden" name="default_foto" value="<?php echo $data['foto'];?>">
                 <br>
                 <?php if($data['foto']) {?>
                   <img src="uploads/profiles/<?php echo $data['nama'];?>/<?php echo $data['foto'];?>" width="100">
@@ -57,85 +58,86 @@
       'id_users' => $_POST['id_users'],
       'nama' => ucwords(trim($_POST['nama'])),
       'username' => $_POST['username'],
-      'password' => (!empty($_POST['password']))? password_hash($_POST['password'], PASSWORD_DEFAULT) : '',
       'tipe' => $_POST['tipe'],
-      'foto' => $_FILES['foto']['name']
+      'foto' => $_POST['default_foto']
     ];
 
-    // Upload foto profil
-    $target_dir = "uploads". DIRECTORY_SEPARATOR. "profiles". DIRECTORY_SEPARATOR. $data['nama']. DIRECTORY_SEPARATOR;
-    $target_file = $target_dir. str_replace(' ', '_', $data['foto']);
-    $data['foto'] = (isset($_FILES['foto']['name']) && $_FILES['foto']['name']!= '')? str_replace(' ', '_', $data['foto']) : '';
-    if(!file_exists($target_dir)) {
-      mkdir($target_dir, 0777, true);
+    if(!empty($_FILES['foto']['name'])) {
+      $target_dir = "uploads/profiles/". $data['nama']. "/";
+      $target_file = $target_dir. str_replace(' ', '_', $_FILES['foto']['name']);
+      $data['foto'] = str_replace(' ', '_', $_FILES['foto']['name']);
+
+      if(!file_exists($target_dir)) {
+        mkdir($target_dir, 0777, true);
+      }
+
+      move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file);
     }
-    move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file);
+
+    $query = mysqli_query($koneksi, "SELECT nama, username, password, tipe, foto FROM user WHERE id_users='". $data['id_users']. "'");
+    $row = mysqli_fetch_array($query);
+
+    $data_update = [
+      'nama' => $data['nama']!= $row['nama']? $data['nama'] : $row['nama'],
+      'username' => $data['username']!= $row['username']? $data['username'] : $row['username'],
+      'tipe' => $data['tipe']!= $row['tipe']? $data['tipe'] : $row['tipe'],
+      'password' =>!empty($_POST['password'])? password_hash($_POST['password'], PASSWORD_DEFAULT) : $row['password'],
+      'foto' => $data['foto']
+    ];
+
+    // Check if profile picture has been changed
+    if($data_update['foto']!= $row['foto']) {
+      // Create new folder for new file profile picture
+      $new_dir = "uploads/profiles/". $data['nama'];
+      if(!file_exists($new_dir)) {
+        mkdir($new_dir, 0777, true);
+      }
+
+      // Delete old profile picture
+      $old_file = "uploads/profiles/". $row['nama']. "/". $row['foto'];
+      if(file_exists($old_file)) {
+        unlink($old_file);
+      }
+
+      // Move uploaded file to target directory
+      move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file);
+    } else if($data_update['nama']!= $row['nama']) {
+      // Create new folder for new file profile picture
+      $new_dir = "uploads/profiles/". $data['nama'];
+      if(!file_exists($new_dir)) {
+        mkdir($new_dir, 0777, true);
+      }
+
+      // Move old profile picture to new folder
+      $old_file = "uploads/profiles/". $row['nama']. "/". $row['foto'];
+      $new_file = $new_dir. "/". $row['foto'];
+      if(file_exists($old_file)) {
+        rename($old_file, $new_file);
+      }
+    }
 
     // Update user data
-    $query = mysqli_query($koneksi, "SELECT nama, username, password, tipe, foto FROM user WHERE id_users='".$data['id_users']."'");
-    if ($query) {
-      $row = mysqli_fetch_array($query);
-      $data_update = [
-        'nama' => ($data['nama']!= $row['nama'])? $data['nama'] : $row['nama'],
-        'username' => ($data['username']!= $row['username'])? $data['username'] : $row['username'],
-        'tipe' => ($data['tipe']!= $row['tipe'])? $data['tipe'] : $row['tipe'],
-        'password' => (!empty($data['password']))? $data['password'] : $row['password'],
-        'foto' => $data['foto']
-      ];
+    $sql = "UPDATE user SET ".
+          "nama = '". $data_update['nama']. "', ".
+          "username = '". $data_update['username']. "', ".
+          "password = '". $data_update['password']. "', ".
+          "tipe = '". $data_update['tipe']. "', ".
+          "foto = '". $data_update['foto']. "' ".
+          "WHERE id_users = '". $data['id_users']. "'";
 
-      // Check if profile picture has been changed or if nama updated, move the file picture
-      if ($data_update['foto']!= $row['foto']) {
-        // Create new folder for new file profile picture
-        $new_dir = "uploads/profiles/".$data['nama'];
-        if (!file_exists($new_dir)) {
-          mkdir($new_dir, 0777, true);
-        }
+    $hasil = mysqli_query($koneksi, $sql);
 
-        // Delete old profile picture
-        $old_file = "uploads/profiles/".$row['nama']."/".$row['foto'];
-        if (file_exists($old_file)) {
-          unlink($old_file);
-        }
-
-        // Move uploaded file to target directory
-        $target_file = $new_dir. DIRECTORY_SEPARATOR. $data['foto'];
-        move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file);
-      } else if ($data_update['nama']!= $row['nama']) {
-        // Create new folder for new file profile picture
-        $new_dir = "uploads/profiles/".$data['nama'];
-        if (!file_exists($new_dir)) {
-          mkdir($new_dir, 0777, true);
-        }
-
-        // Move old profile picture to new folder
-        $old_file = "uploads/profiles/".$row['nama']."/".$row['foto'];
-        $new_file = $new_dir. DIRECTORY_SEPARATOR. $row['foto'];
-        if (file_exists($old_file)) {
-          rename($old_file, $new_file);
-        }
-      }
-
-      // Update user data
-      $sql = "UPDATE user SET ";
-      foreach($data_update as $key => $value){
-        $sql.= "$key = '".($value!= ''? $value : $row[$key])."', ";
-      }
-      $sql = rtrim($sql, ", "). " WHERE id_users = '".$data['id_users']."'";
-      $hasil = mysqli_query($koneksi, $sql);
-
-      // Update session variable
-      if ($hasil && $data_update['nama']!= $row['nama'] && $_SESSION['id_users'] == $data['id_users']) {
-        $_SESSION['nama'] = $data_update['nama'];
-      }
-
-      $message = $hasil? 'Data Berhasil di Edit' : 'Data Gagal di Edit';
-    } else {
-      $message = 'Terjadi kesalahan dalam mengambil data pengguna';
+    // Update session variable
+    if($hasil && $data_update['nama']!= $row['nama'] && $_SESSION['id_users'] == $data['id_users']) {
+      $_SESSION['nama'] = $data_update['nama'];
     }
 
-    // Hapus Profile Directories gak kepake
+    $message = $hasil? 'Data Berhasil di Edit' : 'Data Gagal di Edit';
+
+    // Delete unregistered directories
     deleteUnregisteredDirectories();
 
+    // redirect
     echo "<script>alert('$message');window.location.href='?page=user';</script>";
   }
 ?>

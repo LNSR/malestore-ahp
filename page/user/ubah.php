@@ -122,7 +122,10 @@
       }
       $sql = rtrim($sql, ", "). " WHERE id_users = '".$data['id_users']."'";
       $hasil = mysqli_query($koneksi, $sql);
-
+      if ($hasil) {
+        // Update session variable
+        $_SESSION['nama'] = $data_update['nama'];
+      }
       $message = $hasil? 'Data Berhasil di Edit' : 'Data Gagal di Edit';
     } else {
       $message = 'Terjadi kesalahan dalam mengambil data pengguna';

@@ -1,6 +1,6 @@
 
 # **Project Skripsi**
-[SPK Penilaian Kinerja Karyawan Malestore Berbasis Web Menggunakan Metode Analytical Hierarchy Process(AHP)](https://github.com/LNSR/malestore-ahp)
+[RANCANG BANGUN APLIKASI PENILAIAN KINERJA KARYAWAN MALESTORE BERBASIS WEB MENGGUNAKAN METODE ANALYTICAL HIERARCHY PROCESS](https://github.com/LNSR/malestore-ahp)
 
 ## **Prequisite**
 **XAMPP v7.4.33**

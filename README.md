@@ -7,7 +7,7 @@
 
 # **Tutorial**
 1. Create database "**malestore**" in phpMyAdmin
-2. Import **"db/malestore.db"** 
+2. Import **"db/malestore.sql"** 
 3. Visit your localhost site
 
 ## **Preview**

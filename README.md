@@ -2,7 +2,7 @@
 <!-- # **Project Skripsi**
 [RANCANG BANGUN APLIKASI PENILAIAN KINERJA KARYAWAN MALESTORE BERBASIS WEB MENGGUNAKAN METODE ANALYTICAL HIERARCHY PROCESS](https://github.com/LNSR/malestore-ahp) -->
 
-# **Prequisite**
+# **Prerequisite**
 
 **XAMPP v7.4.33**
 
